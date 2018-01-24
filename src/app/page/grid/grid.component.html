@@ -1,3 +1,30 @@
-<p>
-  grid works!
-</p>
+<p-dataTable [value]="grids">
+    <p-headerColumnGroup>
+        <p-row>
+            <p-column header="" rowspan="2"></p-column>
+            <p-column header="Dommage aux personnes" colspan="3"></p-column>
+            <p-column header="Dommage aux biens" colspan="3"></p-column>
+            <p-column header="Dommage à l'envirenement"></p-column>
+        </p-row>
+        <p-row>
+            <p-column header="Salariés du Groupe Sonatrach"></p-column>
+            <p-column header="Salariés EE"></p-column>
+            <p-column header="Tierce personne"></p-column>
+            <p-column header="Installations (coût direct)"></p-column>
+            <p-column header="perte de production"></p-column>
+            <p-column header="vehicules"></p-column>
+            <p-column header="Epandage d'hydrocarbures"></p-column>
+        </p-row>
+    </p-headerColumnGroup>
+    
+    <p-column field="rank"></p-column>
+    <p-column field="ssh"></p-column>
+    <p-column field="see"></p-column>
+    <p-column field="tp"></p-column>
+    <p-column field="icd"></p-column>
+    <p-column field="pp"></p-column>
+    <p-column field="vh"></p-column>
+    <p-column field="eh"></p-column>
+    
+  
+</p-dataTable>

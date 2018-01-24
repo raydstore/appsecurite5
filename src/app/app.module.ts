@@ -163,7 +163,7 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
       { path: 'nature', component: NatureComponent },
       { path: 'element', component: ElementComponent },
       { path: 'rank', component: RankComponent },
-      { path: 'Grid', component: GridComponent },
+      { path: 'grid', component: GridComponent },
       { path: '**', component: NotFoundComponent }
     ])
   ],
