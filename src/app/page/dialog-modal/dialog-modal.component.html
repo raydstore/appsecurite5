@@ -1,0 +1,32 @@
+<p-dialog header="Nouveau Site ..." [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad">
+    <div class="bdcontent">
+      <span>
+        <label for="iname">name : </label>
+      <input type="text" value=""  pInputText [(ngModel)]="name">
+      </span>
+      <!-- <p-dropdown [options]="labels" [(ngModel)]="selectedLabel" [style]="{'width':'150px'}" filter="filter" #lname>
+        <ng-template let-label pTemplate="item">
+          <div class="ui-helper-clearfix">
+            {{label.label}}
+          </div>
+        </ng-template>
+      </p-dropdown> -->
+      <div class="form-group">
+        <label for="labelMethode">Site</label>
+        <select [(ngModel)]="selectedLabel" id="labelMethode" class="form-control">
+          <option value=""></option>
+          <option *ngFor="let label of labels" [ngValue]="label.value"> {{label.label}} </option>
+        </select>
+      </div>
+      <p-footer>
+        <button type="button" pButton icon="fa-check" (click)="okClick()" label="Yes"></button>
+        <button type="button" pButton icon="fa-close" (click)="cancelCreate()" label="No"></button>
+      </p-footer>
+    </div>
+  </div>
+</p-dialog>
+<div class="toolbtn">
+  <button type="button" (click)="showDialog()" pButton icon="fa-plus-square"></button>
+  <!-- <button type="button" (click)="showDialog()" pButton icon="fa-minus-square"></button> -->
+</div>

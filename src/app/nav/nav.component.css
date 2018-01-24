@@ -1,0 +1,21 @@
+.climgheader, .clplleft, .clplright {
+    background-color: rgba(0,0,0,.03)!important;
+} 
+/* 
+.climgheader {
+    background-color: rgba(0,0,0,.03)!important;
+}  */
+
+.climgheader img{
+    margin-left: 250px!important;
+} 
+
+.clplcenter {
+    border-left-color: lightgray!important;
+    border-left-style: solid!important;
+    border-left-width: 5px!important;
+}
+
+.my-3 {
+    width: 200px;
+}

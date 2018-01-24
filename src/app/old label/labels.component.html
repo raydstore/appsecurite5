@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="col-md-12">
+        <h1>List Labels</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-default">
+                <tr>
+                    <th>#</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>datecreate</th>
+                    <th>dateupdate</th>
+                    <th>owner</th>
+                    <th>lastuser</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let label of labels; index as i">
+                <tr>
+                    <th scope="row">{{i}}</th>
+                    <td>{{label.id}}</td>
+                    <td>{{label.name}}</td>
+                    <td>{{label.datecreate | date: 'shortDate'}}</td>
+                    <td>{{label.dateupdate | date: 'shortDate'}}</td>
+                    <td>{{label.owner}}</td>
+                    <td>{{label.lastuser}}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="showEditLabelForm(label)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                        <button class="btn btn-danger" (click)="deleteLabel(label)">
+                    <i class="fa fa-minus"></i>
+                </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" (click)="showAddLabelForm(label)"><i class="fa fa-plus"></i></button>
+        <br/>
+        <br/>
+        <form *ngIf="labelForm">
+            <div class="form-group">
+                <label for="iid">Id</label>
+                <input type="number" class="form-control" id="iid" [(ngModel)]="newLabel.id" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="iname">name</label>
+                <input type="text" class="form-control" id="iname" [(ngModel)]="newLabel.name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="idatecreate">datecreate</label>
+                <input type="datetime" class="form-control" id="idatecreate" [(ngModel)]="newLabel.datecreate" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="idateupdate">dateupdate</label>
+                <input type="datetime" class="form-control" id="idateupdate" [(ngModel)]="newLabel.dateupdate" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="iowner">owner</label>
+                <input type="text" class="form-control" id="iowner" [(ngModel)]="newLabel.owner" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="ilastuser">lastuser</label>
+                <input type="text" class="form-control" id="ilastuser" [(ngModel)]="newLabel.lastuser" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="saveLabelForm()">Submit</button>
+                <button class="btn btn-warning">cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

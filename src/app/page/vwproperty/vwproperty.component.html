@@ -1,0 +1,22 @@
+<ul class="list-group">
+  <li class="list-group-item titleprop">
+    <h3>Liste des Propriété</h3>
+    <!--<button class="btn btn-success" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>-->
+  </li>
+  <ng-template ngFor let-item [ngForOf]="propertys">
+    <li class="list-group-item" [ngClass]="{
+      'list-group-item-secondary': isEqual(item.type, 'N'),
+      'list-group-item-success':   isEqual(item.type, 'I'),
+      'list-group-item-primary':    isEqual(item.type, 'V'),
+      'list-group-item-warning':   isEqual(item.type, 'D')
+    }" >
+      <span class="badge badge-pill badge-info"> {{item.type}} </span> {{item.name}}
+      <input type="text" id="ivalue" #value [value]="item.value" [attr.placeholder]="'valeur du ' + item.name">
+      <button class="btn btn-danger alright" (click)="updateProperty(item, value)">
+        <i class="fa fa-minus"></i>
+      </button>
+    </li>
+  </ng-template>
+</ul>

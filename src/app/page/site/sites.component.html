@@ -1,0 +1,18 @@
+<div class="panel-scroll">
+  <p-organizationChart [value]="data" expanded="true" styleClass="company" class="a">
+    <ng-template let-node pTemplate="sheet" styleClass="stchild">
+      {{node.label}}
+      <div class="toolbtn">
+        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+      </div>
+    </ng-template>
+    <ng-template let-node pTemplate="branch" styleClass="stparent">
+      <div class="node-header ui-corner-top">{{node.label}}</div>
+      <div class="toolbtn">
+        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+      </div>
+    </ng-template>
+  </p-organizationChart>
+</div>

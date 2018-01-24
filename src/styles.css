@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    margin-left: 100px!important;
+    margin-right: 100px!important;
+}
+
+/* img {
+    margin-left: 100px!important;
+    margin-right: 100px!important;
+} */
+
+
+#chid {
+    width: 100px;
+}
+
+#chname {
+    width: 300px;
+}
+
+.ui-grid {
+    background-color: lightgray;
+    /* padding-top: 20p */
+}
+
+.ui-grid-row {
+    margin-left: 100px;
+}
+
+.alCenter {
+   align-self: center;
+   display: inline-block;
+   width: 300px;
+}
+
+.clupdate {
+   /* position: relative; */
+   /* display: block;
+   position: relative;
+   right: 100px; */
+   /* float: right; */
+   position: relative;
+   /* align-self: flex-end!important; 
+   background-color: blue; */
+   width: 250px;
+   left: 350px;
+}
+
+.container {
+    padding: 40px 0 20px 60px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.btnright {
+    /* display: inline-block; */
+    float: right;
+    position: relative;
+    top: -40px;
+}
+
+.alright {
+    float: right;
+   /*  position: absolute; */
+   /* display: inline-block; */
+   /* background-color: blue; */
+   /* width: 280px;
+   height: 40px; */
+}
+
+.cardtitle {
+    height: 70px;
+    margin-top: 15px;
+    margin-bottom: 15px!important;
+    padding-left: 7px;
+    padding-top: 25px!important;
+}
+
+.titleform {
+    width: 350px;
+    /* left: 50px;/* 
+    /* background-color: red; */
+}
+
+.alleft {
+    float: left;
+}
+
+.bdcontent {
+    padding: 8px 8px 8px 8px;
+}
+
+.toolbtn {
+    display: block;
+    margin-top: 10px!important;
+}
+
+.ui-dialog .ui-dialog-content {
+    padding: 5px 5px 5px 5px;
+}
+

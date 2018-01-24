@@ -1,0 +1,10 @@
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button *ngFor="let object of objects" (click)="selectObject(object)" type="button" class="btn btn-lg" 
+          [ngClass]="{'btn-primary': object.id == selectedId,
+                     'btn-secondary': object.id != selectedId}" > {{object.name}} </button>
+</div>
+<ng-template ngFor let-item [ngForOf]="objects">
+  <div *ngIf="item.id == selectedId">
+     <app-instance-object [idObject]="item"></app-instance-object>
+  </div>
+</ng-template>

@@ -1,0 +1,91 @@
+<div class="card bg-light">
+  <div class="card-header alCenter cardtitle">
+
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
+
+    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+  <p-dataTable [value]="ranks" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
+    rowExpandMode="single" [responsive]="true">
+    <p-column expander="true" styleClass="col-icon"></p-column>
+    <p-column field="id" header="Id"></p-column>
+    <p-column field="name" header="Name"></p-column>
+    <p-column field="datecreate" header="Crée le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        <!-- <span [style.color]="car[col.field]"> -->
+        {{m[col.field] | date:'shortDate'}}
+        <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <p-column field="owner" header="par"></p-column>
+    <p-column field="dateupdate" header="Modifier le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        <!-- <span [style.color]="car[col.field]"> -->
+        {{m[col.field] | date:'shortDate'}}
+        <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <p-column field="lastuser" header="par"></p-column>
+    <p-column styleClass="col-button">
+      <ng-template let-m="rowData" pTemplate="body">
+        <button class="btn btn-danger" (click)="deleteRank(m)">
+          <i class="fa fa-minus"></i>
+        </button>
+      </ng-template>
+    </p-column>
+    <ng-template let-item pTemplate="rowexpansion">
+      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
+      <!-- <div class="ui-grid-row"> -->
+      <div class="container">
+        <div class="form-group row">
+          <label for="chid" class="col-sm-2 col-form-label">id : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chname" class="col-sm-2 col-form-label">name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="le nom de la niveau" #name>
+          </div>
+        </div>
+        <div class="clupdate">
+          <button class="btn btn-success" (click)="updateRank(item, name)">
+            <i class="fa fa-check">Valider</i>
+          </button>
+          <button class="btn btn-warning" (click)="cancelUpdate(item)">
+            <i class="fa fa-times">Annuler</i>
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+    </ng-template>
+  </p-dataTable>
+  <!-- </div> -->
+</div>
+
+<p-dialog header="Niveau Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newRank">
+    <div class="bdcontent">
+      <span>
+        <label for="iid">id : </label>
+        <input type="text" class="form-control" id="chid" [(ngModel)]="newRank.id" placeholder="Identificateur" readonly>
+      </span>
+      <span>
+        <label for="iname">name</label>
+        <input type="text" id="iname" [(ngModel)]="newRank.name" placeholder="le nom du niveau">
+      </span>
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createRank()">Submit</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      </div>
+    </div>
+  </div>

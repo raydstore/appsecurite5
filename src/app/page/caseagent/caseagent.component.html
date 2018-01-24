@@ -1,0 +1,18 @@
+<div class="card-deck">
+  <div *ngFor="let caseagent of caseagents" [class]="'card text-white bg-' + clname + ' mb-3'" style="max-width: 160px;">
+  <!--   <div class="card-header"> -->
+    <img class="card-img-top rounded-circle" [src]="'../../../assets/' + caseagent.idagent + '.JPG'" 
+     alt="Card image cap" style="width: 60px; height: 60px;">
+   <!--  </div> -->
+    <div class="card-body">
+     <!--  <h5 class="card-title"> {{caseagent.idagent}} </h5> -->
+      <p class="card-text">
+         {{caseagent.idagent}}
+         <br>Ababdi Ibrahim
+         <br>du 01/01/2017 
+         <br>au 07/01/2017
+      </p>
+      <!-- <a href="#" class="btn btn-primary">+</a> -->
+    </div>
+  </div>
+</div>

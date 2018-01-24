@@ -1,0 +1,63 @@
+<div class="card bg-light">
+  <div class="card-header alCenter cardtitle">
+    <span>
+      <h4 class="titleform">
+        <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}</h4>
+      <button class="btn btn-success btnright" (click)="addWorkSheet()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </span>
+  </div>
+
+  <p-treeTable [value]="data" [style]="{'margin-top':'50px'}" var="node" labelExpand="Expand">
+    <!-- <p-header>WorkSheet Templating</p-header> -->
+    <p-column field="name" header="WorkSheet Templating" styleClass="clsheet">
+      <div class="clsheet">
+        <ng-template let-node="rowData" pTemplate="body">
+          <input type="text" [(ngModel)]="node.data.name" #in [ngClass]="node.styleClass" maxlength="128" (focus)="setFocusColor(in)"
+            (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
+          <span class="alright" style="width:20%">
+            <!-- <ng-template let-m="rowData" pTemplate=dy ""bo> -->
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteTitleTask(node)">
+              <i class="fa fa-minus" aria-hidden="false"></i>
+            </button>
+            <button class="btn btn-outline-primary btn-sm" (click)="updateTitleTask(node)">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" (click)="addTitleTask(node)" *ngIf="node.data.kind === 'S' ? false : true">
+              <i class="fa fa-plus"></i>
+            </button>
+            <!-- </ng-template> -->
+          </span>
+        </ng-template>
+      </div>
+
+    </p-column>
+
+  </p-treeTable>
+</div>
+<p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+  width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newTitleTask">
+    <div class="bdcontent">
+      <span>
+        <label for="iid">id : </label>
+        <input type="text" class="form-control" id="chid" [(ngModel)]="newTitleTask.id" placeholder="Identificateur"
+          readonly>
+      </span>
+      <span>
+        <label for="iname">name</label>
+        <input type="text" id="iname" [(ngModel)]="newTitleTask.name" placeholder="l'action">
+      </span>
+      <div *ngFor="let kind of kinds" class="radio" [hidden]="this.selectedKind === 'W'">
+        <label *ngIf="kind.id === 'W' ? false : true">
+          <input type="radio" [(ngModel)]="newTitleTask.kind" [value]="kind.id"> {{kind.name}}
+        </label>
+        <!-- (change)="onChangeRadio($event)" -->
+      </div>
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createTitleTask()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      </div>
+    </div>
+  </div>
