@@ -131,7 +131,6 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
     ReactiveFormsModule,
     HttpModule,
     OrganizationChartModule,
-
     CommonModule,
     OrganizationChartModule,
     DataGridModule,
@@ -146,8 +145,7 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
     SharedModule,
     CodeHighlighterModule,
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent },
-     // { path: '', component: NavComponent},
+      { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'activity', component: ActivityComponent },
       { path: 'label', component: LabelsComponent },
       { path: 'mark', component: MarkComponent },
