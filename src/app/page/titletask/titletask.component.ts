@@ -7,12 +7,12 @@ import { AppError } from '../../common/app-error';
 import { NotFoundError } from '../../common/not-found-error';
 
 @Component({
-  selector: 'app-tiltletask',
-  templateUrl: './tiltletask.component.html',
-  styleUrls: ['./tiltletask.component.css'],
+  selector: 'app-titletask',
+  templateUrl: './titletask.component.html',
+  styleUrls: ['./titletask.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TiltletaskComponent implements OnInit {
+export class TitletaskComponent implements OnInit {
   titletasks: Titletask[] = [];
   data: TreeNode[] = [];
   templateNewTitleTask: any = {

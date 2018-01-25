@@ -30,7 +30,7 @@ export class NatureComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  titlelist = 'Marque';
+  titlelist = 'Nature dommage';
   constructor(private service: NatureService, private lastidService: LastidService) {
   }
 

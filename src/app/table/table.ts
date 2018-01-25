@@ -250,3 +250,15 @@ export interface Recommendation {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Bit {
+    id?: string;
+    name?: string;
+    kind?: string;
+    idparent?: string;
+    kindparent?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}

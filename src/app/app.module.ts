@@ -1,3 +1,6 @@
+import { AgentService } from './services/agent.service';
+import { BitService } from './services/bit.service';
+import { TitletaskComponent } from './page/titletask/titletask.component';
 import { RankService } from './services/rank.service';
 import { NatureService } from './services/nature.service';
 import { ListagentService } from './services/listagent.service';
@@ -40,7 +43,6 @@ import { GrowlModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { TabViewModule } from 'primeng/primeng';
 import { CodeHighlighterModule } from 'primeng/primeng';
-import { TiltletaskComponent } from './page/tiltletask/tiltletask.component';
 import { InplaceModule } from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import { MarkComponent } from './page/mark/mark.component';
@@ -82,6 +84,8 @@ import { AccidentnatureComponent } from './page/accidentnature/accidentnature.co
 import { DamageComponent } from './page/damage/damage.component';
 import { CauseComponent } from './page/cause/cause.component';
 import { RecommendationComponent } from './page/recommendation/recommendation.component';
+import { BitComponent } from './page/bit/bit.component';
+import { AgentComponent } from './page/agent/agent.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +96,7 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
     NavComponent,
     OrganizationChartComponent,
     NotFoundComponent,
-    TiltletaskComponent,
+    TitletaskComponent,
     MarkComponent,
     TypeObjectComponent,
     TypeOperationComponent,
@@ -122,7 +126,9 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
     AccidentnatureComponent,
     DamageComponent,
     CauseComponent,
-    RecommendationComponent
+    RecommendationComponent,
+    BitComponent,
+    AgentComponent
   ],
   imports: [
     BrowserModule,
@@ -156,14 +162,16 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
       { path: 'site', component: SitesComponent },
       { path: 'object', component: ObjectComponent },
       { path: 'operation', component: OperationComponent },
-      { path: 'titletask', component: TiltletaskComponent },
+      { path: 'titletask', component: TitletaskComponent },
       { path: 'instance', component: InstanceComponent },
       { path: 'jobposting', component: JobpostingComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'agent', component: AgentComponent },
       { path: 'nature', component: NatureComponent },
       { path: 'element', component: ElementComponent },
       { path: 'rank', component: RankComponent },
       { path: 'grid', component: GridComponent },
+      { path: 'bit', component: BitComponent },
       { path: '**', component: NotFoundComponent }
     ])
   ],
@@ -194,6 +202,8 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
     ElementService,
     RankService,
     GridService,
+    BitService,
+    AgentService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]
