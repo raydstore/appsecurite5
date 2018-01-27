@@ -1,3 +1,120 @@
-<p>
-  agent works!
-</p>
+<div class="card bg-light">
+  <div class="card-header alCenter cardtitle">
+
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
+
+    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+  <p-dataTable [value]="agents" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
+    rowExpandMode="single" [responsive]="true">
+    <p-column expander="true" styleClass="col-icon"></p-column>
+    <p-column field="id" header="Id"></p-column>
+    <p-column field="firstname" header="nom"></p-column>
+    <p-column field="lastname" header="prenom"></p-column>
+    <p-column field="hiredate" header="Date de naissance">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        <!-- <span [style.color]="car[col.field]"> -->
+        {{m[col.field] | date:'shortDate'}}
+        <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <p-column field="datecreate" header="Crée le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        <!-- <span [style.color]="car[col.field]"> -->
+        {{m[col.field] | date:'shortDate'}}
+        <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <p-column field="owner" header="par"></p-column>
+    <p-column field="dateupdate" header="Modifier le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        <!-- <span [style.color]="car[col.field]"> -->
+        {{m[col.field] | date:'shortDate'}}
+        <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <p-column field="lastuser" header="par"></p-column>
+    <p-column styleClass="col-button">
+      <ng-template let-m="rowData" pTemplate="body">
+        <button class="btn btn-danger" (click)="deleteAgent(m)">
+          <i class="fa fa-minus"></i>
+        </button>
+      </ng-template>
+    </p-column>
+    <ng-template let-item pTemplate="rowexpansion">
+      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
+      <!-- <div class="ui-grid-row"> -->
+      <div class="container">
+        <div class="form-group row">
+          <label for="chid" class="col-sm-2 col-form-label">id : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chfirstname" class="col-sm-2 col-form-label">nom</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chfirstname" [value]="item.firstname" placeholder="le nom de l'agent" #firstname>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chlastname" class="col-sm-2 col-form-label">prenom</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chlastname" [value]="item.lastname" placeholder="le prenom de l'agent" #lastname>
+          </div>
+        </div>
+        <!-- <div class="form-group row">
+          <label for="chhiredate" class="col-sm-2 col-form-label">né le :</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="chhiredate" [value]="item.hiredate" placeholder="date de naissance" #hiredate>
+          </div>
+        </div> -->
+        <div class="clupdate">
+          <button class="btn btn-success" (click)="updateAgent(item, firstname, lastname, hiredate)">
+            <i class="fa fa-check">Valider</i>
+          </button>
+          <button class="btn btn-warning" (click)="cancelUpdate(item)">
+            <i class="fa fa-times">Annuler</i>
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+    </ng-template>
+  </p-dataTable>
+  <!-- </div> -->
+</div>
+
+<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAgent">
+    <div class="bdcontent">
+      <span>
+        <label for="iid">id : </label>
+        <input type="text" class="form-control" id="chid" [(ngModel)]="newAgent.id" placeholder="Identificateur">
+      </span>
+      <span>
+        <label for="iname">nom :</label>
+        <input type="text" id="iname" [(ngModel)]="newAgent.firstname" placeholder="le nom de l'agent">
+      </span>
+      <span>
+        <label for="iname">prenom :</label>
+        <input type="text" id="ipname" [(ngModel)]="newAgent.lastname" placeholder="le prenom de l'agent">
+      </span>
+      <!-- <span>
+        <label for="ihiredate">date de naissance :</label>
+        <input type="date" id="ihiredate" [(ngModel)]="newAgent.hiredate"  placeholder="date de naissance">
+      </span> -->
+      <!-- pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:30))|(?:(?:0[13578]|1[02])-31))" -->
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createAgent()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
+      </div>
+    </div>
+  </div>

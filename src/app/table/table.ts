@@ -262,3 +262,14 @@ export interface Bit {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Agent {
+    id?: string;
+    firstname?: string;
+    lastname?: string;
+    hiredate?: Date;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
