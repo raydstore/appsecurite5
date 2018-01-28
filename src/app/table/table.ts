@@ -198,7 +198,9 @@ export interface Grid {
 
 export interface Accident {
     id?: number;
-    name?: string;
+    classification?: string;
+    description?: string;
+    event?: string;
     idsiteparent?: any;
     idsite?: any;
     curdate?: Date;

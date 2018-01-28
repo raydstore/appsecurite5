@@ -16,7 +16,15 @@
     (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
     <p-column expander="true" styleClass="col-icon"></p-column>
     <p-column field="id" header="Id"></p-column>
-    <p-column field="name" header="Name"></p-column>
+    <p-column field="classification" header="classification"></p-column>
+    <p-column field="curdate" header="date"></p-column>
+    <p-column field="time" header="time"></p-column>
+    <p-column field="idsiteparent" header="site parent"></p-column>
+    <p-column field="idsite" header="idsite"></p-column>
+    <p-column field="sitedescription" header="description"></p-column>
+    <p-column field="event" header="evenement"></p-column>
+    <p-column field="idagentdeclare" header="agent declare"></p-column>
+    <p-column field="idagentvalidate" header="agent valide"></p-column>
     <p-column field="datecreate" header="Crée le">
       <ng-template let-col let-m="rowData" pTemplate="body">
         <!-- <span [style.color]="car[col.field]"> -->
@@ -51,9 +59,60 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="chname" class="col-sm-2 col-form-label">name</label>
+          <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="le nom de la marque" #name>
+            <input type="text" class="form-control" id="chclassification" [value]="item.classification" placeholder="classification"
+              readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chcurdate" [value]="item.curdate" placeholder="date" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chtime" class="col-sm-2 col-form-label">heure : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chtime" [value]="item.time" placeholder="heure" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chidsiteparent" class="col-sm-2 col-form-label">id site parent : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent" placeholder="site parent" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chidsite" class="col-sm-2 col-form-label">id site : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chidsite" [value]="item.idsite" placeholder="site" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chdescription" class="col-sm-2 col-form-label">description site</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chdescription" [value]="item.sitedescription" placeholder="la description du site"
+              #name>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chevent" class="col-sm-2 col-form-label">evenement</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chevent" [value]="item.event" placeholder="l'evenement de l'accident" #name>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chidagentdeclare" class="col-sm-2 col-form-label">id : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare" placeholder="agent declare" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chidagentvalidate" class="col-sm-2 col-form-label">id : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate" placeholder="agent validate"
+              readonly>
           </div>
         </div>
         <div class="clupdate">
@@ -64,6 +123,97 @@
             <i class="fa fa-times">Annuler</i>
           </button>
         </div>
+        <button type="button" class="btn btn-info">Dommages aux personnes</button>
+        <button type="button" class="btn btn-info">dommages aux biens</button>
+        <button type="button" class="btn btn-info">dommages à l'envirenemment</button>
+        <div class="card text-center">
+          <div class="card-header">
+             Dommages aux personnes
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <!-- <div class="card text-white bg-danger">
+                  <div class="card-body">
+                    <h5 class="card-title">Salaries du groupe sonatrach</h5> -->
+                    <div class="jumbotron">
+                      <h1 class="display-6">Salaries du groupe sonatrach</h1>
+                      <hr class="my-4">
+                    <div class="alert alert-primary" role="alert">
+                      Décés
+                    </div>
+                    <!-- <p-dataTable [value]="cars3" sortField="brand" rowGroupMode="rowspan" [style]="{'margin-top':'50px'}">
+                      <p-header>RowSpan</p-header>
+                      <p-column field="brand" header="Brand" sortable="true"></p-column>
+                      <p-column field="color" header="Color" sortable="true"></p-column>
+                      <p-column field="year" header="Year" sortable="true"></p-column>
+                      <p-column field="vin" header="Vin" sortable="true"></p-column>
+                    </p-dataTable> -->
+                    <div class="alert alert-secondary" role="alert">
+                       Arrêt de travail > 21 jours
+                    </div>
+                    <div class="alert alert-success" role="alert">
+                       Arrêt de travail < 21 jours
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                      Blessures légères Arrêt de travail
+                    </div>
+                 <!--  </div> -->
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Salaries EE</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Tierce personne</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-muted">
+            2 days ago
+          </div>
+        </div>
+        <div class="card text-center">
+          <div class="card-header">
+             dommages aux biens
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-muted">
+            2 days ago
+          </div>
+        </div>
+        <div class="card text-center">
+          <div class="card-header">
+             dommages à l'envirenemment
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-muted">
+            2 days ago
+          </div>
+        </div>
+
+        <div></div>
       </div>
       <!-- </div> -->
       <!-- </div> -->
@@ -77,11 +227,48 @@
     <div class="bdcontent">
       <span>
         <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newAccident.id" placeholder="Identificateur" readonly>
+        <input type="text" class="form-control" id="iid" [(ngModel)]="newAccident.id" placeholder="Identificateur" readonly>
       </span>
       <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newAccident.name" placeholder="le nom de la marque">
+        <label for="iclassification">classification : </label>
+        <input type="text" class="form-control" id="iclassification" [(ngModel)]="newAccident.classification" placeholder="classification"
+          readonly>
+      </span>
+      <span>
+        <label for="icurdate">date : </label>
+        <input type="text" class="form-control" id="icurdate" [(ngModel)]="newAccident.curdate" placeholder="Identificateur" readonly>
+      </span>
+      <span>
+        <label for="itime">heure : </label>
+        <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly>
+      </span>
+      <span>
+        <label for="iidsiteparent">site parent : </label>
+        <input type="text" class="form-control" id="iidsiteparent" [(ngModel)]="newAccident.idsiteparent" placeholder="Identificateur"
+          readonly>
+      </span>
+      <span>
+        <label for="iidsite">site : </label>
+        <input type="text" class="form-control" id="iidsite" [(ngModel)]="newAccident.idsite" placeholder="site" readonly>
+      </span>
+      <span>
+        <label for="isitedescription">description : </label>
+        <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description"
+          readonly>
+      </span>
+      <span>
+        <label for="ievent">evenement</label>
+        <input type="text" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
+      </span>
+      <span>
+        <label for="iidagentdeclare">agent declare : </label>
+        <input type="text" class="form-control" id="chidagentdeclare" [(ngModel)]="newAccident.idagentdeclare" placeholder="agent declare"
+          readonly>
+      </span>
+      <span>
+        <label for="iidagentvalidate">agent valide : </label>
+        <input type="text" class="form-control" id="iidagentdeclare" [(ngModel)]="newAccident.idagentvalidate" placeholder="agent valide"
+          readonly>
       </span>
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="createAccident()">Submit</button>

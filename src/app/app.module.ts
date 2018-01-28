@@ -86,6 +86,7 @@ import { CauseComponent } from './page/cause/cause.component';
 import { RecommendationComponent } from './page/recommendation/recommendation.component';
 import { BitComponent } from './page/bit/bit.component';
 import { AgentComponent } from './page/agent/agent.component';
+import { AccidentService } from './services/accident.service';
 
 @NgModule({
   declarations: [
@@ -172,6 +173,7 @@ import { AgentComponent } from './page/agent/agent.component';
       { path: 'rank', component: RankComponent },
       { path: 'grid', component: GridComponent },
       { path: 'bit', component: BitComponent },
+      { path: 'accident', component: AccidentComponent },
       { path: '**', component: NotFoundComponent }
     ])
   ],
@@ -204,6 +206,7 @@ import { AgentComponent } from './page/agent/agent.component';
     GridService,
     BitService,
     AgentService,
+    AccidentService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]
