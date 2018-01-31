@@ -275,3 +275,22 @@ export interface Agent {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface AccidentagentshPK {
+    iddamage: number;
+    idagent: string;
+}
+
+export interface Accidentagentsh {
+    accidentagentshPK: AccidentagentshPK;
+    idagent?: string;
+    countstopwork: number;
+    accidentdomain: number;
+    typeaccident: string;
+    samury: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+

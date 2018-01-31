@@ -1,3 +1,4 @@
+import { VwelementdamageService } from './../../services/vwelementdamage.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
 import { NotFoundError } from './../../common/not-found-error';
@@ -9,6 +10,7 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accident } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @Component({
   selector: 'app-accident',
@@ -17,6 +19,7 @@ import { Http, Response } from '@angular/http';
 })
 export class AccidentComponent implements OnInit {
   accidents: any[];
+ // vwelementdamages: any[];
   selectedAccident: Accident;
   selectedNode: TreeNode;
   // accident: any;
@@ -34,12 +37,22 @@ export class AccidentComponent implements OnInit {
   lastids: any[];
   lastid: any;
   titlelist = 'Accident';
+  selectedNatures: string[];
 
-  constructor(private service: AccidentService, private lastidService: LastidService) {
+  constructor(private service: AccidentService
+    // , private vwelementdamageService: VwelementdamageService
+    , private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
+  /*   this.vwelementdamageService.getAll()
+     .subscribe(
+      vwelementdamages => {
+        this.vwelementdamages = vwelementdamages;
+      } 
+    )*/
+    this.selectedNatures = ['dp', 'db'];
     // this.loadLastId(); 
   }
 

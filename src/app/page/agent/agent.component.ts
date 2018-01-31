@@ -96,9 +96,7 @@ export class AgentComponent implements OnInit {
 
     this.service.create(this.newAgent)
       .subscribe(newAgent => {
-        console.log('1');
         this.loadData();
-        console.log('2');
         /*       console.log('newAgent' + JSON.stringify(newAgent));
               console.log('first lastids' + JSON.stringify(this.lastids));
               let lid = this.getLastid('agent');

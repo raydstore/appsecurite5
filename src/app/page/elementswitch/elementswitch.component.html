@@ -1,0 +1,5 @@
+<div class="card bg-light" [ngSwitch]="accidentdomain" >
+  <app-accidentagentsh *ngSwitchCase="1" [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagentsh>
+  <app-accidentagentee *ngSwitchCase="2" [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagentee>
+  <app-accidentagenttp *ngSwitchDefault  [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagenttp>
+</div>  

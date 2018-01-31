@@ -1,3 +1,8 @@
+import { VwaccidentnatureService } from './services/vwaccidentnature.service';
+import { VwdamageService } from './services/vwdamage.service';
+import { VwelementdamageService } from './services/vwelementdamage.service';
+import { AccidentagenttpService } from './services/accidentagenttp.service';
+import { AccidentagenteeService } from './services/accidentagentee.service';
 import { AgentService } from './services/agent.service';
 import { BitService } from './services/bit.service';
 import { TitletaskComponent } from './page/titletask/titletask.component';
@@ -58,7 +63,7 @@ import { TypeFormationComponent } from './page/type-formation/type-formation.com
 import { FormationComponent } from './page/formation/formation.component';
 import { AlertComponent } from './page/alert/alert.component';
 import { Input } from '@angular/core';
-
+import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModalComponent } from './page/dialog-modal/dialog-modal.component';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { PropertyComponent } from './page/property/property.component';
@@ -87,6 +92,11 @@ import { RecommendationComponent } from './page/recommendation/recommendation.co
 import { BitComponent } from './page/bit/bit.component';
 import { AgentComponent } from './page/agent/agent.component';
 import { AccidentService } from './services/accident.service';
+import { AccidentagentshComponent } from './page/accidentagentsh/accidentagentsh.component';
+import { AccidentagentshService } from './services/accidentagentsh.service';
+import { ElementswitchComponent } from './page/elementswitch/elementswitch.component';
+import { AccidentagenteeComponent } from './page/accidentagentee/accidentagentee.component';
+import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +139,11 @@ import { AccidentService } from './services/accident.service';
     CauseComponent,
     RecommendationComponent,
     BitComponent,
-    AgentComponent
+    AgentComponent,
+    AccidentagentshComponent,
+    ElementswitchComponent,
+    AccidentagenteeComponent,
+    AccidentagenttpComponent
   ],
   imports: [
     BrowserModule,
@@ -149,6 +163,7 @@ import { AccidentService } from './services/accident.service';
     DropdownModule,
     DialogModule,
     DataTableModule,
+    CheckboxModule,
     SharedModule,
     CodeHighlighterModule,
     RouterModule.forRoot([
@@ -207,6 +222,12 @@ import { AccidentService } from './services/accident.service';
     BitService,
     AgentService,
     AccidentService,
+    AccidentagentshService,
+    AccidentagenteeService,
+    AccidentagenttpService,
+    VwelementdamageService, 
+    VwdamageService, 
+    VwaccidentnatureService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

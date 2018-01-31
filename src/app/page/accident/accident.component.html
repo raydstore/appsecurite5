@@ -17,27 +17,37 @@
     <p-column expander="true" styleClass="col-icon"></p-column>
     <p-column field="id" header="Id"></p-column>
     <p-column field="classification" header="classification"></p-column>
-    <p-column field="curdate" header="date"></p-column>
-    <p-column field="time" header="time"></p-column>
-    <p-column field="idsiteparent" header="site parent"></p-column>
-    <p-column field="idsite" header="idsite"></p-column>
-    <p-column field="sitedescription" header="description"></p-column>
-    <p-column field="event" header="evenement"></p-column>
-    <p-column field="idagentdeclare" header="agent declare"></p-column>
-    <p-column field="idagentvalidate" header="agent valide"></p-column>
-    <p-column field="datecreate" header="Crée le">
+    <!-- <p-column field="curdate" header="date"></p-column> -->
+    <p-column field="curdate" header="date">
       <ng-template let-col let-m="rowData" pTemplate="body">
         <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
         <!-- </span> -->
       </ng-template>
     </p-column>
-    <p-column field="owner" header="par"></p-column>
-    <p-column field="dateupdate" header="Modifier le">
+    <p-column field="time" header="Heure">
       <ng-template let-col let-m="rowData" pTemplate="body">
         <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
         <!-- </span> -->
+      </ng-template>
+    </p-column>
+    <!-- <p-column field="time" header="time"></p-column> -->
+    <p-column field="idsiteparent" header="site parent"></p-column>
+    <p-column field="idsite" header="idsite"></p-column>
+    <p-column field="sitedescription" header="description"></p-column>
+    <p-column field="event" header="evenement"></p-column>
+    <p-column field="idagentdeclare" header="agent declare"></p-column>
+    <p-column field="idagentvalidate" header="agent valide"></p-column>
+    <!-- <p-column field="datecreate" header="Crée le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        {{m[col.field] | date:'shortDate'}}
+      </ng-template>
+    </p-column>
+    <p-column field="owner" header="par"></p-column>
+    <p-column field="dateupdate" header="Modifier le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        {{m[col.field] | date:'shortDate'}}
       </ng-template>
     </p-column>
     <p-column field="lastuser" header="par"></p-column>
@@ -47,7 +57,7 @@
           <i class="fa fa-minus"></i>
         </button>
       </ng-template>
-    </p-column>
+    </p-column> -->
     <ng-template let-item pTemplate="rowexpansion">
       <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
       <!-- <div class="ui-grid-row"> -->
@@ -123,98 +133,60 @@
             <i class="fa fa-times">Annuler</i>
           </button>
         </div>
-        <button type="button" class="btn btn-info">Dommages aux personnes</button>
+        <!-- <button type="button" class="btn btn-info">Dommages aux personnes</button>
         <button type="button" class="btn btn-info">dommages aux biens</button>
-        <button type="button" class="btn btn-info">dommages à l'envirenemment</button>
-        <div class="card text-center">
-          <div class="card-header">
-             Dommages aux personnes
-          </div>
-          <div class="card-body">
+        <button type="button" class="btn btn-info">dommages à l'envirenemment</button> -->
+        <span class="badge badge-info" style="width:500px;margin:10px">
+          <h3>l'accident comporte les dommages  </h3>
+          <p-checkbox name="group2" value="dp" label="personnes     " [(ngModel)]="selectedNatures" inputId="dp"></p-checkbox>
+          <p-checkbox name="group2" value="db" label="biens         " [(ngModel)]="selectedNatures" inputId="db"></p-checkbox>
+          <p-checkbox name="group2" value="de" label="envirennements" [(ngModel)]="selectedNatures" inputId="de"></p-checkbox>
+        </span>
+         Selected Natures:
+        <span *ngFor="let nature of selectedNatures" style="margin-right:10px">{{nature}} </span>
+        <p-tabView>
+          <p-tabPanel header="Dommages aux personnes" [selected]="true"  *ngIf="selectedNatures.indexOf('dp') > -1"  [closable]="true">
             <div class="row">
               <div class="col-sm-12">
-                <!-- <div class="card text-white bg-danger">
-                  <div class="card-body">
-                    <h5 class="card-title">Salaries du groupe sonatrach</h5> -->
-                    <div class="jumbotron">
-                      <h1 class="display-6">Salaries du groupe sonatrach</h1>
-                      <hr class="my-4">
-                    <div class="alert alert-primary" role="alert">
-                      Décés
-                    </div>
-                    <!-- <p-dataTable [value]="cars3" sortField="brand" rowGroupMode="rowspan" [style]="{'margin-top':'50px'}">
-                      <p-header>RowSpan</p-header>
-                      <p-column field="brand" header="Brand" sortable="true"></p-column>
-                      <p-column field="color" header="Color" sortable="true"></p-column>
-                      <p-column field="year" header="Year" sortable="true"></p-column>
-                      <p-column field="vin" header="Vin" sortable="true"></p-column>
-                    </p-dataTable> -->
-                    <div class="alert alert-secondary" role="alert">
-                       Arrêt de travail > 21 jours
-                    </div>
-                    <div class="alert alert-success" role="alert">
-                       Arrêt de travail < 21 jours
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                      Blessures légères Arrêt de travail
-                    </div>
-                 <!--  </div> -->
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Salaries EE</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="jumbotron">
+                  <h1 class="display-6">Salaries du groupe sonatrach</h1>
+                  <hr class="my-4">
+                  <div>
+                  <!-- <app-accidentagentsh [iddamage]="1" [titlelist]="'Décés'" ></app-accidentagentsh>
+                  <app-accidentagentsh [iddamage]="2"  [titlelist]="'Arrêt de travail > 21 jours'" ></app-accidentagentsh> -->
+                  <app-elementswitch [iddamage]="1" [titlelist]="'Décés'" [accidentdomain]="1" ></app-elementswitch>
+                  <app-elementswitch [iddamage]="2" [titlelist]="'Arrêt de travail > 21 jours'" [accidentdomain]="1"></app-elementswitch>
                   </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Tierce personne</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Salaries EE</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Tierce personne</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer text-muted">
-            2 days ago
-          </div>
-        </div>
-        <div class="card text-center">
-          <div class="card-header">
-             dommages aux biens
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer text-muted">
-            2 days ago
-          </div>
-        </div>
-        <div class="card text-center">
-          <div class="card-header">
-             dommages à l'envirenemment
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer text-muted">
-            2 days ago
-          </div>
-        </div>
-
-        <div></div>
-      </div>
+          </p-tabPanel>
+          <p-tabPanel header="dommages aux biens"  *ngIf="selectedNatures.indexOf('db') > -1" [closable]="true">
+            dommage aux bien
+          </p-tabPanel>
+          <p-tabPanel header="dommages à l'envirenemment"  *ngIf="selectedNatures.indexOf('de') > -1" [closable]="true">
+             dommage aux envirenemment
+          </p-tabPanel>
+        </p-tabView>
+       </div>
       <!-- </div> -->
       <!-- </div> -->
     </ng-template>
