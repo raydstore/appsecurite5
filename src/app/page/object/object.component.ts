@@ -43,7 +43,7 @@ export class ObjectComponent implements OnInit {
     lastuser: 'ali',
     name: '',
     owner: 'ali'
-  }; 
+  };
   dialogVisibleProperty = false;
   newModeProperty = false;
 
@@ -53,7 +53,7 @@ export class ObjectComponent implements OnInit {
   titlelist = 'Objet';
   typeObjects: any[];
 
-  constructor(private service: ObjectService, private serviceProperty: PropertyService, 
+  constructor(private service: ObjectService, private serviceProperty: PropertyService,
     private lastidService: LastidService, private typeObjectService: TypeObjectService) {
   }
 

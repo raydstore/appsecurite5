@@ -31,7 +31,7 @@ import { AppErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
 import { LabelService } from './services/label.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -150,7 +150,7 @@ import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     OrganizationChartModule,
     CommonModule,
     OrganizationChartModule,
@@ -225,8 +225,8 @@ import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp
     AccidentagentshService,
     AccidentagenteeService,
     AccidentagenttpService,
-    VwelementdamageService, 
-    VwdamageService, 
+    VwelementdamageService,
+    VwdamageService,
     VwaccidentnatureService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
