@@ -50,10 +50,10 @@ export class AccidentComponent implements OnInit {
      .subscribe(
       vwelementdamages => {
         this.vwelementdamages = vwelementdamages;
-      } 
+      }
     )*/
     this.selectedNatures = ['dp', 'db'];
-    // this.loadLastId(); 
+    // this.loadLastId();
   }
 
   loadData() {
@@ -69,7 +69,7 @@ export class AccidentComponent implements OnInit {
   }
 
   getLastid(name) {
-    let lts: any[];
+   // let lts: any[];
     this.loadLastId();
     console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
@@ -121,7 +121,7 @@ export class AccidentComponent implements OnInit {
   }
 
   deleteAccident(_accident: Accident) {
-    let index = this.accidents.indexOf(_accident);
+    const index = this.accidents.indexOf(_accident);
     this.accidents.splice(index, 1);
     this.accidents = [...this.accidents];
     // this.accidents.splice(index, 1);
@@ -180,7 +180,7 @@ export class AccidentComponent implements OnInit {
   }
 
   save() {
-    let accidents = [...this.accidents];
+    const accidents = [...this.accidents];
     if (this.newMode) {
       accidents.push(this.newAccident);
     } else {
@@ -192,7 +192,7 @@ export class AccidentComponent implements OnInit {
   }
 
   delete() {
-    let index = this.findSelectedAccidentIndex();
+    const index = this.findSelectedAccidentIndex();
     this.accidents = this.accidents.filter((val, i) => i !== index);
     this.newAccident = null;
     this.dialogVisible = false;

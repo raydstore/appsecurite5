@@ -1,3 +1,4 @@
+import { VwdamageaccidentnatureService } from './services/vwdamageaccidentnature.service';
 import { VwaccidentnatureService } from './services/vwaccidentnature.service';
 import { VwdamageService } from './services/vwdamage.service';
 import { VwelementdamageService } from './services/vwelementdamage.service';
@@ -228,6 +229,7 @@ import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp
     VwelementdamageService,
     VwdamageService,
     VwaccidentnatureService,
+    VwdamageaccidentnatureService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]
