@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { VwaccidentnatureService } from './../../services/vwaccidentnature.service';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-accidentnature',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accidentnature.component.css']
 })
 export class AccidentnatureComponent implements OnInit {
-
-  constructor() { }
+  @Input() idaccident: number;
+  accidentnatures: any[];
+  constructor(private service: VwaccidentnatureService) { }
 
   ngOnInit() {
+    this.loadData();
   }
 
+  loadData() {
+    console.log('in an');
+    this.service.getByQueryParam({ 'idaccident': this.idaccident })
+      .subscribe(accidentnatures => {
+        this.accidentnatures = accidentnatures;
+        console.log('an = ' + JSON.stringify(this.accidentnatures));
+      });
+    console.log('out an');
+  }
 }

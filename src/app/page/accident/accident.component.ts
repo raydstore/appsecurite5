@@ -1,3 +1,4 @@
+import { VwdamageaccidentnatureService } from './../../services/vwdamageaccidentnature.service';
 import { VwelementdamageService } from './../../services/vwelementdamage.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
@@ -39,9 +40,10 @@ export class AccidentComponent implements OnInit {
   titlelist = 'Accident';
   selectedNatures: string[];
 
-  constructor(private service: AccidentService
+  constructor(private service: AccidentService,
+    /* private serviceVwdamageaccidentnatureService: VwdamageaccidentnatureService */
     // , private vwelementdamageService: VwelementdamageService
-    , private lastidService: LastidService) {
+    private lastidService: LastidService) {
   }
 
   ngOnInit() {

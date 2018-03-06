@@ -1,3 +1,135 @@
-<p>
-  accidentagentee works!
-</p>
+<div class="card-header alCenter cardtitle">
+
+  <h4 class="titleform">
+    <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+  </h4>
+
+  <button class="btn btn-success btnright" (click)="showNewDialoge()">
+    <i class="fa fa-plus"></i>
+  </button>
+
+</div>
+
+<!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+<p-dataTable [value]="accidentagentees" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
+  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
+  <p-column expander="true" styleClass="col-icon"></p-column>
+  <p-column field="accidentagenteePK.id" header="id"></p-column>
+  <p-column field="name" header="name"></p-column>
+  <p-column field="function" header="fonction"></p-column>
+ <!--  <p-column field="identreprise.name" header="entreprise"></p-column> -->
+  <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
+  <p-column field="samury" header="observation"></p-column>
+  <p-column field="datecreate" header="Crée le">
+    <ng-template let-col let-m="rowData" pTemplate="body">
+      <!-- <span [style.color]="car[col.field]"> -->
+      {{m[col.field] | date:'shortDate'}}
+      <!-- </span> -->
+    </ng-template>
+  </p-column>
+  <p-column field="owner" header="par"></p-column>
+  <p-column field="dateupdate" header="Modifier le">
+    <ng-template let-col let-m="rowData" pTemplate="body">
+      <!-- <span [style.color]="car[col.field]"> -->
+      {{m[col.field] | date:'shortDate'}}
+      <!-- </span> -->
+    </ng-template>
+  </p-column>
+  <p-column field="lastuser" header="par"></p-column>
+  <p-column styleClass="col-button">
+    <ng-template let-m="rowData" pTemplate="body">
+      <button class="btn btn-danger" (click)="deleteAccidentagentee(m)">
+        <i class="fa fa-minus"></i>
+      </button>
+    </ng-template>
+  </p-column>
+  <ng-template let-item pTemplate="rowexpansion">
+    <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
+    <!-- <div class="ui-grid-row"> -->
+    <div class="container">
+      <div class="form-group row">
+        <label for="chid" class="col-sm-2 col-form-label">id : </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chid" [value]="item.accidentagenteePK.id" placeholder="Identificateur" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="chname" class="col-sm-2 col-form-label">name : </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="nom" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="chfunction" class="col-sm-2 col-form-label">fonction : </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chfunction" [value]="item.function" placeholder="fonction" readonly>
+        </div>
+      </div>
+     <!--  <div class="form-group row">
+        <label for="chentreprise" class="col-sm-2 col-form-label">entreprise : </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chentreprise" [value]="item.identreprise.name" placeholder="entreprise" readonly>
+        </div>
+      </div> -->
+      <div class="form-group row">
+        <label for="chcountstopwork" class="col-sm-2 col-form-label">nb jour d'arrêt</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chcountstopwork" [value]="item.countstopwork" placeholder="le nom de la marque"
+            #name>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="chsamury" class="col-sm-2 col-form-label">observation</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chsamury" [value]="item.samury" placeholder="le nom de la marque" #name>
+        </div>
+      </div>
+      <div class="clupdate">
+        <button class="btn btn-success" (click)="updateAccidentagentee(item, name)">
+          <i class="fa fa-check">Valider</i>
+        </button>
+        <button class="btn btn-warning" (click)="cancelUpdate(item)">
+          <i class="fa fa-times">Annuler</i>
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+  </ng-template>
+</p-dataTable>
+<!-- </div> -->
+<!-- </div> -->
+
+<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentee">
+    <div class="bdcontent">
+      <span>
+        <label for="iid">id : </label>
+        <input type="text" class="form-control" id="chid" [(ngModel)]="newAccidentagentee.accidentagenteePK.id" placeholder="Identificateur">
+      </span>
+      <span>
+        <label for="iname">nom : </label>
+        <input type="text" class="form-control" id="chname" [(ngModel)]="newAccidentagentee.name" placeholder="nom">
+      </span>
+      <span>
+        <label for="ifunction">fonction : </label>
+        <input type="text" class="form-control" id="chfunction" [(ngModel)]="newAccidentagentee.function" placeholder="fonction">
+      </span>
+      <!-- <span>
+        <label for="iname">entreprise : </label>
+        <input type="text" class="form-control" id="chentreprise" [(ngModel)]="newAccidentagentee.identreprise.name" placeholder="entreprise">
+      </span> -->
+      <span>
+        <label for="icountstopwork">nbj d'arrêt</label>
+        <input type="text" id="icountstopwork" [(ngModel)]="newAccidentagentee.countstopwork" placeholder="nombre de jour d'arrêt">
+      </span>
+      <span>
+        <label for="isamury">observation</label>
+        <input type="text" id="isamury" [(ngModel)]="newAccidentagentee.samury" placeholder="l'observation'">
+      </span>
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createAccidentagentee()">Submit</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      </div>
+    </div>
+  </div>

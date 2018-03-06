@@ -1,0 +1,9 @@
+<span class="badge badge-info" style="width:500px;margin:10px">
+  <h3>l'accident comporte les dommages </h3>
+  <p-checkbox name="group2" value="dp" label="personnes     " [(ngModel)]="selectedNatures" inputId="dp"></p-checkbox>
+  <p-checkbox name="group2" value="db" label="biens         " [(ngModel)]="selectedNatures" inputId="db"></p-checkbox>
+  <p-checkbox name="group2" value="de" label="envirennements" [(ngModel)]="selectedNatures" inputId="de"></p-checkbox>
+</span>
+Selected Natures:
+<span *ngFor="let nature of selectedNatures" style="margin-right:10px">{{nature}} </span>
+<app-accidentnature  [idaccident]="idaccident"></app-accidentnature>

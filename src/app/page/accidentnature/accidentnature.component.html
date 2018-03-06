@@ -1,3 +1,6 @@
-<p>
-  accidentnature works!
-</p>
+<p-tabView>
+  <p-tabPanel *ngFor="let accidentnature of accidentnatures; let i = index;let first = first;" [selected]="first" [header]="accidentnature.name" [closable]="true">
+    <!--  [selected]="true" *ngIf="selectedNatures.indexOf('dp') > -1" -->
+    <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
+  </p-tabPanel>
+</p-tabView>

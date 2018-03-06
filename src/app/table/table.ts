@@ -281,6 +281,16 @@ export interface AccidentagentshPK {
     idagent: string;
 }
 
+export interface AccidentagenteePK {
+    iddamage: number;
+    id: number;
+}
+
+export interface AccidentagenttpPK {
+    iddamage: number;
+    id: number;
+}
+
 export interface Accidentagentsh {
     accidentagentshPK: AccidentagentshPK;
     idagent?: string;
@@ -293,4 +303,53 @@ export interface Accidentagentsh {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Accidentagentee {
+    accidentagenteePK: AccidentagenteePK;
+    name?: string;
+    function?: string;
+    identreprise?: any;
+    countstopwork: number;
+    accidentdomain: number;
+    typeaccident: string;
+    samury: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentagenttp {
+    accidentagenttpPK: AccidentagenttpPK;
+    name?: string;
+    function?: string;
+    countstopwork: number;
+    accidentdomain: number;
+    typeaccident: string;
+    samury: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentvehicule {
+    id?: number;
+    iddamage?: number;
+    accidentdomain?: number;
+    identreprise?: any;
+    idmark?: any;
+    name?: string;
+    source?: string;
+    destination?: string;
+    classification: string;
+    kind: string;
+    matricule: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+
 

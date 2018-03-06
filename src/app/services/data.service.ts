@@ -54,7 +54,8 @@ export class DataService {
         query += op + param + '=' + listParam[param];
             op = op === '?' ? '&&' : '&&';
         }
-        console.log('listParam = ' + query);
+      /*   console.log('listParam = ' + query); */
+        console.log('query url = ' + this.url + query);
         return this.http.get(this.url + query)
       //      .map(response => response.json())
             .catch(this.handleError);

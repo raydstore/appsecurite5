@@ -11,60 +11,57 @@
 </div>
 
 <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-<p-dataTable [value]="accidentagentshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
+<p-dataTable [value]="accidentvehiculenonshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
   (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
   <p-column expander="true" styleClass="col-icon"></p-column>
-  <p-column field="accidentagentshPK.idagent" header="idagent"></p-column>
-  <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
-  <p-column field="samury" header="observation"></p-column>
-  <p-column field="datecreate" header="Crée le">
+  <p-column field="matricule" header="matricule"></p-column>
+  <p-column field="idmark.name" header="marque"></p-column>
+  <p-column field="name" header="nom"></p-column>
+  <p-column field="identreprise.name" header="propriétaire"></p-column>
+  <!-- <p-column field="datecreate" header="Crée le">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
     </ng-template>
   </p-column>
   <p-column field="owner" header="par"></p-column>
   <p-column field="dateupdate" header="Modifier le">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
     </ng-template>
   </p-column>
   <p-column field="lastuser" header="par"></p-column>
   <p-column styleClass="col-button">
     <ng-template let-m="rowData" pTemplate="body">
-      <button class="btn btn-danger" (click)="deleteAccidentagentsh(m)">
+      <button class="btn btn-danger" (click)="deleteAccidentvehiculenonsh(m)">
         <i class="fa fa-minus"></i>
       </button>
     </ng-template>
-  </p-column>
+  </p-column> -->
   <ng-template let-item pTemplate="rowexpansion">
     <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
     <!-- <div class="ui-grid-row"> -->
     <div class="container">
       <div class="form-group row">
-        <label for="chid" class="col-sm-2 col-form-label">idagent : </label>
+        <label for="chmatricule" class="col-sm-2 col-form-label">matricule : </label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="chid" [value]="item.accidentagentshPK.idagent" placeholder="Identificateur" readonly>
+          <input type="text" class="form-control" id="chmatricule" [value]="item.matricule" placeholder="matricule" readonly>
         </div>
       </div>
       <div class="form-group row">
-        <label for="chcountstopwork" class="col-sm-2 col-form-label">countstopwork</label>
+        <label for="chmarque" class="col-sm-2 col-form-label">countstopwork</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="chcountstopwork" [value]="item.countstopwork" placeholder="le nom de la marque"
+          <input type="text" class="form-control" id="chmarque" [value]="item.idmark.name" placeholder="le nom de la marque" #name>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="chowner" class="col-sm-2 col-form-label">observation</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chowner" [value]="item.identreprise.name" placeholder="le nom de l'entreprise"
             #name>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="chsamury" class="col-sm-2 col-form-label">observation</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="chsamury" [value]="item.samury" placeholder="le nom de la marque" #name>
-        </div>
-      </div>
       <div class="clupdate">
-        <button class="btn btn-success" (click)="updateAccidentagentsh(item, name)">
+        <button class="btn btn-success" (click)="updateAccidentvehiculenonsh(item, name)">
           <i class="fa fa-check">Valider</i>
         </button>
         <button class="btn btn-warning" (click)="cancelUpdate(item)">
@@ -80,22 +77,22 @@
 <!-- </div> -->
 
 <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculenonsh">
     <div class="bdcontent">
       <span>
-        <label for="iid">idagent : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newAccidentagentsh.accidentagentshPK.idagent" placeholder="Identificateur">
+        <label for="imatricule">idagent : </label>
+        <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculenonsh.matricule" placeholder="matricule">
+      </span>
+      <!-- <span>
+        <label for="imark">marque</label>
+        <input type="text" id="imark" [(ngModel)]="newAccidentvehiculenonsh.idmark.id" placeholder="la marque">
       </span>
       <span>
-        <label for="icountstopwork">countstopwork</label>
-        <input type="text" id="icountstopwork" [(ngModel)]="newAccidentagentsh.countstopwork" placeholder="le nom de la marque">
-      </span>
-      <span>
-        <label for="isamury">observation</label>
-        <input type="text" id="isamury" [(ngModel)]="newAccidentagentsh.samury" placeholder="l'observation'">
-      </span>
+        <label for="iowner">observation</label>
+        <input type="text" id="iowner" [(ngModel)]="newAccidentvehiculenonsh.identreprise.id" placeholder="le propriètaire">
+      </span> -->
       <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createAccidentagentsh()">Submit</button>
+        <button class="btn btn-primary" (click)="createAccidentvehiculenonsh()">Submit</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
       </div>
     </div>

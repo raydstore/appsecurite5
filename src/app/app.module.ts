@@ -1,3 +1,4 @@
+import { AccidentvehiculeService } from './services/accidentvehicule.service';
 import { VwdamageaccidentnatureService } from './services/vwdamageaccidentnature.service';
 import { VwaccidentnatureService } from './services/vwaccidentnature.service';
 import { VwdamageService } from './services/vwdamage.service';
@@ -98,6 +99,12 @@ import { AccidentagentshService } from './services/accidentagentsh.service';
 import { ElementswitchComponent } from './page/elementswitch/elementswitch.component';
 import { AccidentagenteeComponent } from './page/accidentagentee/accidentagentee.component';
 import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp.component';
+import { AccidentdetailComponent } from './page/accidentdetail/accidentdetail.component';
+import { ElementdamageComponent } from './page/elementdamage/elementdamage.component';
+import { AccidentvehiculeComponent } from './page/accidentvehicule/accidentvehicule.component';
+import { AccidentvehiculeshComponent } from './page/accidentvehiculesh/accidentvehiculesh.component';
+import { AccidentvehiculenonshComponent } from './page/accidentvehiculenonsh/accidentvehiculenonsh.component';
+import { VwnotnatureofaccidentComponent } from './page/vwnotnatureofaccident/vwnotnatureofaccident.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +151,13 @@ import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp
     AccidentagentshComponent,
     ElementswitchComponent,
     AccidentagenteeComponent,
-    AccidentagenttpComponent
+    AccidentagenttpComponent,
+    AccidentdetailComponent,
+    ElementdamageComponent,
+    AccidentvehiculeComponent,
+    AccidentvehiculeshComponent,
+    AccidentvehiculenonshComponent,
+    VwnotnatureofaccidentComponent
   ],
   imports: [
     BrowserModule,
@@ -230,6 +243,7 @@ import { AccidentagenttpComponent } from './page/accidentagenttp/accidentagenttp
     VwdamageService,
     VwaccidentnatureService,
     VwdamageaccidentnatureService,
+    AccidentvehiculeService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

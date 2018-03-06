@@ -136,57 +136,8 @@
         <!-- <button type="button" class="btn btn-info">Dommages aux personnes</button>
         <button type="button" class="btn btn-info">dommages aux biens</button>
         <button type="button" class="btn btn-info">dommages à l'envirenemment</button> -->
-        <span class="badge badge-info" style="width:500px;margin:10px">
-          <h3>l'accident comporte les dommages  </h3>
-          <p-checkbox name="group2" value="dp" label="personnes     " [(ngModel)]="selectedNatures" inputId="dp"></p-checkbox>
-          <p-checkbox name="group2" value="db" label="biens         " [(ngModel)]="selectedNatures" inputId="db"></p-checkbox>
-          <p-checkbox name="group2" value="de" label="envirennements" [(ngModel)]="selectedNatures" inputId="de"></p-checkbox>
-        </span>
-         Selected Natures:
-        <span *ngFor="let nature of selectedNatures" style="margin-right:10px">{{nature}} </span>
-        <p-tabView>
-          <p-tabPanel header="Dommages aux personnes" [selected]="true"  *ngIf="selectedNatures.indexOf('dp') > -1"  [closable]="true">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="jumbotron">
-                  <h1 class="display-6">Salaries du groupe sonatrach</h1>
-                  <hr class="my-4">
-                  <div>
-                  <!-- <app-accidentagentsh [iddamage]="1" [titlelist]="'Décés'" ></app-accidentagentsh>
-                  <app-accidentagentsh [iddamage]="2"  [titlelist]="'Arrêt de travail > 21 jours'" ></app-accidentagentsh> -->
-                  <app-elementswitch [iddamage]="1" [titlelist]="'Décés'" [accidentdomain]="1" ></app-elementswitch>
-                  <app-elementswitch [iddamage]="2" [titlelist]="'Arrêt de travail > 21 jours'" [accidentdomain]="1"></app-elementswitch>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Salaries EE</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Tierce personne</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </p-tabPanel>
-          <p-tabPanel header="dommages aux biens"  *ngIf="selectedNatures.indexOf('db') > -1" [closable]="true">
-            dommage aux bien
-          </p-tabPanel>
-          <p-tabPanel header="dommages à l'envirenemment"  *ngIf="selectedNatures.indexOf('de') > -1" [closable]="true">
-             dommage aux envirenemment
-          </p-tabPanel>
-        </p-tabView>
-       </div>
+        <app-accidentdetail [idaccident]="item.id" [selectedNatures]="selectedNatures"></app-accidentdetail>
+      </div>
       <!-- </div> -->
       <!-- </div> -->
     </ng-template>

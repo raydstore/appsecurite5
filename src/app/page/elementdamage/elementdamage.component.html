@@ -1,0 +1,11 @@
+<div class="row">
+  <!-- <div class="col-sm-12"> -->
+  <div *ngFor="let elementdamage of elementdamages" class="jumbotron">
+    <span>
+      <h1 class="display-6">{{elementdamage.name}}</h1>
+    </span>
+    <hr class="my-4">
+    <app-damage [idaccident]="idaccident" [idnature]="idnature" [accidentdomain]="elementdamage.accidentdomain"></app-damage>
+  </div>
+  <!-- </div> -->
+</div>
