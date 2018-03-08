@@ -10,30 +10,33 @@
 
 </div>
 
-<!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-<p-dataTable [value]="accidentagentshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
-  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
-  <p-column expander="true" styleClass="col-icon"></p-column>
-  <p-column field="accidentagentshPK.idagent" header="idagent"></p-column>
-  <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
-  <p-column field="samury" header="observation"></p-column>
-  <p-column field="datecreate" header="Crée le">
+<!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"
+   scrollable="true" scrollHeight="200px" scrollWidth="600px"
+  -->
+<p-dataTable [value]="accidentagentshs" expandableRows="true"  selectionMode="single" immuable="true" [(selection)]="selectedNode"
+  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" >
+  <p-column expander="true" styleClass="col-icon" ></p-column>
+  <p-column field="accidentagentshPK.idagent" header="agent" ></p-column>
+  <p-column field="countstopwork" header="nb jour arrêt de travail" ></p-column>
+  <p-column field="samury" header="observation" ></p-column>
+<!--   <p-column field="datecreate" header="Crée le"  [style]="{'width':'125px'}">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
+      
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
+      
     </ng-template>
   </p-column>
-  <p-column field="owner" header="par"></p-column>
-  <p-column field="dateupdate" header="Modifier le">
+  <p-column field="owner" header="par" [style]="{'width':'125px'}"></p-column>
+  <p-column field="dateupdate" header="Modifier le" [style]="{'width':'125px'}">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
+      
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
+      
     </ng-template>
   </p-column>
-  <p-column field="lastuser" header="par"></p-column>
-  <p-column styleClass="col-button">
+  <p-column field="lastuser" header="par" [style]="{'width':'125px'}"></p-column>
+   -->
+  <p-column styleClass="col-button" >
     <ng-template let-m="rowData" pTemplate="body">
       <button class="btn btn-danger" (click)="deleteAccidentagentsh(m)">
         <i class="fa fa-minus"></i>

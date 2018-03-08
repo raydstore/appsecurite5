@@ -1,24 +1,25 @@
-<div class="card-header alCenter cardtitle">
+<div class="ctn">
+  <div class="card-header alCenter cardtitle">
 
-  <h4 class="titleform">
-    <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
-  </h4>
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
 
-  <button class="btn btn-success btnright" (click)="showNewDialoge()">
-    <i class="fa fa-plus"></i>
-  </button>
+    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>
 
-</div>
+  </div>
 
-<!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-<p-dataTable [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
-  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
-  <p-column expander="true" styleClass="col-icon"></p-column>
-  <p-column field="matricule" header="matricule"></p-column>
-  <p-column field="idmark['name']" header="marque"></p-column>
-  <p-column field="name" header="nom"></p-column>
-  <p-column field="identreprise['name']" header="propriétaire"></p-column>
-  <!-- <p-column field="datecreate" header="Crée le">
+  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+  <p-dataTable class="header-table" [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" 
+    [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
+    <p-column expander="true" styleClass="col-icon"></p-column>
+    <p-column field="matricule" header="matricule"></p-column>
+    <p-column field="idmark.name" header="marque"></p-column>
+    <p-column field="name" header="nom"></p-column>
+    <p-column field="identreprise.name" header="propriétaire"></p-column>
+    <!-- <p-column field="datecreate" header="Crée le">
     <ng-template let-col let-m="rowData" pTemplate="body">
       {{m[col.field] | date:'shortDate'}}
     </ng-template>
@@ -37,49 +38,48 @@
       </button>
     </ng-template>
   </p-column> -->
-  <ng-template let-item pTemplate="rowexpansion">
-    <div class="container">
-      <div class="form-group row">
-        <label for="chmatricule" class="col-sm-2 col-form-label">matricule : </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="chmatricule" [value]="item.matricule" placeholder="matricule"
-            readonly>
+    <ng-template let-item pTemplate="rowexpansion">
+      <div class="container">
+        <div class="form-group row">
+          <label for="chmatricule" class="col-sm-2 col-form-label">matricule : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chmatricule" [value]="item.matricule" placeholder="matricule" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chmarque" class="col-sm-2 col-form-label">marque</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chmarque" [value]="item.idmark['name']" placeholder="le nom de la marque" #name>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chowner" class="col-sm-2 col-form-label">propriètaire</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chowner" [value]="item.identreprise['name']" placeholder="le nom de l'entreprise"
+              #name>
+          </div>
+        </div>
+        <div class="clupdate">
+          <button class="btn btn-success" (click)="updateAccidentvehiculesh(item, name)">
+            <i class="fa fa-check">Valider</i>
+          </button>
+          <button class="btn btn-warning" (click)="cancelUpdate(item)">
+            <i class="fa fa-times">Annuler</i>
+          </button>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="chmarque" class="col-sm-2 col-form-label">marque</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="chmarque" [value]="item.idmark['name']" placeholder="le nom de la marque"
-            #name>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="chowner" class="col-sm-2 col-form-label">propriètaire</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="chowner" [value]="item.identreprise['name']" placeholder="le nom de l'entreprise" #name>
-        </div>
-      </div>
-      <div class="clupdate">
-        <button class="btn btn-success" (click)="updateAccidentvehiculesh(item, name)">
-          <i class="fa fa-check">Valider</i>
-        </button>
-        <button class="btn btn-warning" (click)="cancelUpdate(item)">
-          <i class="fa fa-times">Annuler</i>
-        </button>
-      </div>
-    </div>
-  </ng-template>
-</p-dataTable>
+    </ng-template>
+  </p-dataTable>
+</div>
 
-
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculesh">
-    <div class="bdcontent">
-      <span>
-        <label for="imatricule">idagent : </label>
-        <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
-      </span>
-  <!--     <span>
+  <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculesh">
+      <div class="bdcontent">
+        <span>
+          <label for="imatricule">idagent : </label>
+          <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
+        </span>
+        <!--     <span>
         <label for="imark">marque</label>
         <input type="text" id="imark" [(ngModel)]="newAccidentvehiculesh.idmark['id']" placeholder="la marque">
       </span>
@@ -87,9 +87,10 @@
         <label for="iowner">observation</label>
         <input type="text" id="iowner" [(ngModel)]="newAccidentvehiculesh.identreprise['id']" placeholder="le propriètaire">
       </span>
-  -->     <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+  -->
+        <div class="toolbtn">
+          <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Submit</button>
+          <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+        </div>
       </div>
     </div>
-  </div>

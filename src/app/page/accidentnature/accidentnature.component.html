@@ -1,6 +1,20 @@
-<p-tabView>
+<!-- <p-tabView>
   <p-tabPanel *ngFor="let accidentnature of accidentnatures; let i = index;let first = first;" [selected]="first" [header]="accidentnature.name" [closable]="true">
-    <!--  [selected]="true" *ngIf="selectedNatures.indexOf('dp') > -1" -->
     <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
   </p-tabPanel>
-</p-tabView>
+</p-tabView> -->
+
+<p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{accidentnature.name}}</span>
+      
+      <!-- <p-splitButton [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></p-splitButton> -->
+    </div>
+  </p-header>
+  <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
+  <p-footer>
+    <button pButton type="button" icon="fa-plus" label="New" class="ui-button-info"></button>
+    <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
+  </p-footer>
+</p-panel>

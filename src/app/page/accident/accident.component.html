@@ -13,7 +13,7 @@
 
   <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
   <p-dataTable [value]="accidents" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
-    (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
+    (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
     <p-column expander="true" styleClass="col-icon"></p-column>
     <p-column field="id" header="Id"></p-column>
     <p-column field="classification" header="classification"></p-column>
@@ -59,93 +59,104 @@
       </ng-template>
     </p-column> -->
     <ng-template let-item pTemplate="rowexpansion">
-      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
-      <!-- <div class="ui-grid-row"> -->
-      <div class="container">
-        <div class="form-group row">
-          <label for="chid" class="col-sm-2 col-form-label">id : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
-          </div>
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Info Accident</div>
+        <div class="card-body">
+          <!-- <h5 class="card-title"></h5> -->
+          <p-tabView>
+            <p-tabPanel [selected]="true" [header]="'Détail'">
+              <div class="container">
+                <div class="form-group row">
+                  <label for="chid" class="col-sm-2 col-form-label">id : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chclassification" [value]="item.classification" placeholder="classification"
+                      readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chcurdate" [value]="item.curdate" placeholder="date" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chtime" class="col-sm-2 col-form-label">heure : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chtime" [value]="item.time" placeholder="heure" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chidsiteparent" class="col-sm-2 col-form-label">id site parent : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent" placeholder="site parent" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chidsite" class="col-sm-2 col-form-label">id site : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chidsite" [value]="item.idsite" placeholder="site" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chdescription" class="col-sm-2 col-form-label">description site</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chdescription" [value]="item.sitedescription" placeholder="la description du site"
+                      #name>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chevent" class="col-sm-2 col-form-label">evenement</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chevent" [value]="item.event" placeholder="l'evenement de l'accident" #name>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chidagentdeclare" class="col-sm-2 col-form-label">id : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare" placeholder="agent declare" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chidagentvalidate" class="col-sm-2 col-form-label">id : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate" placeholder="agent validate"
+                      readonly>
+                  </div>
+                </div>
+                <div class="clupdate">
+                  <button class="btn btn-success" (click)="updateAccident(item, name)">
+                    <i class="fa fa-check">Valider</i>
+                  </button>
+                  <button class="btn btn-warning" (click)="cancelUpdate(item)">
+                    <i class="fa fa-times">Annuler</i>
+                  </button>
+                </div>
+              </div>
+
+            </p-tabPanel>
+            <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
+              <app-accidentdetail [accident]="item"></app-accidentdetail>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Cause'"></p-tabPanel>
+            <p-tabPanel [header]="'Recommandation'"></p-tabPanel>
+            <p-tabPanel [header]="'Action'"></p-tabPanel>
+            <p-tabPanel [header]="'Investigation'"></p-tabPanel>
+          </p-tabView>
         </div>
-        <div class="form-group row">
-          <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chclassification" [value]="item.classification" placeholder="classification"
-              readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chcurdate" [value]="item.curdate" placeholder="date" readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chtime" class="col-sm-2 col-form-label">heure : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chtime" [value]="item.time" placeholder="heure" readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chidsiteparent" class="col-sm-2 col-form-label">id site parent : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent" placeholder="site parent" readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chidsite" class="col-sm-2 col-form-label">id site : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chidsite" [value]="item.idsite" placeholder="site" readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chdescription" class="col-sm-2 col-form-label">description site</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chdescription" [value]="item.sitedescription" placeholder="la description du site"
-              #name>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chevent" class="col-sm-2 col-form-label">evenement</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chevent" [value]="item.event" placeholder="l'evenement de l'accident" #name>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chidagentdeclare" class="col-sm-2 col-form-label">id : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare" placeholder="agent declare" readonly>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="chidagentvalidate" class="col-sm-2 col-form-label">id : </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate" placeholder="agent validate"
-              readonly>
-          </div>
-        </div>
-        <div class="clupdate">
-          <button class="btn btn-success" (click)="updateAccident(item, name)">
-            <i class="fa fa-check">Valider</i>
-          </button>
-          <button class="btn btn-warning" (click)="cancelUpdate(item)">
-            <i class="fa fa-times">Annuler</i>
-          </button>
-        </div>
-        <!-- <button type="button" class="btn btn-info">Dommages aux personnes</button>
-        <button type="button" class="btn btn-info">dommages aux biens</button>
-        <button type="button" class="btn btn-info">dommages à l'envirenemment</button> -->
-        <app-accidentdetail [idaccident]="item.id" [selectedNatures]="selectedNatures"></app-accidentdetail>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
+
     </ng-template>
   </p-dataTable>
   <!-- </div> -->
 </div>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
     <div class="bdcontent">
       <span>

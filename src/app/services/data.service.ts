@@ -66,9 +66,9 @@ export class DataService {
         // return Observable.throw(new AppError());
       //  this.headers.set('Content-Type', 'application/json');
     //   , { headers: this.headers }
-        return this.http.post(this.url, JSON.stringify(resource), { headers: this.headers });
+        return this.http.post(this.url, resource, { headers: this.headers })
       //  .map(response => response.json())
-          //  .catch(this.handleError);
+            .catch(this.handleError);
     }
 
     update(resource) {

@@ -213,8 +213,14 @@ export interface Accident {
     dateupdate?: Date;
 }
 
+export interface AccidentnaturePK {
+    idaccident?: any;
+    idnature?: number;
+}
+
 export interface Accidentnature {
-    id?: number;
+    accidentnaturePK?: AccidentnaturePK;
+    accident?: any;
     idaccident?: any;
     owner?: string;
     lastuser?: string;
