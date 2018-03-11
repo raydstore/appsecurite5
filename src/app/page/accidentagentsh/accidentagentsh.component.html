@@ -15,7 +15,7 @@
   -->
 <p-dataTable [value]="accidentagentshs" expandableRows="true"  selectionMode="single" immuable="true" [(selection)]="selectedNode"
   (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" >
-  <p-column expander="true" styleClass="col-icon" ></p-column>
+  <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
   <p-column field="accidentagentshPK.idagent" header="agent" ></p-column>
   <p-column field="countstopwork" header="nb jour arrêt de travail" ></p-column>
   <p-column field="samury" header="observation" ></p-column>
@@ -36,7 +36,7 @@
   </p-column>
   <p-column field="lastuser" header="par" [style]="{'width':'125px'}"></p-column>
    -->
-  <p-column styleClass="col-button" >
+  <p-column styleClass="col-button"  [style]="{'width':'70px'}">
     <ng-template let-m="rowData" pTemplate="body">
       <button class="btn btn-danger" (click)="deleteAccidentagentsh(m)">
         <i class="fa fa-minus"></i>
@@ -74,6 +74,7 @@
           <i class="fa fa-times">Annuler</i>
         </button>
       </div>
+      <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent"></app-accidentagentshbit>
     </div>
     <!-- </div> -->
     <!-- </div> -->

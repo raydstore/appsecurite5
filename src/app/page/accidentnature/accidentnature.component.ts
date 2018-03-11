@@ -1,5 +1,6 @@
 import { VwaccidentnatureService } from './../../services/vwaccidentnature.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-accidentnature',

@@ -1,10 +1,11 @@
+import { Accident } from './../../table/table';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
 import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { CauseService } from './../../services/cause.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Cause } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
@@ -16,6 +17,8 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./cause.component.css']
 })
 export class CauseComponent implements OnInit {
+  @Input() idaccident: Accident;
+  @Input() titlelist: string;
   causes: any[];
   selectedCause: Cause;
   selectedNode: TreeNode;
@@ -24,6 +27,7 @@ export class CauseComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
+    idaccident: null,
     lastuser: 'ali',
     name: '',
     owner: 'ali'
@@ -33,7 +37,7 @@ export class CauseComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  titlelist = 'Cause';
+  // titlelist = 'Cause';
 
   constructor(private service: CauseService, private lastidService: LastidService) {
   }
@@ -44,7 +48,7 @@ export class CauseComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getAll()
+    this.service.getByQueryParam({'idaccident': this.idaccident.id})
       .subscribe(causes => {
         this.causes = causes;
       });
@@ -81,6 +85,7 @@ export class CauseComponent implements OnInit {
 
   createCause() {
     this.dialogVisible = false;
+    this.newCause.idaccident = this.idaccident;
     //  console.log(JSON.stringify(this.newCause));
     // this.causes.splice(0, 0, this.newCause);
     this.causes = [this.newCause, ...this.causes];

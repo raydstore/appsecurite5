@@ -14,7 +14,7 @@
   <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
   <p-dataTable class="header-table" [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" 
     [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
-    <p-column expander="true" styleClass="col-icon"></p-column>
+    <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
     <p-column field="matricule" header="matricule"></p-column>
     <p-column field="idmark.name" header="marque"></p-column>
     <p-column field="name" header="nom"></p-column>
@@ -30,14 +30,14 @@
       {{m[col.field] | date:'shortDate'}}
     </ng-template>
   </p-column>
-  <p-column field="lastuser" header="par"></p-column>
-  <p-column styleClass="col-button">
+  <p-column field="lastuser" header="par"></p-column> -->
+  <p-column styleClass="col-button" [style]="{'width':'70px'}">
     <ng-template let-m="rowData" pTemplate="body">
       <button class="btn btn-danger" (click)="deleteAccidentvehiculesh(m)">
         <i class="fa fa-minus"></i>
       </button>
     </ng-template>
-  </p-column> -->
+  </p-column> 
     <ng-template let-item pTemplate="rowexpansion">
       <div class="container">
         <div class="form-group row">

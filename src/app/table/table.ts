@@ -357,5 +357,49 @@ export interface Accidentvehicule {
     dateupdate?: Date;
 }
 
+export interface Accidentcause {
+    id?: number;
+    idaccident?: number;
+    idgrid?: number;
+    idnature?: number;
+    accidentdomain: number;
+    description?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
 
+export interface Accidentagentshbit {
+    id?: number;
+    iddamage: number;
+    idagent: string;
+    idbit: string;
+    idbitclass: string;
+    kind: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
 
+export interface Bitclass {
+    id?: string;
+    kind: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Vw$accidentagentshbit {
+    iddamage: number;
+    idagent: string;
+    idbitclass?: string;
+    classname?: string;
+    name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}

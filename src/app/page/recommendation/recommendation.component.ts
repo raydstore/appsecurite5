@@ -1,10 +1,11 @@
+import { Accident } from './../../table/table';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
 import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { RecommendationService } from './../../services/recommendation.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Recommendation } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
@@ -16,6 +17,8 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./recommendation.component.css']
 })
 export class RecommendationComponent implements OnInit {
+  @Input() idaccident: Accident;
+  @Input() titlelist:  string;
   recommendations: any[];
   selectedRecommendation: Recommendation;
   selectedNode: TreeNode;
@@ -24,6 +27,7 @@ export class RecommendationComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
+    idaccident: null,
     lastuser: 'ali',
     name: '',
     owner: 'ali'
@@ -33,7 +37,7 @@ export class RecommendationComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  titlelist = 'Marque';
+  // titlelist = 'Marque';
 
   constructor(private service: RecommendationService, private lastidService: LastidService) {
   }
@@ -44,7 +48,7 @@ export class RecommendationComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getAll()
+    this.service.getByQueryParam({ 'idaccident': this.idaccident.id })
       .subscribe(recommendations => {
         this.recommendations = recommendations;
       });
@@ -80,6 +84,7 @@ export class RecommendationComponent implements OnInit {
 
 
   createRecommendation() {
+    this.newRecommendation.idaccident = this.idaccident;
     this.dialogVisible = false;
     //  console.log(JSON.stringify(this.newRecommendation));
     // this.recommendations.splice(0, 0, this.newRecommendation);

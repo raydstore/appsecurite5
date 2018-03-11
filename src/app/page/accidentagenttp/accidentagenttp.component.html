@@ -13,29 +13,25 @@
 <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
 <p-dataTable [value]="accidentagenttps" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
   (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
-  <p-column expander="true" styleClass="col-icon"></p-column>
+  <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
   <p-column field="accidentagenttpPK.id" header="id"></p-column>
   <p-column field="name" header="name"></p-column>
   <p-column field="function" header="fonction"></p-column>
   <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
   <p-column field="samury" header="observation"></p-column>
-  <p-column field="datecreate" header="Crée le">
+  <!-- <p-column field="datecreate" header="Crée le">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
     </ng-template>
   </p-column>
   <p-column field="owner" header="par"></p-column>
   <p-column field="dateupdate" header="Modifier le">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
       {{m[col.field] | date:'shortDate'}}
-      <!-- </span> -->
     </ng-template>
   </p-column>
-  <p-column field="lastuser" header="par"></p-column>
-  <p-column styleClass="col-button">
+  <p-column field="lastuser" header="par"></p-column> -->
+  <p-column styleClass="col-button"  [style]="{'width':'70px'}">
     <ng-template let-m="rowData" pTemplate="body">
       <button class="btn btn-danger" (click)="deleteAccidentagenttp(m)">
         <i class="fa fa-minus"></i>

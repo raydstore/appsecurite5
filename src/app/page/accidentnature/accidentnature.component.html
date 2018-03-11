@@ -4,13 +4,14 @@
   </p-tabPanel>
 </p-tabView> -->
 
-<p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+<p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
   <p-header>
     <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{accidentnature.name}}</span>
-      
-      <!-- <p-splitButton [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></p-splitButton> -->
+      <span class="ui-panel-title" >{{accidentnature.name}}</span>
     </div>
+    <p-button [style]="{'float':'right'}" label="Ajouter element 1"></p-button>
+    <p-button [style]="{'float':'right'}" label="Ajouter element 2"></p-button>
+    <p-button [style]="{'float':'right'}" label="Ajouter element 3"></p-button>
   </p-header>
   <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
   <p-footer>

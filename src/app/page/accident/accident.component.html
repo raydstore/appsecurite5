@@ -143,8 +143,12 @@
             <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
               <app-accidentdetail [accident]="item"></app-accidentdetail>
             </p-tabPanel>
-            <p-tabPanel [header]="'Cause'"></p-tabPanel>
-            <p-tabPanel [header]="'Recommandation'"></p-tabPanel>
+            <p-tabPanel [header]="'Cause'">
+              <app-cause [idaccident]="item" [titlelist]="'Causes'"></app-cause>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Recommandation'">
+              <app-recommendation [idaccident]="item" [titlelist]="'Recommandations'"></app-recommendation>
+            </p-tabPanel>
             <p-tabPanel [header]="'Action'"></p-tabPanel>
             <p-tabPanel [header]="'Investigation'"></p-tabPanel>
           </p-tabView>

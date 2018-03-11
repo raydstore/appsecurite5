@@ -13,32 +13,28 @@
   <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
   <p-dataTable [value]="causes" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
     rowExpandMode="single" [responsive]="true">
-    <p-column expander="true" styleClass="col-icon"></p-column>
-    <p-column field="id" header="Id"></p-column>
+    <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
+  <!--   <p-column field="id" header="Id"></p-column> -->
     <p-column field="name" header="Name"></p-column>
-    <p-column field="datecreate" header="Crée le">
+   <!--  <p-column field="datecreate" header="Crée le">
       <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
       </ng-template>
     </p-column>
     <p-column field="owner" header="par"></p-column>
     <p-column field="dateupdate" header="Modifier le">
       <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
       </ng-template>
     </p-column>
-    <p-column field="lastuser" header="par"></p-column>
-    <p-column styleClass="col-button">
+    <p-column field="lastuser" header="par"></p-column> -->
+    <p-column styleClass="col-button"  [style]="{'width':'70px'}">
       <ng-template let-m="rowData" pTemplate="body">
         <button class="btn btn-danger" (click)="deleteCause(m)">
           <i class="fa fa-minus"></i>
         </button>
       </ng-template>
-    </p-column>
+    </p-column> 
     <ng-template let-item pTemplate="rowexpansion">
       <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
       <!-- <div class="ui-grid-row"> -->

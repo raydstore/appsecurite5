@@ -1,3 +1,7 @@
+import { AccidentagentshbitService } from './services/accidentagentshbit.service';
+import { BitclassService } from './services/bitclass.service';
+import { RecommendationService } from './services/recommendation.service';
+import { CauseService } from './services/cause.service';
 import { AccidentnatureService } from './services/accidentnature.service';
 import { VwnotnatureofaccidentService } from './services/vwnotnatureofaccident.service';
 import { AccidentvehiculeService } from './services/accidentvehicule.service';
@@ -107,6 +111,9 @@ import { AccidentvehiculeComponent } from './page/accidentvehicule/accidentvehic
 import { AccidentvehiculeshComponent } from './page/accidentvehiculesh/accidentvehiculesh.component';
 import { AccidentvehiculenonshComponent } from './page/accidentvehiculenonsh/accidentvehiculenonsh.component';
 import { VwnotnatureofaccidentComponent } from './page/vwnotnatureofaccident/vwnotnatureofaccident.component';
+import { AccidentagentshbitComponent } from './page/accidentagentshbit/accidentagentshbit.component';
+import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.service';
+
 
 @NgModule({
   declarations: [
@@ -159,7 +166,8 @@ import { VwnotnatureofaccidentComponent } from './page/vwnotnatureofaccident/vwn
     AccidentvehiculeComponent,
     AccidentvehiculeshComponent,
     AccidentvehiculenonshComponent,
-    VwnotnatureofaccidentComponent
+    VwnotnatureofaccidentComponent,
+    AccidentagentshbitComponent
   ],
   imports: [
     BrowserModule,
@@ -248,6 +256,11 @@ import { VwnotnatureofaccidentComponent } from './page/vwnotnatureofaccident/vwn
     AccidentvehiculeService,
     VwnotnatureofaccidentService,
     AccidentnatureService,
+    CauseService,
+    RecommendationService,
+    BitclassService,
+    AccidentagentshbitService,
+    Vw$accidentagentshbitService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]
