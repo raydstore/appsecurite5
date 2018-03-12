@@ -1,5 +1,5 @@
 .list-group {
-    width: 350px;
+    width: 460px;
     padding: 15px;
     margin-top: 20px;
     background-color: white;
@@ -12,10 +12,16 @@
 
 .list-group-item {
     margin: 5px 0px 5px 0px;
+    width: 430px;
 }
 
 .list-group-item > h3{
     color: white;
+}
+
+.clinput {
+    position: absolute;
+    left: 170px!important;
 }
 
 .badge {
@@ -25,4 +31,50 @@
 
 .btndel {
     float: right;
+}
+
+.btnright {
+    float: right;
+}
+
+#chid {
+    width: 100px;
+}
+
+#chname {
+    width: 300px;
+}
+
+.ui-grid {
+    background-color: lightgray;
+    /* padding-top: 20p */
+}
+
+.ui-grid-row {
+    margin-left: 100px;
+}
+
+.alCenter {
+   align-self: center;
+   display: inline-block;
+   width: 300px;
+}
+
+.clupdate {
+   /* position: relative; */
+   /* display: block;
+   position: relative;
+   right: 100px; */
+   /* float: right; */
+   position: relative;
+   /* align-self: flex-end!important; 
+   background-color: blue; */
+   width: 250px;
+   left: 350px;
+}
+
+.container {
+    padding: 40px 0 20px 60px;
+    background-color: lightgray;
+    border-radius: 10px;
 }

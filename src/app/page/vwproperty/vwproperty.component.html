@@ -13,9 +13,9 @@
       'list-group-item-warning':   isEqual(item.type, 'D')
     }" >
       <span class="badge badge-pill badge-info"> {{item.type}} </span> {{item.name}}
-      <input type="text" id="ivalue" #value [value]="item.value" [attr.placeholder]="'valeur du ' + item.name">
-      <button class="btn btn-danger alright" (click)="updateProperty(item, value)">
-        <i class="fa fa-minus"></i>
+      <input class="clinput" type="text" id="ivalue" #value [value]="item.value" [attr.placeholder]="'valeur du ' + item.name">
+      <button class="btn btn-succes alright" (click)="updateProperty(item, value)">
+        <i class="fa fa-check-circle"></i>
       </button>
     </li>
   </ng-template>
