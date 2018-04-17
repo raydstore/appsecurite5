@@ -33,12 +33,12 @@
       </ng-template>
     </p-column>
     <!-- <p-column field="time" header="time"></p-column> -->
-    <p-column field="idsiteparent" header="site parent"></p-column>
-    <p-column field="idsite" header="idsite"></p-column>
+    <p-column field="idsiteparent.name" header="site parent"></p-column>
+    <p-column field="idsite.name" header="idsite"></p-column>
     <p-column field="sitedescription" header="description"></p-column>
     <p-column field="event" header="evenement"></p-column>
-    <p-column field="idagentdeclare" header="agent declare"></p-column>
-    <p-column field="idagentvalidate" header="agent valide"></p-column>
+    <p-column field="idagentdeclare.name" header="agent declare"></p-column>
+    <p-column field="idagentvalidate.name" header="agent valide"></p-column>
     <!-- <p-column field="datecreate" header="Crée le">
       <ng-template let-col let-m="rowData" pTemplate="body">
         {{m[col.field] | date:'shortDate'}}
@@ -94,13 +94,13 @@
                 <div class="form-group row">
                   <label for="chidsiteparent" class="col-sm-2 col-form-label">id site parent : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent" placeholder="site parent" readonly>
+                    <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent.name" placeholder="site parent" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="chidsite" class="col-sm-2 col-form-label">id site : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidsite" [value]="item.idsite" placeholder="site" readonly>
+                    <input type="text" class="form-control" id="chidsite" [value]="item.idsite.name" placeholder="site" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -117,15 +117,16 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="chidagentdeclare" class="col-sm-2 col-form-label">id : </label>
+                  <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare" placeholder="agent declare" readonly>
+                    <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare.name" placeholder="agent declare"
+                      readonly>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="chidagentvalidate" class="col-sm-2 col-form-label">id : </label>
+                  <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate" placeholder="agent validate"
+                    <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate.name" placeholder="agent validate"
                       readonly>
                   </div>
                 </div>
@@ -160,54 +161,99 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="500">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
     <div class="bdcontent">
       <span>
         <label for="iid">id : </label>
         <input type="text" class="form-control" id="iid" [(ngModel)]="newAccident.id" placeholder="Identificateur" readonly>
       </span>
-      <span>
-        <label for="iclassification">classification : </label>
+      <!-- <span>
+        <label for="iclassification"></label>
         <input type="text" class="form-control" id="iclassification" [(ngModel)]="newAccident.classification" placeholder="classification"
           readonly>
-      </span>
-      <span>
-        <label for="icurdate">date : </label>
-        <input type="text" class="form-control" id="icurdate" [(ngModel)]="newAccident.curdate" placeholder="Identificateur" readonly>
-      </span>
-      <span>
-        <label for="itime">heure : </label>
-        <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly>
-      </span>
-      <span>
-        <label for="iidsiteparent">site parent : </label>
-        <input type="text" class="form-control" id="iidsiteparent" [(ngModel)]="newAccident.idsiteparent" placeholder="Identificateur"
-          readonly>
-      </span>
-      <span>
-        <label for="iidsite">site : </label>
-        <input type="text" class="form-control" id="iidsite" [(ngModel)]="newAccident.idsite" placeholder="site" readonly>
-      </span>
-      <span>
-        <label for="isitedescription">description : </label>
-        <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description"
-          readonly>
-      </span>
+      </span> -->
+      <br>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">classification :</h5>
+        <hr>
+        <div class="radio">
+          <label>
+            <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="A"> Accident
+          </label>
+          <label>
+            <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="I"> Incident
+          </label>
+        </div>
+      </div>
+
+      <br>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">classification :</h5>
+        <hr>
+        <div class="form-group">
+          <label for="iidsiteparent">Date :</label>
+          <div class="input-group">
+            <input placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="d1.toggle()">
+                <i class="fa fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <span>
+          <label for="itime">heure : </label>
+          <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly>
+        </span>
+      </div>
+      <br>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Localisation :</h5>
+        <hr>
+        <div class="form-group">
+          <label for="iidsiteparent">site parent :</label>
+          <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
+            <option value=""></option>
+            <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="iidsiteparent">site :</label>
+          <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
+            <option value=""></option>
+            <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
+          </select>
+        </div>
+        <span>
+          <label for="isitedescription">description : </label>
+          <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description">
+        </span>
+      </div>
       <span>
         <label for="ievent">evenement</label>
-        <input type="text" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
+        <input type="text" class="form-control" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
       </span>
-      <span>
-        <label for="iidagentdeclare">agent declare : </label>
-        <input type="text" class="form-control" id="chidagentdeclare" [(ngModel)]="newAccident.idagentdeclare" placeholder="agent declare"
-          readonly>
-      </span>
-      <span>
-        <label for="iidagentvalidate">agent valide : </label>
-        <input type="text" class="form-control" id="iidagentdeclare" [(ngModel)]="newAccident.idagentvalidate" placeholder="agent valide"
-          readonly>
-      </span>
+      <br>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Signature :</h5>
+        <hr>
+        <div class="form-group">
+          <label for="iidagentdeclare">déclarateur :</label>
+          <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
+            <option value=""></option>
+            <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="iidagentvalidate">validateur :</label>
+          <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
+            <option value=""></option>
+            <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
+          </select>
+        </div>
+      </div>
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="createAccident()">Submit</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>

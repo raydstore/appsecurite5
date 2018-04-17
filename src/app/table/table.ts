@@ -199,7 +199,7 @@ export interface Grid {
 export interface Accident {
     id?: number;
     classification?: string;
-    description?: string;
+    sitedescription?: string;
     event?: string;
     idsiteparent?: any;
     idsite?: any;

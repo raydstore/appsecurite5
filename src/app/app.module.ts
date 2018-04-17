@@ -43,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
@@ -190,6 +191,7 @@ import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.s
     CheckboxModule,
     SharedModule,
     CodeHighlighterModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'activity', component: ActivityComponent },

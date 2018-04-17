@@ -16,3 +16,8 @@
 .greenText a {
     color: green;
 }
+
+.dvc {
+    width: 350px!important;
+    background-color: blue!important;
+}

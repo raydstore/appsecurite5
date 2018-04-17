@@ -19,3 +19,7 @@
 .my-3 {
     width: 200px;
 }
+
+.dropdown-toggle {
+    cursor: pointer;
+}

@@ -1,3 +1,5 @@
+import { Site } from './../../table/table';
+import { SiteService } from './../../services/site.service';
 import { VwdamageaccidentnatureService } from './../../services/vwdamageaccidentnature.service';
 import { VwelementdamageService } from './../../services/vwelementdamage.service';
 import { TreeNode } from 'primeng/components/common/api';
@@ -6,30 +8,59 @@ import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { AccidentService } from './../../services/accident.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accident } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import {CheckboxModule} from 'primeng/checkbox';
+import { AgentService } from '../../services/agent.service';
+
+import { NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+/**
+ * Example of a Native Date adapter
+ */
+@Injectable()
+export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
+
+  fromModel(date: Date): NgbDateStruct {
+    return (date && date.getFullYear) ? { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() } : null;
+  }
+
+  toModel(date: NgbDateStruct): Date {
+    return date ? new Date(date.year, date.month - 1, date.day) : null;
+  }
+}
 
 @Component({
   selector: 'app-accident',
   templateUrl: 'accident.component.html',
-  styleUrls: ['./accident.component.css']
+  styleUrls: ['./accident.component.css'],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class AccidentComponent implements OnInit {
   accidents: any[];
+  sites: any[];
+  agents: any[];
  // vwelementdamages: any[];
   selectedAccident: Accident;
   selectedNode: TreeNode;
   // accident: any;
   newAccident: any = {
+    id: 0,
+    classification: 'A',
+    sitedescription: '',
+    event: '',
+    idsiteparent: null,
+    idsite: null,
+    curdate: new Date(),
+    time: new Date(),
+    idagentdeclare: null,
+    idagentvalidate: null,
     datecreate: new Date(),
     dateupdate: new Date(),
-    id: 0,
     lastuser: 'ali',
-    name: '',
     owner: 'ali'
   };
   dialogVisible = false;
@@ -41,27 +72,35 @@ export class AccidentComponent implements OnInit {
   selectedNatures: string[];
 
   constructor(private service: AccidentService,
-    /* private serviceVwdamageaccidentnatureService: VwdamageaccidentnatureService */
-    // , private vwelementdamageService: VwelementdamageService
+    private siteService: SiteService,
+    private agentService: AgentService,
     private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-  /*   this.vwelementdamageService.getAll()
-     .subscribe(
-      vwelementdamages => {
-        this.vwelementdamages = vwelementdamages;
-      }
-    )*/
-    this.selectedNatures = ['dp', 'db'];
-    // this.loadLastId();
+    this.loadSite();
+    this.loadAgent();
   }
 
   loadData() {
     this.service.getAll()
       .subscribe(accidents => {
         this.accidents = accidents;
+      });
+  }
+
+  loadSite() {
+    this.siteService.getAll()
+        .subscribe(sites => {
+          this.sites = sites;
+        });
+  }
+
+  loadAgent() {
+    this.agentService.getAll()
+      .subscribe(agents => {
+        this.agents = agents;
       });
   }
 
@@ -82,6 +121,10 @@ export class AccidentComponent implements OnInit {
     return 0;
     //  console.log('before lid.count' + JSON.stringify(lid));
     //  return lid.count;
+  }
+
+  get today() {
+    return new Date();
   }
 
   nodeExpand(event) {
@@ -162,11 +205,19 @@ export class AccidentComponent implements OnInit {
     this.dialogVisible = true;
     this.newMode = true;
     this.newAccident = {
+      id: 0,
+      classification: 'A',
+      sitedescription: '',
+      event: '',
+      idsiteparent: null,
+      idsite: null,
+      curdate: new Date(),
+      time: new Date(),
+      idagentdeclare: null,
+      idagentvalidate: null,
       datecreate: new Date(),
       dateupdate: new Date(),
-      id: 0,
       lastuser: 'ali',
-      name: '',
       owner: 'ali'
     };
   }
