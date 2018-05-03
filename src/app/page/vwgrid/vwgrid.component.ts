@@ -39,7 +39,7 @@ export class VwgridComponent implements OnInit {
 
   createdamage(damage) {
     this.damages = [damage, ...this.damages];
-    this.service.create(damage)
+    this.damageService.create(damage)
       .subscribe(newdamage => {
         this.loadData();
       }, (error: AppError) => {
@@ -73,6 +73,7 @@ export class VwgridComponent implements OnInit {
   }
 
   onChangeDamageWithRank(eventargs: Damage) {
+    console.log('frm grid = , ', JSON.stringify(eventargs));
     this.createdamage(eventargs);
   }
 

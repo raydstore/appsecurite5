@@ -27,7 +27,7 @@ export class VwdamagewithrankComponent implements OnInit {
     accidentnature: null,
     idgrid: 0,
     degree: 'A',
-    description: '',
+    description: ' ',
     owner: 'ali',
     lastuser: 'ali',
     datecreate: new Date(),
@@ -70,15 +70,10 @@ export class VwdamagewithrankComponent implements OnInit {
 
   getAccidentnature(id: number): any {
     let a: any;
-      a = this.accidentnatures.find(item => item.accidentnaturePK.idnature === id);
+    a = this.accidentnatures.find(item =>(item.accidentnaturePK.idnature === id) && 
+                                         (item.accidentnaturePK.idaccident === this.accident.id));
     console.log('this.accidentnatures = ' + JSON.stringify(this.accidentnatures) + ',  ' + id + ', ' + a);
       return a;
-
-  //  this.accidentnatures.find(getAccidentnatureById(accidentnature, id));
-     /* this.serviceAccidentnature.getItem(id)
-      .subscribe(accidentnature => {
-       return accidentnature;
-      })  */
   }
 
   getIdgrid(value): number {
@@ -86,12 +81,11 @@ export class VwdamagewithrankComponent implements OnInit {
   }
 
   onCheckChange($event) {
+    console.log('frm damagewithrank = onCheckChange,  ' + $event);
      if (this.checked) {
        this.newdamage.accidentdomain = this.accidentdomain;
        this.newdamage.accidentnature = this.getAccidentnature(this.idaccidentnature);
-       // this.accidentnature; // getAccidentnature(this.idaccidentnature);
        this.newdamage.idgrid         = this.getIdgrid(this.idgrid);
-      // this.newdamage.idaccident     = this.accident;
        console.log('newdamage' + JSON.stringify(this.newdamage));
        this.change.emit(this.newdamage);
      }

@@ -1,11 +1,8 @@
 <span>
-   <!--  class="badge badge-info" style="width:500px;margin:10px" -->
   <h3>l'accident comporte les dommages </h3>
   <app-vwgrid [accident]="accident"></app-vwgrid>
+  <!-- <app-vwnotelementofnatureaccident [accident]="accident"></app-vwnotelementofnatureaccident> -->
   <app-vwnotnatureofaccident [accident]="accident" ></app-vwnotnatureofaccident>
-  <!-- <p-checkbox name="group2" value="dp" label="personnes     " [(ngModel)]="selectedNatures" inputId="dp"></p-checkbox>
-  <p-checkbox name="group2" value="db" label="biens         " [(ngModel)]="selectedNatures" inputId="db"></p-checkbox>
-  <p-checkbox name="group2" value="de" label="envirennements" [(ngModel)]="selectedNatures" inputId="de"></p-checkbox> -->
 </span>
 
 <app-accidentnature  [idaccident]="accident['id'] "></app-accidentnature>

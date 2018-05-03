@@ -7,13 +7,11 @@
 <p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
   <p-header>
     <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" >{{accidentnature.name}}</span>
+      <span class="ui-panel-title" >{{accidentnature.name}} </span>
     </div>
-    <!-- <p-button [style]="{'float':'right'}" label="Ajouter element 1"></p-button>
-    <p-button [style]="{'float':'right'}" label="Ajouter element 2"></p-button>
-    <p-button [style]="{'float':'right'}" label="Ajouter element 3"></p-button> -->
   </p-header>
-  <app-vwelementgrid [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-vwelementgrid>
+  <!-- <app-vwelementgrid [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-vwelementgrid> -->
+    <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
   <p-footer>
     <button pButton type="button" icon="fa-plus" label="New" class="ui-button-info"></button>
     <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
