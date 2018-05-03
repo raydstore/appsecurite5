@@ -150,7 +150,9 @@
             <p-tabPanel [header]="'Recommandation'">
               <app-recommendation [idaccident]="item" [titlelist]="'Recommandations'"></app-recommendation>
             </p-tabPanel>
-            <p-tabPanel [header]="'Action'"></p-tabPanel>
+            <p-tabPanel [header]="'Action'">
+              <app-action [idaccident]="item" [titlelist]="'Action'"></app-action>
+            </p-tabPanel>
             <p-tabPanel [header]="'Investigation'"></p-tabPanel>
           </p-tabView>
         </div>
@@ -161,102 +163,134 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="500">
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="680">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
     <div class="bdcontent">
-      <span>
+      <!--  <span>
         <label for="iid">id : </label>
         <input type="text" class="form-control" id="iid" [(ngModel)]="newAccident.id" placeholder="Identificateur" readonly>
-      </span>
+      </span> -->
       <!-- <span>
         <label for="iclassification"></label>
         <input type="text" class="form-control" id="iclassification" [(ngModel)]="newAccident.classification" placeholder="classification"
           readonly>
       </span> -->
-      <br>
-      <div class="alert alert-secondary" role="alert">
-        <h5 class="alert-heading">classification :</h5>
-        <hr>
-        <div class="radio">
-          <label>
-            <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="A"> Accident
-          </label>
-          <label>
-            <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="I"> Incident
-          </label>
-        </div>
-      </div>
-
-      <br>
-      <div class="alert alert-secondary" role="alert">
-        <h5 class="alert-heading">classification :</h5>
-        <hr>
-        <div class="form-group">
-          <label for="iidsiteparent">Date :</label>
-          <div class="input-group">
-            <input placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" (click)="d1.toggle()">
-                <i class="fa fa-calendar-alt"></i>
-              </button>
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">classification :</h5>
+            <hr class="hrline">
+            <div class="radio">
+              <div>
+              <label>
+                <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="A"> Accident
+              </label>
+              </div>
+              <div>
+              <label>
+                <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="I"> Incident
+              </label>
+              </div>
             </div>
           </div>
         </div>
-        <span>
-          <label for="itime">heure : </label>
-          <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly>
-        </span>
+        <div class="col-sm-7">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">c'est produite :</h5>
+            <hr class="hrline">
+            <div class="bx">
+              <!-- class="input-group" class="form-group"<label for="iidsiteparent">le :</label> -->
+              <div class="inlbox">
+                <input class="inpcal" placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
+                <button class="btn btn-secondary btncal" (click)="d1.toggle()">
+                  <i class="fa fa-calendar-alt"></i>
+                </button>
+                <ngb-timepicker class="inptime" [(ngModel)]="newAccident.time"></ngb-timepicker>
+
+                <!-- <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="d1.toggle()">
+                <i class="fa fa-calendar-alt"></i>
+              </button>
+               a: <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker>
+            </div> -->
+              </div>
+              <!--  à : <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker> -->
+            </div>
+            <!-- <span>
+          <label for="itime">à : </label>
+           <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly> 
+          à : <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker>
+        </span> -->
+          </div>
+        </div>
       </div>
-      <br>
       <div class="alert alert-secondary" role="alert">
         <h5 class="alert-heading">Localisation :</h5>
-        <hr>
-        <div class="form-group">
-          <label for="iidsiteparent">site parent :</label>
-          <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
-            <option value=""></option>
-            <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-          </select>
+        <hr class="hrline">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidsiteparent">site parent :</label>
+              <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
+                <option value=""></option>
+                <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidsiteparent">site :</label>
+              <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
+                <option value=""></option>
+                <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <span>
+                <label for="isitedescription">description : </label>
+                <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description">
+              </span>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="iidsiteparent">site :</label>
-          <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
-            <option value=""></option>
-            <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-          </select>
-        </div>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Evenement :</h5>
+        <hr class="hrline">
         <span>
-          <label for="isitedescription">description : </label>
-          <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description">
+          <!-- <label for="ievent">evenement</label> -->
+          <input type="text" class="form-control" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
         </span>
       </div>
-      <span>
-        <label for="ievent">evenement</label>
-        <input type="text" class="form-control" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
-      </span>
-      <br>
       <div class="alert alert-secondary" role="alert">
         <h5 class="alert-heading">Signature :</h5>
-        <hr>
-        <div class="form-group">
-          <label for="iidagentdeclare">déclarateur :</label>
-          <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
-            <option value=""></option>
-            <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="iidagentvalidate">validateur :</label>
-          <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
-            <option value=""></option>
-            <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-          </select>
+        <hr class="hrline">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidagentdeclare">déclarateur :</label>
+              <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
+                <option value=""></option>
+                <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidagentvalidate">validateur :</label>
+              <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
+                <option value=""></option>
+                <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createAccident()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+        <button class="btn btn-primary" (click)="createAccident()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div>
   </div>

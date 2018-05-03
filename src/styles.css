@@ -101,5 +101,11 @@ body {
  .dvc {
      width: 500px!important;
  }
+
+ .ui-dialog .ui-dialog-titlebar {
+    border-bottom: solid 5px darkblue!important;
+    color: darkblue!important;
+    font-size: 20px!important;
+}
 /* */
 

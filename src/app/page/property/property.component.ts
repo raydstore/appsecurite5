@@ -4,12 +4,21 @@ import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { PropertyService } from './../../services/property.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Property } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import { NgClass } from '@angular/common';
+import { ListboxModule } from 'primeng/listbox';
+import { Subject } from 'rxjs/Subject';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-property',
@@ -45,6 +54,10 @@ export class PropertyComponent implements OnInit {
   lastids: any[];
   lastid: any;
 
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
+
   constructor(private service: PropertyService, private unitMeasureService: UnitMeasureService, private lastidService: LastidService) {
   }
 
@@ -67,6 +80,15 @@ export class PropertyComponent implements OnInit {
         this.propertys = propertys;
       });
   }
+
+  search = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.unitMeasures : this.unitMeasures.filter(v => (v.id + v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+  formatter = (x: { name: string }) => x.name;
 
   getLastid(name) {
     let a = '';

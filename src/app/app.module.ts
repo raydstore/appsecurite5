@@ -1,3 +1,8 @@
+import { VwgridService } from './services/vwgrid.service';
+import { VwnotelementofnatureaccidentService } from './services/vwnotelementofnatureaccident.service';
+import { OpscardService } from './services/opscard.service';
+import { ActionService } from './services/action.service';
+import { ListboxModule } from 'primeng/listbox';
 import { AccidentagentshbitService } from './services/accidentagentshbit.service';
 import { BitclassService } from './services/bitclass.service';
 import { RecommendationService } from './services/recommendation.service';
@@ -59,6 +64,7 @@ import { TabViewModule } from 'primeng/primeng';
 import { CodeHighlighterModule } from 'primeng/primeng';
 import { InplaceModule } from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
+import { TableModule } from 'primeng/table';
 import { MarkComponent } from './page/mark/mark.component';
 import { TypeObjectComponent } from './page/type-object/type-object.component';
 import { TypeOperationComponent } from './page/type-operation/type-operation.component';
@@ -114,6 +120,15 @@ import { AccidentvehiculenonshComponent } from './page/accidentvehiculenonsh/acc
 import { VwnotnatureofaccidentComponent } from './page/vwnotnatureofaccident/vwnotnatureofaccident.component';
 import { AccidentagentshbitComponent } from './page/accidentagentshbit/accidentagentshbit.component';
 import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.service';
+import { ActionComponent } from './page/action/action.component';
+import { OpscardComponent } from './page/opscard/opscard.component';
+import { VwnotelementofnatureaccidentComponent } from './page/vwnotelementofnatureaccident/vwnotelementofnatureaccident.component';
+import { VwelementgridComponent } from './page/vwelementgrid/vwelementgrid.component';
+import { VwelementgridService } from './services/vwelementgrid.service';
+import { VwgridComponent } from './page/vwgrid/vwgrid.component';
+import { VwdamagewithrankComponent } from './page/vwdamagewithrank/vwdamagewithrank.component';
+import { VwdamagewithrankService } from './services/vwdamagewithrank.service';
+import { DamageService } from './services/damage.service';
 
 
 @NgModule({
@@ -168,7 +183,13 @@ import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.s
     AccidentvehiculeshComponent,
     AccidentvehiculenonshComponent,
     VwnotnatureofaccidentComponent,
-    AccidentagentshbitComponent
+    AccidentagentshbitComponent,
+    ActionComponent,
+    OpscardComponent,
+    VwnotelementofnatureaccidentComponent,
+    VwelementgridComponent,
+    VwgridComponent,
+    VwdamagewithrankComponent
   ],
   imports: [
     BrowserModule,
@@ -181,6 +202,7 @@ import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.s
     OrganizationChartModule,
     DataGridModule,
     GrowlModule,
+    ListboxModule,
     PanelModule,
     TabViewModule,
     TreeTableModule,
@@ -188,6 +210,7 @@ import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.s
     DropdownModule,
     DialogModule,
     DataTableModule,
+    TableModule,
     CheckboxModule,
     SharedModule,
     CodeHighlighterModule,
@@ -263,6 +286,13 @@ import { Vw$accidentagentshbitService } from './services/vw$accidentagentshbit.s
     BitclassService,
     AccidentagentshbitService,
     Vw$accidentagentshbitService,
+    ActionService,
+    OpscardService,
+    VwelementgridService,
+    VwnotelementofnatureaccidentService,
+    VwgridService,
+    VwdamagewithrankService,
+    DamageService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

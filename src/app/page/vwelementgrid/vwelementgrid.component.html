@@ -1,0 +1,11 @@
+<div class="col">
+  <!-- <div class="col-sm-12"> -->
+  <div class="col-12" *ngFor="let vwelementgrid of vwelementgrids" class="jumbotron">
+    <span>
+      <h1 class="display-6">{{vwelementgrid.name}}</h1>
+    </span>
+    <hr class="my-4">
+    <app-damage [idaccident]="idaccident" [idnature]="idnature" [accidentdomain]="vwelementgrid.accidentdomain"></app-damage>
+  </div>
+  <!-- </div> -->
+</div>

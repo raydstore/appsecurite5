@@ -40,11 +40,34 @@
         </label>
       </div>
       <div class="form-group">
-        <label for="unitmeasureMethode">Unité de mesure</label>
+        <!-- <label for="unitmeasureMethode">Unité de mesure</label>
         <select [(ngModel)]="newProperty.idunitmeasure" id="unitmeasureMethode" class="form-control">
           <option value=""></option>
           <option *ngFor="let unitMesure of unitMeasures" [ngValue]="unitMesure"> {{unitMesure.name}} </option>
-        </select>
+        </select> -->
+        <span>
+          <!-- <label for="ium">um</label>
+          <input  type="text" id="ium" [(ngModel)]="newProperty.idunitmeasure" list="ltum" placeholder="unité de mesure">
+          <label for="ium1">um</label>
+          <input type="text" id="ium1" list="ltum" placeholder="unité de mesure">
+          <datalist id="ltum">
+            <option *ngFor="let unitMesure of unitMeasures" [value]="unitMesure.id" [label]="unitMesure.name">  </option>
+          </datalist>
+          <p> {{ newProperty.idunitmeasure.id }} </p> -->
+
+          <!-- <p-listbox [options]="unitMeasures" filter="filter" [(ngModel)]="newProperty.idunitmeasure" [style]="{'width':'200px'}" optionLabel="name"></p-listbox> -->
+
+          <ng-template #rt let-r="result" let-t="term">
+            {{ r.id}} - {{ r.name}}
+          </ng-template>
+
+          <label for="typeahead-focus">Unité de mesure</label>
+          <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="newProperty.idunitmeasure" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
+            (click)="click$.next($event.target.value)" #instance="ngbTypeahead" [resultTemplate]="rt"  [inputFormatter]="formatter"/>
+          <!-- <hr>
+          <pre>Model: {{ newProperty.idunitmeasure | json }}</pre> -->
+
+        </span>
       </div>
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="newProperty.object1 = idObject; newProperty.propertyPK = {id: 0, idobject: idObject.id} ; createProperty()">Submit</button>

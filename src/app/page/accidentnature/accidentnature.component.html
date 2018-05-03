@@ -9,11 +9,11 @@
     <div class="ui-helper-clearfix">
       <span class="ui-panel-title" >{{accidentnature.name}}</span>
     </div>
-    <p-button [style]="{'float':'right'}" label="Ajouter element 1"></p-button>
+    <!-- <p-button [style]="{'float':'right'}" label="Ajouter element 1"></p-button>
     <p-button [style]="{'float':'right'}" label="Ajouter element 2"></p-button>
-    <p-button [style]="{'float':'right'}" label="Ajouter element 3"></p-button>
+    <p-button [style]="{'float':'right'}" label="Ajouter element 3"></p-button> -->
   </p-header>
-  <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
+  <app-vwelementgrid [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-vwelementgrid>
   <p-footer>
     <button pButton type="button" icon="fa-plus" label="New" class="ui-button-info"></button>
     <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>

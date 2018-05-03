@@ -8,7 +8,7 @@ import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { AccidentService } from './../../services/accident.service';
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accident } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
@@ -17,6 +17,15 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { AgentService } from '../../services/agent.service';
 
 import { NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs/Subject';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+
 
 /**
  * Example of a Native Date adapter
@@ -71,6 +80,10 @@ export class AccidentComponent implements OnInit {
   titlelist = 'Accident';
   selectedNatures: string[];
 
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
+
   constructor(private service: AccidentService,
     private siteService: SiteService,
     private agentService: AgentService,
@@ -89,6 +102,41 @@ export class AccidentComponent implements OnInit {
         this.accidents = accidents;
       });
   }
+
+  searchSite = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.sites : this.sites.filter(v => (v.id + v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  searchSiteParent = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.sites : this.sites.filter(v => (v.id + v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+        
+  searchAgentDeclare = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));      
+
+  searchAgentValidate = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  formatter = (x: { name: string }) => x.name;
+
 
   loadSite() {
     this.siteService.getAll()

@@ -17,7 +17,83 @@
     color: green;
 }
 
-.dvc {
-    width: 350px!important;
-    background-color: blue!important;
+.inpcal {
+   width : 100px!important;
+   display: inline-block!important;
+   /* float: left!important; */
+   padding: 4px!important;
+   position: relative;
+   top: 2px;
+}
+
+.inlbox {
+    display: block!important;
+    /* height: 50px; */
+    /* background-color: brown!important; */
+    width: 130px!important;
+    padding-top: 10px!important;
+}
+
+.inptime {
+    position: absolute;
+    display: inline-block!important;
+    top: 40px;
+    left: 150px;
+}
+.bx {
+    display: block!important;
+    /* background-color: green!important; */
+    height: 65px;
+}
+
+.btncal {
+    /* display: block!important; */
+    position: relative;
+    top: 3px;
+    left: -2px; 
+
+}
+
+.alert-heading {
+    color: #0062cc!important;
+    font-style: oblique;
+    font-size: 16px;
+    font-weight: bold;
+   /*  background-color: red!important;
+    padding: 7px;
+    border-radius: 7x!important;
+    position: relative;
+    left: 2px; */
+}
+
+.hrline {
+    border: solid 1px green;
+    /* #17a2b8; */
+    /* #563d7c; */
+}
+
+/* label[not(class = custom-control-label)] {
+    color: firebrick;
+} */
+
+.bdcontent {
+    background-color: white;
+}
+
+.toolbtn {
+    background-color: lightgrey;/* ; */
+    display: block;
+    float: left;
+    padding: 5px!important;
+    height: 50px;
+}
+
+.btn-primary {
+    position: absolute;
+    right: 110px;
+}
+
+.btn-warning {
+    position: absolute;
+    right: 30px;
 }

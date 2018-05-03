@@ -230,10 +230,10 @@ export interface Accidentnature {
 
 export interface Damage {
     id?: number;
-    idaccident?: number;
+    accidentdomain?: number;
+    accidentnature?: any;
     idgrid?: number;
-    idnature?: number;
-    accidentdomain: number;
+    degree?: string;
     description?: string;
     owner?: string;
     lastuser?: string;
@@ -398,6 +398,17 @@ export interface Vw$accidentagentshbit {
     idbitclass?: string;
     classname?: string;
     name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Action {
+    id?: number;
+    idparent?: number;
+    tabindex?: number;
+    name: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

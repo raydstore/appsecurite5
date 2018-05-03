@@ -39,9 +39,9 @@ export class DataService {
     }
  */
     getItem(id) {
-       /*  return this.getAll()
-        .map(items => items.find(item => item.id === id)) */
-       return this.http.get(this.url + '/' + id)
+         return this.getAll()
+        .map(items => items.find(item => item.id === id))
+       /* this.http.get(this.url + '/' + id) */
         //    .map(response => response.json())
             .catch(this.handleError);
     }
