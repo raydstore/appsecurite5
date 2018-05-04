@@ -14,6 +14,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AccidentvehiculenonshComponent implements OnInit {
   @Input() iddamage: number;
+  @Input() idgrid: number;
   @Input() accidentdomain: number;
   @Input() classification: number;
   @Input() titlelist: string;
@@ -28,6 +29,7 @@ export class AccidentvehiculenonshComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     iddamage: this.iddamage,
+    idgrid: this.idgrid,
     accidentdomain: 6,
     matricule: '',
     lastuser: 'ali',
@@ -55,7 +57,7 @@ export class AccidentvehiculenonshComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'accidentdomain': 6, 'classification': 'N' })
+    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'N' })
       .subscribe(accidentvehiculenonshs => {
         this.accidentvehiculenonshs = accidentvehiculenonshs;
       });
@@ -169,6 +171,7 @@ export class AccidentvehiculenonshComponent implements OnInit {
       datecreate: new Date(),
       dateupdate: new Date(),
       iddamage: this.iddamage,
+      idgrid: this.idgrid,
       accidentdomain: 6,
       matricule: '',
       lastuser: 'ali',

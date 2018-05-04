@@ -14,6 +14,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AccidentagenttpComponent implements OnInit {
   @Input() iddamage: number;
+  @Input() idgrid: number;
   @Input() titlelist: string;
   /* @Input() accidentdomain: number; */
   accidentagenttps: any[];
@@ -27,6 +28,7 @@ export class AccidentagenttpComponent implements OnInit {
     accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
     accidentdomain: 1,
     name: '',
+    idgrid: 0,
     function: '',
     lastuser: 'ali',
     samury: '',
@@ -50,7 +52,7 @@ export class AccidentagenttpComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage })
+    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid })
       .subscribe(accidentagenttps => {
         this.accidentagenttps = accidentagenttps;
       });
@@ -163,6 +165,7 @@ export class AccidentagenttpComponent implements OnInit {
       dateupdate: new Date(),
       accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
       name: '',
+      idgrid: 0,
       function: '',
       lastuser: 'ali',
       countstopwork: 0,

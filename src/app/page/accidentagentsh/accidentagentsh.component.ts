@@ -17,6 +17,7 @@ import { Http, Response } from '@angular/http';
 })
 export class AccidentagentshComponent implements OnInit {
   @Input() iddamage: number;
+  @Input() idgrid: number;
   @Input() titlelist: string;
   /* @Input() accidentdomain: number; */
   accidentagentshs: any[];
@@ -29,6 +30,7 @@ export class AccidentagentshComponent implements OnInit {
     dateupdate: new Date(),
     accidentagentshPK: {iddamage : this.iddamage, idagent: ''},
     accidentdomain: 1,
+    idgrid: 0,
     idagent: '',
     lastuser: 'ali',
     samury: '',
@@ -52,7 +54,7 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage })
+    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid })
       .subscribe(accidentagentshs => {
         this.accidentagentshs = accidentagentshs;
       });
@@ -165,6 +167,7 @@ export class AccidentagentshComponent implements OnInit {
       dateupdate: new Date(),
       accidentagentshPK: {iddamage: this.iddamage, idagent: ''} ,
       lastuser: 'ali',
+      idgrid: 1,
       countstopwork: 0,
       accidentdomain: 1,
       samury: '',

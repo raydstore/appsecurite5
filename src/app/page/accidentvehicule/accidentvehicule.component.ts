@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AccidentvehiculeComponent implements OnInit {
   @Input() iddamage: number;
+  @Input() idgrid: number;
   @Input() accidentdomain: number;
   @Input() classification: number;
   

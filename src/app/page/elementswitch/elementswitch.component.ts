@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ElementswitchComponent implements OnInit {
   @Input() iddamage: number;
+  @Input() idgrid: number;
   @Input() titlelist: string;
   @Input() accidentdomain: number;
   id: number;

@@ -303,6 +303,7 @@ export interface Accidentagentsh {
     countstopwork: number;
     accidentdomain: number;
     typeaccident: string;
+    idgrid: number;
     samury: string;
     owner?: string;
     lastuser?: string;
@@ -318,6 +319,7 @@ export interface Accidentagentee {
     countstopwork: number;
     accidentdomain: number;
     typeaccident: string;
+    idgrid: number;
     samury: string;
     owner?: string;
     lastuser?: string;
@@ -332,6 +334,7 @@ export interface Accidentagenttp {
     countstopwork: number;
     accidentdomain: number;
     typeaccident: string;
+    idgrid: number;
     samury: string;
     owner?: string;
     lastuser?: string;
@@ -342,6 +345,7 @@ export interface Accidentagenttp {
 export interface Accidentvehicule {
     id?: number;
     iddamage?: number;
+    idgrid: number;
     accidentdomain?: number;
     identreprise?: any;
     idmark?: any;

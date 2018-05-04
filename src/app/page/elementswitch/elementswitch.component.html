@@ -1,7 +1,7 @@
 <div class="card bg-light" [ngSwitch]="accidentdomain" >
-  <app-accidentagentsh *ngSwitchCase="1" [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagentsh>
-  <app-accidentagentee *ngSwitchCase="2" [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagentee>
-  <app-accidentagenttp *ngSwitchCase="3" [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagenttp>
-  <app-accidentvehicule *ngSwitchCase="6" [iddamage]="iddamage" [classification]="'S'" [accidentdomain]="'6'"></app-accidentvehicule>
-  <app-accidentagenttp *ngSwitchDefault  [iddamage]="iddamage" [titlelist]="titlelist"></app-accidentagenttp>
+  <app-accidentagentsh *ngSwitchCase="1" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagentsh>
+  <app-accidentagentee *ngSwitchCase="2" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagentee>
+  <app-accidentagenttp *ngSwitchCase="3" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagenttp>
+  <app-accidentvehicule *ngSwitchCase="6" [iddamage]="iddamage" [idgrid]="idgrid" [classification]="'S'" [accidentdomain]="'6'"></app-accidentvehicule>
+  <app-accidentagenttp *ngSwitchDefault  [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagenttp>
 </div>  
