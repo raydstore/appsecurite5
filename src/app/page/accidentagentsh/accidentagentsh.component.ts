@@ -1,3 +1,4 @@
+import { AgentService } from './../../services/agent.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
 import { NotFoundError } from './../../common/not-found-error';
@@ -6,9 +7,10 @@ import { BadInput } from './../../common/bad-input';
 import { AccidentagentshService } from './../../services/accidentagentsh.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Accidentagentsh, AccidentagentshPK } from '../../table/table';
+import { Accidentagentsh, AccidentagentshPK, Agent } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-accidentagentsh',
@@ -21,6 +23,7 @@ export class AccidentagentshComponent implements OnInit {
   @Input() titlelist: string;
   /* @Input() accidentdomain: number; */
   accidentagentshs: any[];
+  agents: any[];
   selectedAccidentagentsh: Accidentagentsh;
   selectedNode: TreeNode;
   // accidentagentsh: any;
@@ -45,7 +48,7 @@ export class AccidentagentshComponent implements OnInit {
   lastid: any;
   // titlelist = 'Marque';
 
-  constructor(private service: AccidentagentshService, private lastidService: LastidService) {
+  constructor(private service: AccidentagentshService, private serviceAgent: AgentService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
@@ -58,6 +61,22 @@ export class AccidentagentshComponent implements OnInit {
       .subscribe(accidentagentshs => {
         this.accidentagentshs = accidentagentshs;
       });
+    this.serviceAgent.getAll()
+    .subscribe(agents => {
+      this.agents = agents;
+    })
+  }
+
+  getAgent(id?): Agent {
+    if (!isNullOrUndefined(id) && !isNullOrUndefined(this.agents) {
+     return this.agents.find(item => item.id === id);
+    }
+  }
+
+  getName(agent?: Agent): string {
+    if (!isNullOrUndefined(agent)) {
+       return agent.firstname + ' ' + agent.lastname;
+    }
   }
 
   loadLastId() {

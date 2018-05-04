@@ -69,11 +69,9 @@ export class VwdamagewithrankComponent implements OnInit {
   }
 
   getAccidentnature(id: number): any {
-    let a: any;
-    a = this.accidentnatures.find(item =>(item.accidentnaturePK.idnature === id) && 
+    return this.accidentnatures.find(item =>(item.accidentnaturePK.idnature === id) && 
                                          (item.accidentnaturePK.idaccident === this.accident.id));
-    console.log('this.accidentnatures = ' + JSON.stringify(this.accidentnatures) + ',  ' + id + ', ' + a);
-      return a;
+
   }
 
   getIdgrid(value): number {
@@ -81,7 +79,6 @@ export class VwdamagewithrankComponent implements OnInit {
   }
 
   onCheckChange($event) {
-    console.log('frm damagewithrank = onCheckChange,  ' + $event);
      if (this.checked) {
        this.newdamage.accidentdomain = this.accidentdomain;
        this.newdamage.accidentnature = this.getAccidentnature(this.idaccidentnature);
