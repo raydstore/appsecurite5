@@ -19,7 +19,7 @@ export class MarkComponent implements OnInit {
   marks: any[];
   selectedMark: Mark;
   selectedNode: TreeNode;
-  // mark: any;
+
   newMark: any = {
     datecreate: new Date(),
     dateupdate: new Date(),
@@ -40,7 +40,6 @@ export class MarkComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
@@ -65,13 +64,10 @@ export class MarkComponent implements OnInit {
         }
     }
     return 0;
-  //  console.log('before lid.count' + JSON.stringify(lid));
-     //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -81,21 +77,12 @@ export class MarkComponent implements OnInit {
 
   createMark() {
     this.dialogVisible = false;
-  //  console.log(JSON.stringify(this.newMark));
-    // this.marks.splice(0, 0, this.newMark);
     this.marks = [this.newMark, ...this.marks];
-    // console.log('before marks' + JSON.stringify(this.lastids));
+
 
     this.service.create(this.newMark)
       .subscribe(newMark => {
         this.loadData();
-  /*       console.log('newMark' + JSON.stringify(newMark));
-        console.log('first lastids' + JSON.stringify(this.lastids));
-        let lid = this.getLastid('mark');
-        console.log('last id mark = ' + lid);
-        console.log('last id mark = ' + JSON.stringify(lid));
-        this.marks[0].id = lid + 1 ;
-        console.log('fnito '); */
       }, (error: AppError) => {
         this.marks.splice(0, 1);
         if (error instanceof BadInput) {
@@ -104,15 +91,12 @@ export class MarkComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after marks' + this.getLastid('mark'));
   }
 
   deleteMark(_mark: Mark) {
     let index = this.marks.indexOf(_mark);
     this.marks.splice(index, 1);
     this.marks = [...this.marks] ;
-    // this.marks.splice(index, 1);
-    console.log('_mark' + _mark.id + ', ' + JSON.stringify(_mark));
     this.service.delete(_mark.id)
       .subscribe(
       () => { this.loadData(); } ,
@@ -162,7 +146,6 @@ export class MarkComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-   // this.mark = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -186,16 +169,10 @@ export class MarkComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newMark = this.cloneMark(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneMark(c: Mark): Mark {
-    let mark: Mark; // = new Prime();
-    /* for (let prop of c) {
-      mark[prop] = c[prop];
-    } */
+    let mark: Mark;
     mark = c;
     return mark;
   }

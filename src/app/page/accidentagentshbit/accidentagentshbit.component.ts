@@ -12,6 +12,7 @@ import { Vw$accidentagentshbit } from '../../table/table';
 export class AccidentagentshbitComponent implements OnInit {
   @Input() iddamage: number;
   @Input() idagent:  string;
+  @Input() idgrid: number;
   vw$accidentagentshbits: Vw$accidentagentshbit[];
   bitclasss: any[];
 
@@ -23,14 +24,10 @@ export class AccidentagentshbitComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idagent': this.idagent })
+    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idagent': this.idagent, 'idgrid': this.idgrid })
       .subscribe(vw$accidentagentshbits => {
         this.vw$accidentagentshbits = vw$accidentagentshbits;
       });
-   /*  this.bitclassService.getAll()
-      .subscribe(bitclasss => {
-        this.bitclasss = bitclasss;
-      }); */
   }
 
 }

@@ -129,6 +129,10 @@ import { VwgridComponent } from './page/vwgrid/vwgrid.component';
 import { VwdamagewithrankComponent } from './page/vwdamagewithrank/vwdamagewithrank.component';
 import { VwdamagewithrankService } from './services/vwdamagewithrank.service';
 import { DamageService } from './services/damage.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { EntrepriseComponent } from './page/entreprise/entreprise.component';
+import { EntrepriseService } from './services/entreprise.service';
+
 
 
 @NgModule({
@@ -189,7 +193,8 @@ import { DamageService } from './services/damage.service';
     VwnotelementofnatureaccidentComponent,
     VwelementgridComponent,
     VwgridComponent,
-    VwdamagewithrankComponent
+    VwdamagewithrankComponent,
+    EntrepriseComponent
   ],
   imports: [
     BrowserModule,
@@ -204,6 +209,7 @@ import { DamageService } from './services/damage.service';
     GrowlModule,
     ListboxModule,
     PanelModule,
+    AutoCompleteModule,
     TabViewModule,
     TreeTableModule,
     InplaceModule,
@@ -232,6 +238,7 @@ import { DamageService } from './services/damage.service';
       { path: 'jobposting', component: JobpostingComponent },
       { path: 'home', component: HomeComponent },
       { path: 'agent', component: AgentComponent },
+      { path: 'entreprise', component: EntrepriseComponent },
       { path: 'nature', component: NatureComponent },
       { path: 'element', component: ElementComponent },
       { path: 'rank', component: RankComponent },
@@ -293,6 +300,7 @@ import { DamageService } from './services/damage.service';
     VwgridService,
     VwdamagewithrankService,
     DamageService,
+    EntrepriseService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

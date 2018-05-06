@@ -418,3 +418,15 @@ export interface Action {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Entreprise {
+    id?: number;
+    name: string;
+    adress: string;
+    phone: string;
+    fiscalenumber: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}

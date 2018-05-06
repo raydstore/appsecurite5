@@ -1,11 +1,15 @@
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { EntrepriseService } from './../../services/entreprise.service';
 import { NotFoundError } from './../../common/not-found-error';
 import { BadInput } from './../../common/bad-input';
 import { AppError } from './../../common/app-error';
 import { LastidService } from './../../services/lastid.service';
 import { AccidentagenteeService } from './../../services/accidentagentee.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentagentee, AccidentagenteePK } from './../../table/table';
-import { Component, OnInit, Input } from '@angular/core';
+import { Accidentagentee, AccidentagenteePK, Entreprise } from './../../table/table';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-accidentagentee',
@@ -16,18 +20,16 @@ export class AccidentagenteeComponent implements OnInit {
   @Input() iddamage: number;
   @Input() idgrid: number;
   @Input() titlelist: string;
-  /* @Input() accidentdomain: number; */
   accidentagentees: any[];
   selectedAccidentagentee: Accidentagentee;
   selectedNode: TreeNode;
-  // accidentagentee: any;
   accidentagenteePK: AccidentagenteePK;
   newAccidentagentee: Accidentagentee = {
     datecreate: new Date(),
     dateupdate: new Date(),
     accidentagenteePK: {iddamage : this.iddamage, id: 0},
-    accidentdomain: 1,
-    idgrid: 0,
+    accidentdomain: 2,
+    idgrid: this.idgrid,
     name: '',
     function: '',
     identreprise: null,
@@ -39,17 +41,23 @@ export class AccidentagenteeComponent implements OnInit {
   };
   dialogVisible = false;
   newMode = false;
-
+  
+  entreprises: any[];
+  entreprise: Entreprise;
   lastids: any[];
   lastid: any;
-  // titlelist = 'Marque';
 
-  constructor(private service: AccidentagenteeService, private lastidService: LastidService) {
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<String>();
+  click$ = new Subject<String>();
+
+
+  constructor(private service: AccidentagenteeService, private serviceEntreprise: EntrepriseService, 
+    private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
@@ -57,6 +65,11 @@ export class AccidentagenteeComponent implements OnInit {
       .subscribe(accidentagentees => {
         this.accidentagentees = accidentagentees;
       });
+
+      this.serviceEntreprise.getAll()
+        .subscribe(entreprises => {
+          this.entreprises = entreprises;
+        });
   }
 
   loadLastId() {
@@ -67,16 +80,23 @@ export class AccidentagenteeComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
+
+  searchEntreprise = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.entreprises : this.entreprises.filter(v => (v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  formatter = (x: { name: string }) => x.name;
 
   nodeExpand(event) {
     this.selectedNode = event.node;
@@ -90,27 +110,11 @@ export class AccidentagenteeComponent implements OnInit {
 
   createAccidentagentee() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAccidentagentee.hiredate));
-    this.newAccidentagentee.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAccidentagentee.hiredate.getDate));
-    console.log(JSON.stringify(this.newAccidentagentee)); */
-
-    console.log(JSON.stringify(this.newAccidentagentee));
-    // this.accidentagentees.splice(0, 0, this.newAccidentagentee);
     this.accidentagentees = [this.newAccidentagentee, ...this.accidentagentees];
-    // console.log('before accidentagentees' + JSON.stringify(this.lastids));
-
+    this.newAccidentagentee.identreprise = this.entreprise;
     this.service.create(this.newAccidentagentee)
       .subscribe(newAccidentagentee => {
         this.loadData();
-        /*       console.log('newAccidentagentee' + JSON.stringify(newAccidentagentee));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accidentagentee');
-              console.log('last id accidentagentee = ' + lid);
-              console.log('last id accidentagentee = ' + JSON.stringify(lid));
-              this.accidentagentees[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidentagentees.splice(0, 1);
         if (error instanceof BadInput) {
@@ -126,8 +130,6 @@ export class AccidentagenteeComponent implements OnInit {
     let index = this.accidentagentees.indexOf(_accidentagentee);
     this.accidentagentees.splice(index, 1);
     this.accidentagentees = [...this.accidentagentees];
-    // this.accidentagentees.splice(index, 1);
-//    console.log('_accidentagentee' + _accidentagentee.id + ', ' + JSON.stringify(_accidentagentee));
     this.service.delete(_accidentagentee.accidentagenteePK)
       .subscribe(
       () => { this.loadData(); },
@@ -150,8 +152,6 @@ export class AccidentagenteeComponent implements OnInit {
         this.loadData();
         console.log(updateaccidentagentee);
       });
-    /*   console.log('name = ' + input.value);
-      console.log(_accidentagentee); */
   }
 
   cancelUpdate(_accidentagentee) {
@@ -166,12 +166,12 @@ export class AccidentagenteeComponent implements OnInit {
       dateupdate: new Date(),
       accidentagenteePK: {iddamage: this.iddamage, id: 0} ,
       name: '',
-      idgrid: 0,
+      idgrid: this.idgrid,
       function: '',
       identreprise: null,
       lastuser: 'ali',
       countstopwork: 0,
-      accidentdomain: 1,
+      accidentdomain: 2,
       samury: '',
       typeaccident: 'L',
       owner: 'ali'
@@ -184,7 +184,6 @@ export class AccidentagenteeComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.accidentagentee = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -208,16 +207,10 @@ export class AccidentagenteeComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newAccidentagentee = this.cloneAccidentagentee(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneAccidentagentee(c: Accidentagentee): Accidentagentee {
-    let accidentagentee: Accidentagentee; // = new Prime();
-    /* for (let prop of c) {
-      accidentagentee[prop] = c[prop];
-    } */
+    let accidentagentee: Accidentagentee; 
     accidentagentee = c;
     return accidentagentee;
   }

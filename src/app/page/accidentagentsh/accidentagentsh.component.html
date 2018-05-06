@@ -10,41 +10,18 @@
 
 </div>
 
-<!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"
-   scrollable="true" scrollHeight="200px" scrollWidth="600px"
-  -->
-<p-dataTable [value]="accidentagentshs" expandableRows="true"  selectionMode="single" immuable="true" [(selection)]="selectedNode"
-  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" >
-  <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
-  <p-column field="accidentagentshPK.idagent" header="id" ></p-column>
+<p-dataTable [value]="accidentagentshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
+  (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
+  <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
+  <p-column field="accidentagentshPK.idagent" header="id"></p-column>
   <p-column field="accidentagentshPK" header="name">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      <!-- <span [style.color]="car[col.field]"> -->
       {{getName(getAgent(m[col.field].idagent))}}
-       <!-- {{getName(getAgent(m[col.field]))}} -->
-      <!-- </span> -->
     </ng-template>
   </p-column>
-  <p-column field="countstopwork" header="nb jour arrêt de travail" ></p-column>
-  <p-column field="samury" header="observation" ></p-column>
-<!--   <p-column field="datecreate" header="Crée le"  [style]="{'width':'125px'}">
-    <ng-template let-col let-m="rowData" pTemplate="body">
-      
-      {{m[col.field] | date:'shortDate'}}
-      
-    </ng-template>
-  </p-column>
-  <p-column field="owner" header="par" [style]="{'width':'125px'}"></p-column>
-  <p-column field="dateupdate" header="Modifier le" [style]="{'width':'125px'}">
-    <ng-template let-col let-m="rowData" pTemplate="body">
-      
-      {{m[col.field] | date:'shortDate'}}
-      
-    </ng-template>
-  </p-column>
-  <p-column field="lastuser" header="par" [style]="{'width':'125px'}"></p-column>
-   -->
-  <p-column styleClass="col-button"  [style]="{'width':'70px'}">
+  <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
+  <p-column field="samury" header="observation"></p-column>
+  <p-column styleClass="col-button" [style]="{'width':'70px'}">
     <ng-template let-m="rowData" pTemplate="body">
       <button class="btn btn-danger" (click)="deleteAccidentagentsh(m)">
         <i class="fa fa-minus"></i>
@@ -52,14 +29,18 @@
     </ng-template>
   </p-column>
   <ng-template let-item pTemplate="rowexpansion">
-    <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
-    <!-- <div class="ui-grid-row"> -->
     <div class="container">
       <div class="form-group row">
         <label for="chid" class="col-sm-2 col-form-label">idagent : </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="chid" [value]="item.accidentagentshPK.idagent" placeholder="Identificateur" readonly>
-        </div>
+        <p-autoComplete [(ngModel)]="agent" [suggestions]="filteredAgents" (completeMethod)="filterAgents($event)" [size]="30" [minLength]="1"
+          placeholder="Hint: " [dropdown]="true">
+          <ng-template let-agent pTemplate="item">
+            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+              <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{agent.firstname + ' ' + agent.lastname}}</div>
+            </div>
+          </ng-template>
+        </p-autoComplete>
+
       </div>
       <div class="form-group row">
         <label for="chcountstopwork" class="col-sm-2 col-form-label">countstopwork</label>
@@ -82,21 +63,24 @@
           <i class="fa fa-times">Annuler</i>
         </button>
       </div>
-      <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent"></app-accidentagentshbit>
+      <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
+      <ng-template #showAccidentagentshBit>
+        <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" [idgrid]="idgrid"></app-accidentagentshbit>
+      </ng-template>
     </div>
-    <!-- </div> -->
-    <!-- </div> -->
   </ng-template>
 </p-dataTable>
-<!-- </div> -->
-<!-- </div> -->
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<p-dialog header="Agent Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
     <div class="bdcontent">
       <span>
+        <ng-template #rt let-r="result" let-t="term">
+          {{ getName(r) }}
+        </ng-template>
         <label for="iid">idagent : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newAccidentagentsh.accidentagentshPK.idagent" placeholder="Identificateur">
+        <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="agent" [ngbTypeahead]="searchAgent" (click)="click$.next($event.target.value)"
+          #instance="ngbTypeahead" [resultTemplate]="rt" [inputFormatter]="formatter" />
       </span>
       <span>
         <label for="icountstopwork">countstopwork</label>

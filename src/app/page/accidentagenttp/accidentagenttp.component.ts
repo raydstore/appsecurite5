@@ -1,11 +1,14 @@
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundError } from './../../common/not-found-error';
 import { BadInput } from './../../common/bad-input';
 import { AppError } from './../../common/app-error';
 import { LastidService } from './../../services/lastid.service';
 import { AccidentagenttpService } from './../../services/accidentagenttp.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentagenttp, AccidentagenttpPK } from './../../table/table';
-import { Component, OnInit, Input } from '@angular/core';
+import { Accidentagenttp, AccidentagenttpPK, Entreprise } from './../../table/table';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-accidentagenttp',
@@ -16,19 +19,20 @@ export class AccidentagenttpComponent implements OnInit {
   @Input() iddamage: number;
   @Input() idgrid: number;
   @Input() titlelist: string;
-  /* @Input() accidentdomain: number; */
   accidentagenttps: any[];
+  entreprises: any[];
+  entreprise: Entreprise;
   selectedAccidentagenttp: Accidentagenttp;
   selectedNode: TreeNode;
-  // accidentagenttp: any;
+
   accidentagenttpPK: AccidentagenttpPK;
   newAccidentagenttp: Accidentagenttp = {
     datecreate: new Date(),
     dateupdate: new Date(),
     accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
-    accidentdomain: 1,
+    accidentdomain: 3,
     name: '',
-    idgrid: 0,
+    idgrid: this.idgrid,
     function: '',
     lastuser: 'ali',
     samury: '',
@@ -41,14 +45,16 @@ export class AccidentagenttpComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  // titlelist = 'Marque';
+
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<String>();
+  click$ = new Subject<String>();
 
   constructor(private service: AccidentagenttpService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
@@ -73,9 +79,17 @@ export class AccidentagenttpComponent implements OnInit {
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
+
+  searchEntreprise = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.entreprises : this.entreprises.filter(v => (v.name).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  formatter = (x: { name: string }) => x.name;
 
   nodeExpand(event) {
     this.selectedNode = event.node;
@@ -89,27 +103,10 @@ export class AccidentagenttpComponent implements OnInit {
 
   createAccidentagenttp() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAccidentagenttp.hiredate));
-    this.newAccidentagenttp.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAccidentagenttp.hiredate.getDate));
-    console.log(JSON.stringify(this.newAccidentagenttp)); */
-
-    console.log(JSON.stringify(this.newAccidentagenttp));
-    // this.accidentagenttps.splice(0, 0, this.newAccidentagenttp);
     this.accidentagenttps = [this.newAccidentagenttp, ...this.accidentagenttps];
-    // console.log('before accidentagenttps' + JSON.stringify(this.lastids));
-
     this.service.create(this.newAccidentagenttp)
       .subscribe(newAccidentagenttp => {
         this.loadData();
-        /*       console.log('newAccidentagenttp' + JSON.stringify(newAccidentagenttp));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accidentagenttp');
-              console.log('last id accidentagenttp = ' + lid);
-              console.log('last id accidentagenttp = ' + JSON.stringify(lid));
-              this.accidentagenttps[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidentagenttps.splice(0, 1);
         if (error instanceof BadInput) {
@@ -125,8 +122,6 @@ export class AccidentagenttpComponent implements OnInit {
     let index = this.accidentagenttps.indexOf(_accidentagenttp);
     this.accidentagenttps.splice(index, 1);
     this.accidentagenttps = [...this.accidentagenttps];
-    // this.accidentagenttps.splice(index, 1);
-    //    console.log('_accidentagenttp' + _accidentagenttp.id + ', ' + JSON.stringify(_accidentagenttp));
     this.service.delete(_accidentagenttp.accidentagenttpPK)
       .subscribe(
         () => { this.loadData(); },
@@ -149,8 +144,6 @@ export class AccidentagenttpComponent implements OnInit {
         this.loadData();
         console.log(updateaccidentagenttp);
       });
-    /*   console.log('name = ' + input.value);
-      console.log(_accidentagenttp); */
   }
 
   cancelUpdate(_accidentagenttp) {
@@ -165,11 +158,11 @@ export class AccidentagenttpComponent implements OnInit {
       dateupdate: new Date(),
       accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
       name: '',
-      idgrid: 0,
+      idgrid: this.idgrid,
       function: '',
       lastuser: 'ali',
       countstopwork: 0,
-      accidentdomain: 1,
+      accidentdomain: 3,
       samury: '',
       typeaccident: 'L',
       owner: 'ali'
@@ -182,7 +175,6 @@ export class AccidentagenttpComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.accidentagenttp = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -206,16 +198,10 @@ export class AccidentagenttpComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newAccidentagenttp = this.cloneAccidentagenttp(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneAccidentagenttp(c: Accidentagenttp): Accidentagenttp {
     let accidentagenttp: Accidentagenttp; // = new Prime();
-    /* for (let prop of c) {
-      accidentagenttp[prop] = c[prop];
-    } */
     accidentagenttp = c;
     return accidentagenttp;
   }

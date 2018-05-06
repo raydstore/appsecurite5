@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { AgentService } from './../../services/agent.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from './../../services/lastid.service';
@@ -5,28 +8,34 @@ import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { AccidentagentshService } from './../../services/accidentagentsh.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accidentagentsh, AccidentagentshPK, Agent } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import { isUndefined, isNullOrUndefined } from 'util';
 
+
+
 @Component({
   selector: 'app-accidentagentsh',
   templateUrl: 'accidentagentsh.component.html',
   styleUrls: ['./accidentagentsh.component.css']
 })
+
 export class AccidentagentshComponent implements OnInit {
   @Input() iddamage: number;
   @Input() idgrid: number;
   @Input() titlelist: string;
-  /* @Input() accidentdomain: number; */
+
+  accptedGrid = [2, 3, 4];
   accidentagentshs: any[];
   agents: any[];
   selectedAccidentagentsh: Accidentagentsh;
   selectedNode: TreeNode;
-  // accidentagentsh: any;
+  agent: Agent;
+  filteredAgents: any[];
+
   accidentagentshPK: AccidentagentshPK;
   newAccidentagentsh: Accidentagentsh = {
     datecreate: new Date(),
@@ -46,14 +55,17 @@ export class AccidentagentshComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  // titlelist = 'Marque';
+
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<String>();
+  click$ = new Subject<String>();
+
 
   constructor(private service: AccidentagentshService, private serviceAgent: AgentService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
@@ -68,7 +80,7 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   getAgent(id?): Agent {
-    if (!isNullOrUndefined(id) && !isNullOrUndefined(this.agents) {
+    if (!isNullOrUndefined(id) && !isNullOrUndefined(this.agents)) {
      return this.agents.find(item => item.id === id);
     }
   }
@@ -78,6 +90,16 @@ export class AccidentagentshComponent implements OnInit {
        return agent.firstname + ' ' + agent.lastname;
     }
   }
+
+  searchAgent = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.firstname + ' ' + v.lastname).toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  formatter = (x: { firstname: string; lastname: string }) => this.getName(x);
 
   loadLastId() {
     this.lastidService.getAll()
@@ -94,13 +116,10 @@ export class AccidentagentshComponent implements OnInit {
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -110,27 +129,11 @@ export class AccidentagentshComponent implements OnInit {
 
   createAccidentagentsh() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAccidentagentsh.hiredate));
-    this.newAccidentagentsh.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAccidentagentsh.hiredate.getDate));
-    console.log(JSON.stringify(this.newAccidentagentsh)); */
-
-    console.log(JSON.stringify(this.newAccidentagentsh));
-    // this.accidentagentshs.splice(0, 0, this.newAccidentagentsh);
+    this.newAccidentagentsh.accidentagentshPK.idagent = this.agent.id;
     this.accidentagentshs = [this.newAccidentagentsh, ...this.accidentagentshs];
-    // console.log('before accidentagentshs' + JSON.stringify(this.lastids));
-
     this.service.create(this.newAccidentagentsh)
       .subscribe(newAccidentagentsh => {
         this.loadData();
-        /*       console.log('newAccidentagentsh' + JSON.stringify(newAccidentagentsh));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accidentagentsh');
-              console.log('last id accidentagentsh = ' + lid);
-              console.log('last id accidentagentsh = ' + JSON.stringify(lid));
-              this.accidentagentshs[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidentagentshs.splice(0, 1);
         if (error instanceof BadInput) {
@@ -146,8 +149,6 @@ export class AccidentagentshComponent implements OnInit {
     let index = this.accidentagentshs.indexOf(_accidentagentsh);
     this.accidentagentshs.splice(index, 1);
     this.accidentagentshs = [...this.accidentagentshs];
-    // this.accidentagentshs.splice(index, 1);
-//    console.log('_accidentagentsh' + _accidentagentsh.id + ', ' + JSON.stringify(_accidentagentsh));
     this.service.delete(_accidentagentsh.accidentagentshPK)
       .subscribe(
       () => { this.loadData(); },
@@ -170,8 +171,6 @@ export class AccidentagentshComponent implements OnInit {
         this.loadData();
         console.log(updateaccidentagentsh);
       });
-    /*   console.log('name = ' + input.value);
-      console.log(_accidentagentsh); */
   }
 
   cancelUpdate(_accidentagentsh) {
@@ -201,7 +200,6 @@ export class AccidentagentshComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.accidentagentsh = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -225,22 +223,26 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newAccidentagentsh = this.cloneAccidentagentsh(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneAccidentagentsh(c: Accidentagentsh): Accidentagentsh {
-    let accidentagentsh: Accidentagentsh; // = new Prime();
-    /* for (let prop of c) {
-      accidentagentsh[prop] = c[prop];
-    } */
+    let accidentagentsh: Accidentagentsh; 
     accidentagentsh = c;
     return accidentagentsh;
   }
 
   findSelectedAccidentagentshIndex(): number {
     return this.accidentagentshs.indexOf(this.selectedAccidentagentsh);
+  }
+
+  filterAgents(event) {
+    this.filteredAgents = [];
+    for (let i = 0; i < this.agents.length; i++) {
+      let agent = this.agents[i];
+      if (agent.firstname.toLowerCase().indexOf(event.query.toLowerCase()) === 0) {
+        this.filteredAgents.push(agent);
+      }
+    }
   }
 }
 
