@@ -17,12 +17,9 @@ export class AccidentnatureComponent implements OnInit {
   }
 
   loadData() {
-    console.log('in an');
     this.service.getByQueryParam({ 'idaccident': this.idaccident })
       .subscribe(accidentnatures => {
         this.accidentnatures = accidentnatures;
-        console.log('an = ' + JSON.stringify(this.accidentnatures));
       });
-    console.log('out an');
   }
 }

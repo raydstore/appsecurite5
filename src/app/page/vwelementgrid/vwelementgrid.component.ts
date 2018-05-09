@@ -18,13 +18,10 @@ export class VwelementgridComponent implements OnInit {
   }
 
   loadData() {
-    console.log('in ed');
     this.service.getByQueryParam({ 'idnature': this.idnature })
       .subscribe(elementgrids => {
         this.vwelementgrids = elementgrids;
-        console.log('vweg = ' + JSON.stringify(this.vwelementgrids));
       });
-    console.log('out ed');
   }
 
 }

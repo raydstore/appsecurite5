@@ -2,7 +2,7 @@
   <!-- <div class="col-sm-12"> -->
   <div *ngFor="let elementdamage of elementdamages" class="jumbotron">
     <span>
-      <h1 class="display-6">{{elementdamage.name}}</h1>
+      <h3 class="display-6 titledamage">{{elementdamage.name}}</h3>
     </span>
     <hr class="my-4">
     <app-damage [idaccident]="idaccident" [idnature]="idnature" [accidentdomain]="elementdamage.accidentdomain"></app-damage>

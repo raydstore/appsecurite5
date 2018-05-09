@@ -54,20 +54,16 @@ export class NatureComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -77,21 +73,11 @@ export class NatureComponent implements OnInit {
 
   createNature() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newNature));
-    // this.natures.splice(0, 0, this.newNature);
     this.natures = [this.newNature, ...this.natures];
-    // console.log('before natures' + JSON.stringify(this.lastids));
 
     this.service.create(this.newNature)
       .subscribe(newNature => {
         this.loadData();
-        /*       console.log('newNature' + JSON.stringify(newNature));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('nature');
-              console.log('last id nature = ' + lid);
-              console.log('last id nature = ' + JSON.stringify(lid));
-              this.natures[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.natures.splice(0, 1);
         if (error instanceof BadInput) {
@@ -100,15 +86,12 @@ export class NatureComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after natures' + this.getLastid('nature'));
   }
 
   deleteNature(_nature: Nature) {
     let index = this.natures.indexOf(_nature);
     this.natures.splice(index, 1);
     this.natures = [...this.natures];
-    // this.natures.splice(index, 1);
-    console.log('_nature' + _nature.id + ', ' + JSON.stringify(_nature));
     this.service.delete(_nature.id)
       .subscribe(
       () => { this.loadData(); },
@@ -131,8 +114,6 @@ export class NatureComponent implements OnInit {
         this.loadData();
         console.log(updatenature);
       });
-    console.log('name = ' + input.value);
-    console.log(_nature);
   }
 
   cancelUpdate(_nature) {
@@ -158,7 +139,6 @@ export class NatureComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.nature = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -182,16 +162,10 @@ export class NatureComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newNature = this.cloneNature(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneNature(c: Nature): Nature {
-    let nature: Nature; // = new Prime();
-    /* for (let prop of c) {
-      nature[prop] = c[prop];
-    } */
+    let nature: Nature; 
     nature = c;
     return nature;
   }

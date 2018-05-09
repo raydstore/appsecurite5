@@ -60,15 +60,9 @@ export class TypeObjectComponent implements OnInit {
 
   createTypeObject() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newTypeObject));
-    // this.typeObjects.splice(0, 0, this.newTypeObject);
     this.typeObjects = [this.newTypeObject, ...this.typeObjects];
-    // console.log('before typeObjects' + JSON.stringify(this.lastids));
-
     this.service.create(this.newTypeObject)
       .subscribe(newTypeObject => {
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side typeObjects' + JSON.stringify(this.lastidService.getItem('typeObject')));
       }, (error: AppError) => {
         this.typeObjects.splice(0, 1);
         if (error instanceof BadInput) {
@@ -77,15 +71,12 @@ export class TypeObjectComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after typeObjects' + this.getLastid('typeObject'));
   }
 
   deleteTypeObject(_typeObject: TypeObject) {
     let index = this.typeObjects.indexOf(_typeObject);
     this.typeObjects.splice(index, 1);
     this.typeObjects = [...this.typeObjects];
-    // this.typeObjects.splice(index, 1);
-    console.log('_typeObject' + _typeObject.id + ', ' + JSON.stringify(_typeObject));
     this.service.delete(_typeObject.id)
       .subscribe(
       null,
@@ -107,8 +98,6 @@ export class TypeObjectComponent implements OnInit {
       .subscribe(updatetypeObject => {
         console.log(updatetypeObject);
       });
-    console.log('name = ' + input.value);
-    console.log(_typeObject);
   }
 
   cancelUpdate(_typeObject) {
@@ -134,7 +123,6 @@ export class TypeObjectComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.typeObject = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -158,16 +146,10 @@ export class TypeObjectComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newTypeObject = this.cloneTypeObject(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneTypeObject(c: TypeObject): TypeObject {
-    let typeObject: TypeObject; // = new Prime();
-    /* for (let prop of c) {
-      typeObject[prop] = c[prop];
-    } */
+    let typeObject: TypeObject; 
     typeObject = c;
     return typeObject;
   }

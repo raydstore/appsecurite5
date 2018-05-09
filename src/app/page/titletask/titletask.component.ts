@@ -139,9 +139,7 @@ export class TitletaskComponent implements OnInit {
     this.selectedKind = 'W';
     this.newTitleTask.kind = this.selectedKind;
     this.showNewDialoge();
-   // this.newTitleTask.kind = this.selectedKind;
     this.newTitleTask.name = '';
-   // this.selectedKind = 'w';
   } 
 
   onChangeRadio(event: any) {
@@ -151,7 +149,6 @@ export class TitletaskComponent implements OnInit {
   createTitleTask() {
     this.dialogVisible = false;
     this.titletasks = [this.newTitleTask, ...this.titletasks];
-    console.log(JSON.stringify(this.newTitleTask));
     this.service.create(this.newTitleTask)
       .subscribe(newtt => {
         this.titletasks = [];
@@ -166,7 +163,6 @@ export class TitletaskComponent implements OnInit {
   }
 
   deleteTitleTask(node) {
-    console.log(JSON.stringify(node.data));
     this.service.delete(node.data.id)
       .subscribe(
       () => {
@@ -183,11 +179,9 @@ export class TitletaskComponent implements OnInit {
   }
 
   updateTitleTask(node) {
-    console.log('update node.data = ' + JSON.stringify(node.data));
     this.service.update(node.data)
       .subscribe(updatetitletask => {
         this.loadData();
-       // console.log(updatemark);
       });
   }
 
@@ -202,8 +196,6 @@ export class TitletaskComponent implements OnInit {
   }
 
   setFocusColor(input: HTMLInputElement) {
-    // input: HTMLInputElement
-    // console.log('focus : ' + JSON.stringify(event));
     input.style.backgroundColor = 'blue';
     input.style.color = 'white';
 

@@ -62,20 +62,16 @@ export class RecommendationComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -86,38 +82,23 @@ export class RecommendationComponent implements OnInit {
   createRecommendation() {
     this.newRecommendation.idaccident = this.idaccident;
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newRecommendation));
-    // this.recommendations.splice(0, 0, this.newRecommendation);
     this.recommendations = [this.newRecommendation, ...this.recommendations];
-    // console.log('before recommendations' + JSON.stringify(this.lastids));
-
     this.service.create(this.newRecommendation)
       .subscribe(newRecommendation => {
         this.loadData();
-        /*       console.log('newRecommendation' + JSON.stringify(newRecommendation));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('recommendation');
-              console.log('last id recommendation = ' + lid);
-              console.log('last id recommendation = ' + JSON.stringify(lid));
-              this.recommendations[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.recommendations.splice(0, 1);
         if (error instanceof BadInput) {
-          // this.form.setErrors(originalError);
         } else {
           throw error;
         }
       });
-    // console.log('after recommendations' + this.getLastid('recommendation'));
   }
 
   deleteRecommendation(_recommendation: Recommendation) {
     let index = this.recommendations.indexOf(_recommendation);
     this.recommendations.splice(index, 1);
     this.recommendations = [...this.recommendations];
-    // this.recommendations.splice(index, 1);
-    console.log('_recommendation' + _recommendation.id + ', ' + JSON.stringify(_recommendation));
     this.service.delete(_recommendation.id)
       .subscribe(
       () => { this.loadData(); },
@@ -138,10 +119,7 @@ export class RecommendationComponent implements OnInit {
     this.service.update(_recommendation)
       .subscribe(updaterecommendation => {
         this.loadData();
-        console.log(updaterecommendation);
       });
-    console.log('name = ' + input.value);
-    console.log(_recommendation);
   }
 
   cancelUpdate(_recommendation) {
@@ -167,7 +145,6 @@ export class RecommendationComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.recommendation = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -191,16 +168,10 @@ export class RecommendationComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newRecommendation = this.cloneRecommendation(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneRecommendation(c: Recommendation): Recommendation {
-    let recommendation: Recommendation; // = new Prime();
-    /* for (let prop of c) {
-      recommendation[prop] = c[prop];
-    } */
+    let recommendation: Recommendation; 
     recommendation = c;
     return recommendation;
   }

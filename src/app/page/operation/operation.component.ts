@@ -71,16 +71,10 @@ export class OperationComponent implements OnInit {
 
   createOperation() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newoperation));
-    // this.operations.splice(0, 0, this.newoperation);
     this.operations = [this.newOperation, ...this.operations];
-    console.log('before newOperation' + JSON.stringify(this.newOperation));
-
     this.service.create(this.newOperation)
       .subscribe(newOperation => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side operations' + JSON.stringify(this.lastidService.getItem('operation')));
       }, (error: AppError) => {
         this.operations.splice(0, 1);
         if (error instanceof BadInput) {
@@ -89,15 +83,12 @@ export class OperationComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after operations' + this.getLastid('operation'));
   }
 
   deleteOperation(_operation: Operation) {
     let index = this.operations.indexOf(_operation);
     this.operations.splice(index, 1);
     this.operations = [...this.operations];
-    // this.operations.splice(index, 1);
-    console.log('_operation' + _operation.id + ', ' + JSON.stringify(_operation));
     this.service.delete(_operation.id)
       .subscribe(
       null,
@@ -119,8 +110,6 @@ export class OperationComponent implements OnInit {
       .subscribe(updateoperation => {
         console.log(updateoperation);
       });
-    console.log('name = ' + input.value);
-    console.log(_operation);
   }
 
   cancelUpdate(_operation) {
@@ -146,7 +135,6 @@ export class OperationComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.operation = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -170,16 +158,10 @@ export class OperationComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newoperation = this.cloneoperation(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneoperation(c: Operation): Operation {
-    let operation: Operation; // = new Prime();
-    /* for (let prop of c) {
-      operation[prop] = c[prop];
-    } */
+    let operation: Operation; 
     operation = c;
     return operation;
   }

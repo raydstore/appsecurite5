@@ -48,7 +48,6 @@ export class JobpostingComponent implements OnInit {
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -77,7 +76,6 @@ export class JobpostingComponent implements OnInit {
     let index = this.jobpostings.indexOf(_jobposting);
     this.jobpostings.splice(index, 1);
     this.jobpostings = [...this.jobpostings];
-    console.log('_jobposting' + _jobposting.id + ', ' + JSON.stringify(_jobposting));
     this.service.delete(_jobposting.id)
       .subscribe(
       () => { this.loadData(); },
@@ -98,10 +96,7 @@ export class JobpostingComponent implements OnInit {
     this.service.update(_jobposting)
       .subscribe(updatejobposting => {
         this.loadData();
-        console.log(updatejobposting);
       });
-    console.log('name = ' + input.value);
-    console.log(_jobposting);
   }
 
   cancelUpdate(_jobposting) {

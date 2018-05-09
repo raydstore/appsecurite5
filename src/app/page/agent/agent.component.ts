@@ -60,20 +60,16 @@ export class AgentComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -83,48 +79,24 @@ export class AgentComponent implements OnInit {
 
   createAgent() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAgent.hiredate));
-    this.newAgent.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAgent.hiredate.getDate));
-    console.log(JSON.stringify(this.newAgent)); */
-
-
-    // this.agents.splice(0, 0, this.newAgent);
     this.agents = [this.newAgent, ...this.agents];
-    // console.log('before agents' + JSON.stringify(this.lastids));
-
     this.service.create(this.newAgent)
       .subscribe(newAgent => {
         this.loadData();
-        /*       console.log('newAgent' + JSON.stringify(newAgent));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('agent');
-              console.log('last id agent = ' + lid);
-              console.log('last id agent = ' + JSON.stringify(lid));
-              this.agents[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
-        console.log('3');
         this.agents.splice(0, 1);
         if (error instanceof BadInput) {
-          console.log('4');
           // this.form.setErrors(originalError);
         } else {
-          console.log('5');
           throw error;
         }
-        console.log('6');
       });
-    // console.log('after agents' + this.getLastid('agent'));
   }
 
   deleteAgent(_agent: Agent) {
     let index = this.agents.indexOf(_agent);
     this.agents.splice(index, 1);
     this.agents = [...this.agents];
-    // this.agents.splice(index, 1);
-    console.log('_agent' + _agent.id + ', ' + JSON.stringify(_agent));
     this.service.delete(_agent.id)
       .subscribe(
       () => { this.loadData(); },
@@ -147,10 +119,7 @@ export class AgentComponent implements OnInit {
     this.service.update(_agent)
       .subscribe(updateagent => {
         this.loadData();
-        console.log(updateagent);
       });
-  /*   console.log('name = ' + input.value);
-    console.log(_agent); */
   }
 
   cancelUpdate(_agent) {
@@ -178,7 +147,6 @@ export class AgentComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.agent = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -202,16 +170,10 @@ export class AgentComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newAgent = this.cloneAgent(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneAgent(c: Agent): Agent {
-    let agent: Agent; // = new Prime();
-    /* for (let prop of c) {
-      agent[prop] = c[prop];
-    } */
+    let agent: Agent; 
     agent = c;
     return agent;
   }

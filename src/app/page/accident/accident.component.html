@@ -206,21 +206,8 @@
                   <i class="fa fa-calendar-alt"></i>
                 </button>
                 <ngb-timepicker class="inptime" [(ngModel)]="newAccident.time"></ngb-timepicker>
-
-                <!-- <div class="input-group-append">
-              <button class="btn btn-secondary" (click)="d1.toggle()">
-                <i class="fa fa-calendar-alt"></i>
-              </button>
-               a: <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker>
-            </div> -->
               </div>
-              <!--  à : <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker> -->
             </div>
-            <!-- <span>
-          <label for="itime">à : </label>
-           <input type="text" class="form-control" id="itime" [(ngModel)]="newAccident.time" placeholder="time" readonly> 
-          à : <ngb-timepicker [(ngModel)]="newAccident.time"></ngb-timepicker>
-        </span> -->
           </div>
         </div>
       </div>
@@ -230,7 +217,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="iidsiteparent">site parent :</label>
+              <label for="iidsiteparent">site :</label>
               <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
@@ -239,7 +226,7 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="iidsiteparent">site :</label>
+              <label for="iidsiteparent">lieu :</label>
               <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
@@ -249,7 +236,7 @@
           <div class="row">
             <div class="col-sm-12">
               <span>
-                <label for="isitedescription">description : </label>
+                <label for="isitedescription">description du lieu : </label>
                 <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description">
               </span>
             </div>
@@ -257,7 +244,7 @@
         </div>
       </div>
       <div class="alert alert-secondary" role="alert">
-        <h5 class="alert-heading">Evenement :</h5>
+        <h5 class="alert-heading">Description de l'evenement :</h5>
         <hr class="hrline">
         <span>
           <!-- <label for="ievent">evenement</label> -->
@@ -270,7 +257,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="iidagentdeclare">déclarateur :</label>
+              <label for="iidagentdeclare">établi par :</label>
               <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
@@ -279,7 +266,7 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="iidagentvalidate">validateur :</label>
+              <label for="iidagentvalidate">validé par :</label>
               <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>

@@ -41,8 +41,6 @@ export class LabelsComponent implements OnInit {
             .subscribe(labels => {
                 this.labels = labels;
             });
-        /* this.lastidService.getAll()
-          .subscribe(lastids => this.lastids = lastids); */
     }
 
     getLastid(name) {
@@ -60,15 +58,10 @@ export class LabelsComponent implements OnInit {
 
     createLabel() {
         this.dialogVisible = false;
-        //  console.log(JSON.stringify(this.newLabel));
-        // this.labels.splice(0, 0, this.newLabel);
         this.labels = [this.newLabel, ...this.labels];
-        // console.log('before labels' + JSON.stringify(this.lastids));
 
         this.service.create(this.newLabel)
             .subscribe(newLabel => {
-                // this.label['id'] = newlabel.id;
-                //  console.log('in side labels' + JSON.stringify(this.lastidService.getItem('label')));
             }, (error: AppError) => {
                 this.labels.splice(0, 1);
                 if (error instanceof BadInput) {
@@ -77,15 +70,12 @@ export class LabelsComponent implements OnInit {
                     throw error;
                 }
             });
-        // console.log('after labels' + this.getLastid('label'));
     }
 
     deleteLabel(_label: Label) {
         let index = this.labels.indexOf(_label);
         this.labels.splice(index, 1);
         this.labels = [...this.labels];
-        // this.labels.splice(index, 1);
-        console.log('_label' + _label.id + ', ' + JSON.stringify(_label));
         this.service.delete(_label.id)
             .subscribe(
             null,
@@ -107,8 +97,6 @@ export class LabelsComponent implements OnInit {
             .subscribe(updatelabel => {
                 console.log(updatelabel);
             });
-        console.log('name = ' + input.value);
-        console.log(_label);
     }
 
     cancelUpdate(_label) {
@@ -134,7 +122,6 @@ export class LabelsComponent implements OnInit {
 
     showDialogToAdd() {
         this.newMode = true;
-        // this.label = new PrimeCar();
         this.dialogVisible = true;
     }
 
@@ -158,16 +145,11 @@ export class LabelsComponent implements OnInit {
     }
 
     onRowSelect(event) {
-        /* this.newMode = false;
-        this.newLabel = this.cloneLabel(event.data);
-        this.dialogVisible = true; */
+        
     }
 
     cloneLabel(c: Label): Label {
-        let label: Label; // = new Prime();
-        /* for (let prop of c) {
-          label[prop] = c[prop];
-        } */
+        let label: Label; 
         label = c;
         return label;
     }

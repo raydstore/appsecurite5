@@ -39,7 +39,6 @@ export class InstanceComponent implements OnInit {
   }
 
   selectObject(object) {
-    console.log('selectedObject = ' + JSON.stringify(object));
     this.selectedObject = object;
     this.selectedId = object.id;
   }

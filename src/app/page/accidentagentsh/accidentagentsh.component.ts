@@ -28,7 +28,7 @@ export class AccidentagentshComponent implements OnInit {
   @Input() idgrid: number;
   @Input() titlelist: string;
 
-  accptedGrid = [2, 3, 4];
+  
   accidentagentshs: any[];
   agents: any[];
   selectedAccidentagentsh: Accidentagentsh;
@@ -101,6 +101,10 @@ export class AccidentagentshComponent implements OnInit {
 
   formatter = (x: { firstname: string; lastname: string }) => this.getName(x);
 
+  isAccptedGrid(value: number) {
+    return value >= 2 && value <= 4;
+  }
+
   loadLastId() {
     this.lastidService.getAll()
       .subscribe(lastids => this.lastids = lastids);
@@ -109,7 +113,6 @@ export class AccidentagentshComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
@@ -139,9 +142,7 @@ export class AccidentagentshComponent implements OnInit {
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
-          console.log('5');
         }
-        console.log('6');
       });
   }
 
@@ -169,7 +170,6 @@ export class AccidentagentshComponent implements OnInit {
     this.service.update(_accidentagentsh)
       .subscribe(updateaccidentagentsh => {
         this.loadData();
-        console.log(updateaccidentagentsh);
       });
   }
 

@@ -52,10 +52,8 @@ export class AccidentComponent implements OnInit {
   accidents: any[];
   sites: any[];
   agents: any[];
- // vwelementdamages: any[];
   selectedAccident: Accident;
   selectedNode: TreeNode;
-  // accident: any;
   newAccident: any = {
     id: 0,
     classification: 'A',
@@ -64,6 +62,7 @@ export class AccidentComponent implements OnInit {
     idsiteparent: null,
     idsite: null,
     curdate: new Date(),
+    tabindex: 1,
     time: new Date(),
     idagentdeclare: null,
     idagentvalidate: null,
@@ -158,17 +157,13 @@ export class AccidentComponent implements OnInit {
   }
 
   getLastid(name) {
-   // let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
-    for (let lid of this.lastids) {
+      for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   get today() {
@@ -177,7 +172,6 @@ export class AccidentComponent implements OnInit {
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -187,21 +181,11 @@ export class AccidentComponent implements OnInit {
 
   createAccident() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newAccident));
-    // this.accidents.splice(0, 0, this.newAccident);
     this.accidents = [this.newAccident, ...this.accidents];
-    // console.log('before accidents' + JSON.stringify(this.lastids));
-
+    console.log(JSON.stringify(this.newAccident));
     this.service.create(this.newAccident)
       .subscribe(newAccident => {
         this.loadData();
-        /*       console.log('newAccident' + JSON.stringify(newAccident));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accident');
-              console.log('last id accident = ' + lid);
-              console.log('last id accident = ' + JSON.stringify(lid));
-              this.accidents[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidents.splice(0, 1);
         if (error instanceof BadInput) {
@@ -210,15 +194,12 @@ export class AccidentComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after accidents' + this.getLastid('accident'));
   }
 
   deleteAccident(_accident: Accident) {
     const index = this.accidents.indexOf(_accident);
     this.accidents.splice(index, 1);
     this.accidents = [...this.accidents];
-    // this.accidents.splice(index, 1);
-    console.log('_accident' + _accident.id + ', ' + JSON.stringify(_accident));
     this.service.delete(_accident.id)
       .subscribe(
       () => { this.loadData(); },
@@ -239,10 +220,7 @@ export class AccidentComponent implements OnInit {
     this.service.update(_accident)
       .subscribe(updateaccident => {
         this.loadData();
-        console.log(updateaccident);
       });
-    console.log('name = ' + input.value);
-    console.log(_accident);
   }
 
   cancelUpdate(_accident) {
@@ -259,6 +237,7 @@ export class AccidentComponent implements OnInit {
       event: '',
       idsiteparent: null,
       idsite: null,
+      tabindex: 1,
       curdate: new Date(),
       time: new Date(),
       idagentdeclare: null,
@@ -276,7 +255,6 @@ export class AccidentComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.accident = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -300,17 +278,10 @@ export class AccidentComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newAccident = this.cloneAccident(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneAccident(c: Accident): Accident {
-    let accident: Accident; // = new Prime();
-    /* for (let prop of c) {
-      accident[prop] = c[prop];
-    } */
-    accident = c;
+    let accident: Accident; 
     return accident;
   }
 

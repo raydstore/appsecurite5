@@ -59,7 +59,6 @@ export class VwdamagewithrankComponent implements OnInit {
     this.serviceAccidentnature.getItem(this.idaccidentnature)
       .subscribe(accidentnature => {
         this.accidentnature = accidentnature;
-        console.log('this.accidentnature = ' + this.accidentnature + '  ' + this.idaccidentnature);
       })
 
   }
@@ -83,7 +82,6 @@ export class VwdamagewithrankComponent implements OnInit {
        this.newdamage.accidentdomain = this.accidentdomain;
        this.newdamage.accidentnature = this.getAccidentnature(this.idaccidentnature);
        this.newdamage.idgrid         = this.getIdgrid(this.idgrid);
-       console.log('newdamage' + JSON.stringify(this.newdamage));
        this.change.emit(this.newdamage);
      }
   }

@@ -1,10 +1,6 @@
 .climgheader, .clplleft, .clplright {
     background-color: rgba(0,0,0,.03)!important;
 } 
-/* 
-.climgheader {
-    background-color: rgba(0,0,0,.03)!important;
-}  */
 
 .climgheader img{
     margin-left: 250px!important;

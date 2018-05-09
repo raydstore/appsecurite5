@@ -24,31 +24,16 @@ export class VwpropertyComponent implements OnInit {
     private vPropertyService: VPropertyService) { }
 
   ngOnInit() {
-   /*  console.log('this.idInstance = ' + JSON.stringify(this.idInstance));
-    const newSubs = this.service.getByQueryParam({ 'idinstance': this.idInstance.id, 'idobject': this.idInstance.idobject.id })
-      .subscribe(propertys => {
-        this.propertys = propertys;
-       // console.log('propertys = ' + JSON.stringify(propertys));
-      }); */
-    // this.subscriptions.push(newSubs);
     this.loadData();
   }
 
- /*  ngOnDestroy() {
-    for (const subs of this.subscriptions) {
-      subs.unsubscribe();
-    }
-  }  */
-
+ 
   loadData() {
-    // const newSubs =
-    this.service.getByQueryParam({ 'idinstance': this.idInstance.id, 'idobject': this.idInstance.idobject.id })
+     this.service.getByQueryParam({ 'idinstance': this.idInstance.id, 'idobject': this.idInstance.idobject.id })
       .subscribe(propertys => {
         this.propertys = propertys;
-     //   this.subscribeToData();
-    });
-   // this.subscriptions.push(newSubs);
-  }
+     });
+   }
 
   getService(type) {
     switch (type) {

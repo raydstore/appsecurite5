@@ -58,20 +58,16 @@ export class RankComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -81,21 +77,10 @@ export class RankComponent implements OnInit {
 
   createRank() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newRank));
-    // this.ranks.splice(0, 0, this.newRank);
     this.ranks = [this.newRank, ...this.ranks];
-    // console.log('before ranks' + JSON.stringify(this.lastids));
-
     this.service.create(this.newRank)
       .subscribe(newRank => {
         this.loadData();
-        /*       console.log('newRank' + JSON.stringify(newRank));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('rank');
-              console.log('last id rank = ' + lid);
-              console.log('last id rank = ' + JSON.stringify(lid));
-              this.ranks[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.ranks.splice(0, 1);
         if (error instanceof BadInput) {
@@ -104,15 +89,12 @@ export class RankComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after ranks' + this.getLastid('rank'));
   }
 
   deleteRank(_rank: Rank) {
     let index = this.ranks.indexOf(_rank);
     this.ranks.splice(index, 1);
     this.ranks = [...this.ranks];
-    // this.ranks.splice(index, 1);
-    console.log('_rank' + _rank.id + ', ' + JSON.stringify(_rank));
     this.service.delete(_rank.id)
       .subscribe(
       () => { this.loadData(); },
@@ -135,8 +117,6 @@ export class RankComponent implements OnInit {
         this.loadData();
         console.log(updaterank);
       });
-    console.log('name = ' + input.value);
-    console.log(_rank);
   }
 
   cancelUpdate(_rank) {
@@ -162,7 +142,6 @@ export class RankComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.rank = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -186,16 +165,10 @@ export class RankComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newRank = this.cloneRank(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneRank(c: Rank): Rank {
-    let rank: Rank; // = new Prime();
-    /* for (let prop of c) {
-      rank[prop] = c[prop];
-    } */
+    let rank: Rank; 
     rank = c;
     return rank;
   }

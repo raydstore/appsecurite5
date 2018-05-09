@@ -105,17 +105,10 @@ export class PropertyComponent implements OnInit {
 
   createProperty() {
     this.dialogVisible = false;
-    console.log(JSON.stringify(this.newProperty));
-    // this.propertys.splice(0, 0, this.newProperty);
-   // this.newProperty.
     this.propertys = [this.newProperty, ...this.propertys];
-    // console.log('before propertys' + JSON.stringify(this.lastids));
-
     this.service.create(this.newProperty)
       .subscribe(newProperty => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side propertys' + JSON.stringify(this.lastidService.getItem('property')));
       }, (error: AppError) => {
         this.propertys.splice(0, 1);
         if (error instanceof BadInput) {
@@ -124,15 +117,12 @@ export class PropertyComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after propertys' + this.getLastid('property'));
   }
 
   deleteProperty(_property: any) {
     let index = this.propertys.indexOf(_property);
     this.propertys.splice(index, 1);
     this.propertys = [...this.propertys];
-    // this.propertys.splice(index, 1);
-    console.log('_property' + _property.propertyPK.id + ', ' + JSON.stringify(_property));
     this.service.delete(_property.propertyPK.id)
       .subscribe(
       null,
@@ -155,8 +145,6 @@ export class PropertyComponent implements OnInit {
         this.loadData();
         console.log(updateproperty);
       });
-    console.log('name = ' + input.value);
-    console.log(_property);
   }
 
   cancelUpdate(_property) {
@@ -176,7 +164,6 @@ export class PropertyComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.property = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -200,16 +187,10 @@ export class PropertyComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newProperty = this.cloneProperty(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneProperty(c: Property): Property {
-    let property: Property; // = new Prime();
-    /* for (let prop of c) {
-      property[prop] = c[prop];
-    } */
+    let property: Property; 
     property = c;
     return property;
   }

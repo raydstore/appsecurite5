@@ -64,16 +64,10 @@ export class TypeOperationComponent implements OnInit {
 
   createTypeOperation() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newTypeOperation));
-    // this.typeOperations.splice(0, 0, this.newTypeOperation);
     this.typeOperations = [this.newTypeOperation, ...this.typeOperations];
-    // console.log('before typeOperations' + JSON.stringify(this.lastids));
-
     this.service.create(this.newTypeOperation)
       .subscribe(newTypeOperation => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side typeOperations' + JSON.stringify(this.lastidService.getItem('typeOperation')));
       }, (error: AppError) => {
         this.typeOperations.splice(0, 1);
         if (error instanceof BadInput) {
@@ -82,15 +76,12 @@ export class TypeOperationComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after typeOperations' + this.getLastid('typeOperation'));
   }
 
   deleteTypeOperation(_typeOperation: TypeOperation) {
     let index = this.typeOperations.indexOf(_typeOperation);
     this.typeOperations.splice(index, 1);
     this.typeOperations = [...this.typeOperations];
-    // this.typeOperations.splice(index, 1);
-    console.log('_typeOperation' + _typeOperation.id + ', ' + JSON.stringify(_typeOperation));
     this.service.delete(_typeOperation.id)
       .subscribe(
       null,
@@ -113,8 +104,6 @@ export class TypeOperationComponent implements OnInit {
         this.loadData();
         console.log(updatetypeOperation);
       });
-    console.log('name = ' + input.value);
-    console.log(_typeOperation);
   }
 
   cancelUpdate(_typeOperation) {
@@ -140,7 +129,6 @@ export class TypeOperationComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.typeOperation = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -164,16 +152,10 @@ export class TypeOperationComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newTypeOperation = this.cloneTypeOperation(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneTypeOperation(c: TypeOperation): TypeOperation {
-    let typeOperation: TypeOperation; // = new Prime();
-    /* for (let prop of c) {
-      typeOperation[prop] = c[prop];
-    } */
+    let typeOperation: TypeOperation; 
     typeOperation = c;
     return typeOperation;
   }

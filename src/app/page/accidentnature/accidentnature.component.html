@@ -1,19 +1,12 @@
-<!-- <p-tabView>
-  <p-tabPanel *ngFor="let accidentnature of accidentnatures; let i = index;let first = first;" [selected]="first" [header]="accidentnature.name" [closable]="true">
-    <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
-  </p-tabPanel>
-</p-tabView> -->
-
 <p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
   <p-header>
     <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" >{{accidentnature.name}} </span>
+      <span class="ui-panel-title" ><h2>{{accidentnature.name}}</h2> </span>
     </div>
   </p-header>
-  <!-- <app-vwelementgrid [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-vwelementgrid> -->
     <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
-  <p-footer>
+ <!--  <p-footer>
     <button pButton type="button" icon="fa-plus" label="New" class="ui-button-info"></button>
     <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
-  </p-footer>
+  </p-footer> -->
 </p-panel>

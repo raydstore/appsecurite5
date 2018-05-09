@@ -67,7 +67,6 @@ export class CaseagentComponent implements OnInit {
     let index = this.caseagents.indexOf(_caseagent);
     this.caseagents.splice(index, 1);
     this.caseagents = [...this.caseagents];
-    console.log('_caseagent' + _caseagent.id + ', ' + JSON.stringify(_caseagent));
     this.service.delete(_caseagent.id)
       .subscribe(
       () => { this.loadData(); },
@@ -88,10 +87,7 @@ export class CaseagentComponent implements OnInit {
     this.service.update(_caseagent)
       .subscribe(updatecaseagent => {
         this.loadData();
-        console.log(updatecaseagent);
       });
-    console.log('name = ' + input.value);
-    console.log(_caseagent);
   }
 
   cancelUpdate(_caseagent) {

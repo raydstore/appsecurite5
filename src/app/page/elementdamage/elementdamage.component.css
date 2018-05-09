@@ -1,7 +1,10 @@
-h1 { background-color: #ffdb74!important; color: #111; letter-spacing: -1px; }
+.titledamage { 
+    background-color: white; 
+    color: brown; 
+    letter-spacing: -1px; 
+    text-align: center;
+    padding: 7px;
+    border-radius: 7px;
+}
 
 
-/* h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; } */
-
-
-/* span {  line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; } */

@@ -60,7 +60,6 @@ export class AccidentvehiculeshComponent implements OnInit {
     this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'S' })
       .subscribe(accidentvehiculeshs => {
         this.accidentvehiculeshs = accidentvehiculeshs;
-        console.log('avsh = ' + JSON.stringify(this.accidentvehiculeshs));
       });
   }
 
@@ -72,20 +71,16 @@ export class AccidentvehiculeshComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -95,35 +90,17 @@ export class AccidentvehiculeshComponent implements OnInit {
 
   createAccidentvehiculesh() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAccidentvehiculesh.hiredate));
-    this.newAccidentvehiculesh.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAccidentvehiculesh.hiredate.getDate));
-    console.log(JSON.stringify(this.newAccidentvehiculesh)); */
-
-    console.log(JSON.stringify(this.newAccidentvehiculesh));
-    // this.accidentvehiculeshs.splice(0, 0, this.newAccidentvehiculesh);
     this.accidentvehiculeshs = [this.newAccidentvehiculesh, ...this.accidentvehiculeshs];
-    // console.log('before accidentvehiculeshs' + JSON.stringify(this.lastids));
 
     this.service.create(this.newAccidentvehiculesh)
       .subscribe(newAccidentvehiculesh => {
         this.loadData();
-        /*       console.log('newAccidentvehiculesh' + JSON.stringify(newAccidentvehiculesh));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accidentvehiculesh');
-              console.log('last id accidentvehiculesh = ' + lid);
-              console.log('last id accidentvehiculesh = ' + JSON.stringify(lid));
-              this.accidentvehiculeshs[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidentvehiculeshs.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
-          console.log('5');
         }
-        console.log('6');
       });
   }
 
@@ -131,8 +108,6 @@ export class AccidentvehiculeshComponent implements OnInit {
     let index = this.accidentvehiculeshs.indexOf(_accidentvehiculesh);
     this.accidentvehiculeshs.splice(index, 1);
     this.accidentvehiculeshs = [...this.accidentvehiculeshs];
-    // this.accidentvehiculeshs.splice(index, 1);
-//    console.log('_accidentvehiculesh' + _accidentvehiculesh.id + ', ' + JSON.stringify(_accidentvehiculesh));
     this.service.delete(_accidentvehiculesh.id)
       .subscribe(
       () => { this.loadData(); },
@@ -153,10 +128,7 @@ export class AccidentvehiculeshComponent implements OnInit {
     this.service.update(_accidentvehiculesh)
       .subscribe(updateaccidentvehiculesh => {
         this.loadData();
-        console.log(updateaccidentvehiculesh);
       });
-    /*   console.log('name = ' + input.value);
-      console.log(_accidentvehiculesh); */
   }
 
   cancelUpdate(_accidentvehiculesh) {

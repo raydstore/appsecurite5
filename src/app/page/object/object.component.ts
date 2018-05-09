@@ -93,16 +93,11 @@ export class ObjectComponent implements OnInit {
 
   createObject() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newObject));
-    // this.objects.splice(0, 0, this.newObject);
     this.objects = [this.newObject, ...this.objects];
-    console.log('before objects' + JSON.stringify(this.newObject));
 
     this.service.create(this.newObject)
       .subscribe(newObject => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side objects' + JSON.stringify(this.lastidService.getItem('object')));
       }, (error: AppError) => {
         this.objects.splice(0, 1);
         if (error instanceof BadInput) {
@@ -111,15 +106,12 @@ export class ObjectComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after objects' + this.getLastid('object'));
   }
 
   deleteObject(_object: Object) {
     let index = this.objects.indexOf(_object);
     this.objects.splice(index, 1);
     this.objects = [...this.objects];
-    // this.objects.splice(index, 1);
-    console.log('_object' + _object.id + ', ' + JSON.stringify(_object));
     this.service.delete(_object.id)
       .subscribe(
       null,
@@ -141,8 +133,6 @@ export class ObjectComponent implements OnInit {
       .subscribe(updateobject => {
         console.log(updateobject);
       });
-    console.log('name = ' + input.value);
-    console.log(_object);
   }
 
   cancelUpdate(_object) {
@@ -168,7 +158,6 @@ export class ObjectComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.object = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -192,16 +181,10 @@ export class ObjectComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newObject = this.cloneObject(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneObject(c: Object): Object {
-    let object: Object; // = new Prime();
-    /* for (let prop of c) {
-      object[prop] = c[prop];
-    } */
+    let object: Object; 
     object = c;
     return object;
   }
@@ -214,15 +197,9 @@ export class ObjectComponent implements OnInit {
 
   createProperty() {
     this.dialogVisibleProperty = false;
-    //  console.log(JSON.stringify(this.newObject));
-    // this.objects.splice(0, 0, this.newObject);
     this.propertys = [this.newObject, ...this.propertys];
-    // console.log('before objects' + JSON.stringify(this.lastids));
-
     this.service.create(this.newObject)
       .subscribe(newObject => {
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side objects' + JSON.stringify(this.lastidService.getItem('object')));
       }, (error: AppError) => {
         this.propertys.splice(0, 1);
         if (error instanceof BadInput) {
@@ -231,15 +208,12 @@ export class ObjectComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after objects' + this.getLastid('object'));
   }
 
   deleteProperty(_property: Property) {
     let index = this.objects.indexOf(_property);
     this.propertys.splice(index, 1);
     this.propertys = [...this.propertys];
-    // this.objects.splice(index, 1);
-    console.log('_object' + _property.propertyPK.id + ', ' + JSON.stringify(_property));
     this.service.delete(_property.propertyPK.id)
       .subscribe(
       null,
@@ -261,8 +235,6 @@ export class ObjectComponent implements OnInit {
       .subscribe(updateproperty => {
         console.log(updateproperty);
       });
-    console.log('name = ' + input.value);
-    console.log(_property);
   }
 
   cancelUpdateProperty(_property) {
@@ -288,7 +260,6 @@ export class ObjectComponent implements OnInit {
 
   showDialogToAddProperty() {
     this.newModeProperty = true;
-    // this.object = new PrimeCar();
     this.dialogVisibleProperty = true;
   }
 
@@ -314,10 +285,7 @@ export class ObjectComponent implements OnInit {
 
 
   cloneProperty(c: Property): Property {
-    let property: Property; // = new Prime();
-    /* for (let prop of c) {
-      object[prop] = c[prop];
-    } */
+    let property: Property; 
     property = c;
     return property;
   }

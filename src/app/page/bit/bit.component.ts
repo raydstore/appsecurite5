@@ -153,7 +153,6 @@ export class BitComponent implements OnInit {
   createBit() {
     this.dialogVisible = false;
     this.bits = [this.newBit, ...this.bits];
-    console.log(JSON.stringify(this.newBit));
     this.service.create(this.newBit)
       .subscribe(newtt => {
         this.bits = [];
@@ -168,7 +167,6 @@ export class BitComponent implements OnInit {
   }
 
   deleteBit(node) {
-    console.log(JSON.stringify(node.data));
     this.service.delete(node.data.id)
       .subscribe(
       () => {
@@ -185,11 +183,9 @@ export class BitComponent implements OnInit {
   }
 
   updateBit(node) {
-    console.log('update node.data = ' + JSON.stringify(node.data));
     this.service.update(node.data)
       .subscribe(updatebit => {
         this.loadData();
-        // console.log(updatemark);
       });
   }
 
@@ -204,8 +200,6 @@ export class BitComponent implements OnInit {
   }
 
   setFocusColor(input: HTMLInputElement) {
-    // input: HTMLInputElement
-    // console.log('focus : ' + JSON.stringify(event));
     input.style.backgroundColor = 'blue';
     input.style.color = 'white';
 

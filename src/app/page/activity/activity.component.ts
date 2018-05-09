@@ -64,16 +64,11 @@ export class ActivityComponent implements OnInit {
 
   createActivity() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newMark));
-    // this.marks.splice(0, 0, this.newMark);
     this.activitys = [this.newActivity, ...this.activitys];
-    // console.log('before marks' + JSON.stringify(this.lastids));
 
     this.service.create(this.newActivity)
       .subscribe(newActivity => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side marks' + JSON.stringify(this.lastidService.getItem('mark')));
       }, (error: AppError) => {
         this.activitys.splice(0, 1);
         if (error instanceof BadInput) {
@@ -82,15 +77,12 @@ export class ActivityComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after marks' + this.getLastid('mark'));
   }
 
   deleteActivity(_activity: Activity) {
     let index = this.activitys.indexOf(_activity);
     this.activitys.splice(index, 1);
     this.activitys = [...this.activitys];
-    // this.marks.splice(index, 1);
-    console.log('_activitys' + _activity.id + ', ' + JSON.stringify(_activity));
     this.service.delete(_activity.id)
       .subscribe(
       null,
@@ -140,7 +132,6 @@ export class ActivityComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.mark = new PrimeCar();
     this.dialogVisible = true;
   }
 

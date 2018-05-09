@@ -57,7 +57,6 @@ export class MarkComponent implements OnInit {
   getLastid(name) {
     let lts: any[] ;
     this.loadLastId(); 
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids)  {
         if (lid.id === name) {
            return lid['count'] ;
@@ -117,10 +116,7 @@ export class MarkComponent implements OnInit {
     this.service.update(_mark)
       .subscribe(updatemark => {
         this.loadData();
-        console.log(updatemark);
       });
-    console.log('name = ' + input.value);
-    console.log(_mark);
   }
 
   cancelUpdate(_mark) {

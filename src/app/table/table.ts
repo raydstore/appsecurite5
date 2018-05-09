@@ -205,6 +205,7 @@ export interface Accident {
     idsite?: any;
     curdate?: Date;
     time?: Date;
+    tabindex?: number;
     idagentdeclare?: any;
     idagentvalidate?: any;
     owner?: string;
@@ -411,7 +412,27 @@ export interface Vw$accidentagentshbit {
 export interface Action {
     id?: number;
     idparent?: number;
-    tabindex?: number;
+    kind?: string;
+    state?: string;
+    name: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Actionassignment {
+    idaction?: number;
+    idstructure?: number;
+    sendin?: Date;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Structure {
+    id?: number;
     name: string;
     owner?: string;
     lastuser?: string;
@@ -425,6 +446,31 @@ export interface Entreprise {
     adress: string;
     phone: string;
     fiscalenumber: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentmaterial {
+    id?: number;
+    name?: string;
+    damagename?: string;
+    accidentdomain?: number;
+    iddamage?: number;
+    idgrid?: number;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface DamageDefinition {
+    id?: number;
+    name?: string;
+    accidentdomain?: number;
+    iddamage?: number;
+    idgrid?: number;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

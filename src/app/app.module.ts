@@ -1,3 +1,6 @@
+import { StructureService } from './services/structure.service';
+import { DamagedefinitionService } from './services/damagedefinition.service';
+import { AccidentmaterialService } from './services/accidentmaterial.service';
 import { VwgridService } from './services/vwgrid.service';
 import { VwnotelementofnatureaccidentService } from './services/vwnotelementofnatureaccident.service';
 import { OpscardService } from './services/opscard.service';
@@ -132,6 +135,11 @@ import { DamageService } from './services/damage.service';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { EntrepriseComponent } from './page/entreprise/entreprise.component';
 import { EntrepriseService } from './services/entreprise.service';
+import { AccidentmaterialComponent } from './page/accidentmaterial/accidentmaterial.component';
+import { DamagedefinitionComponent } from './page/damagedefinition/damagedefinition.component';
+import { StructureComponent } from './page/structure/structure.component';
+import { ActionassignmentComponent } from './page/actionassignment/actionassignment.component';
+
 
 
 
@@ -194,7 +202,11 @@ import { EntrepriseService } from './services/entreprise.service';
     VwelementgridComponent,
     VwgridComponent,
     VwdamagewithrankComponent,
-    EntrepriseComponent
+    EntrepriseComponent,
+    AccidentmaterialComponent,
+    DamagedefinitionComponent,
+    StructureComponent,
+    ActionassignmentComponent
   ],
   imports: [
     BrowserModule,
@@ -231,6 +243,7 @@ import { EntrepriseService } from './services/entreprise.service';
       { path: 'operation', component: OperationComponent },
       { path: 'unitmeasure', component: UnitmeasureComponent },
       { path: 'site', component: SitesComponent },
+      { path: 'structure', component: StructureComponent },
       { path: 'object', component: ObjectComponent },
       { path: 'operation', component: OperationComponent },
       { path: 'titletask', component: TitletaskComponent },
@@ -301,6 +314,9 @@ import { EntrepriseService } from './services/entreprise.service';
     VwdamagewithrankService,
     DamageService,
     EntrepriseService,
+    AccidentmaterialService,
+    DamagedefinitionService,
+    StructureService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

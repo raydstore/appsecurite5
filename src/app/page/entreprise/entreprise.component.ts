@@ -58,20 +58,16 @@ export class EntrepriseComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -81,21 +77,10 @@ export class EntrepriseComponent implements OnInit {
 
   createEntreprise() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newEntreprise));
-    // this.entreprises.splice(0, 0, this.newEntreprise);
     this.entreprises = [this.newEntreprise, ...this.entreprises];
-    // console.log('before entreprises' + JSON.stringify(this.lastids));
-
     this.service.create(this.newEntreprise)
       .subscribe(newEntreprise => {
         this.loadData();
-        /*       console.log('newEntreprise' + JSON.stringify(newEntreprise));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('entreprise');
-              console.log('last id entreprise = ' + lid);
-              console.log('last id entreprise = ' + JSON.stringify(lid));
-              this.entreprises[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.entreprises.splice(0, 1);
         if (error instanceof BadInput) {
@@ -104,21 +89,17 @@ export class EntrepriseComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after entreprises' + this.getLastid('entreprise'));
   }
 
   deleteEntreprise(_entreprise: Entreprise) {
     let index = this.entreprises.indexOf(_entreprise);
     this.entreprises.splice(index, 1);
     this.entreprises = [...this.entreprises];
-    // this.entreprises.splice(index, 1);
-    console.log('_entreprise' + _entreprise.id + ', ' + JSON.stringify(_entreprise));
     this.service.delete(_entreprise.id)
       .subscribe(
         () => { this.loadData(); },
         (error: Response) => {
           this.entreprises.splice(index, 0, _entreprise);
-
           if (error instanceof NotFoundError) {
             alert('this post has already been deleted');
           } else {
@@ -133,10 +114,7 @@ export class EntrepriseComponent implements OnInit {
     this.service.update(_entreprise)
       .subscribe(updateentreprise => {
         this.loadData();
-        console.log(updateentreprise);
       });
-    console.log('name = ' + input.value);
-    console.log(_entreprise);
   }
 
   cancelUpdate(_entreprise) {
@@ -162,7 +140,6 @@ export class EntrepriseComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.entreprise = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -186,16 +163,10 @@ export class EntrepriseComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newEntreprise = this.cloneEntreprise(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneEntreprise(c: Entreprise): Entreprise {
-    let entreprise: Entreprise; // = new Prime();
-    /* for (let prop of c) {
-      entreprise[prop] = c[prop];
-    } */
+    let entreprise: Entreprise; 
     entreprise = c;
     return entreprise;
   }

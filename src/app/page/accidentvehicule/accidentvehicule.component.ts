@@ -10,6 +10,7 @@ export class AccidentvehiculeComponent implements OnInit {
   @Input() idgrid: number;
   @Input() accidentdomain: number;
   @Input() classification: number;
+  @Input() titlelist: string;
   
   constructor() { }
 

@@ -45,7 +45,6 @@ export class ListagentComponent implements OnInit {
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -73,7 +72,6 @@ export class ListagentComponent implements OnInit {
     let index = this.listagents.indexOf(_listagent);
     this.listagents.splice(index, 1);
     this.listagents = [...this.listagents];
-    console.log('_listagent' + _listagent.id + ', ' + JSON.stringify(_listagent));
     this.service.delete(_listagent.id)
       .subscribe(
       () => { this.loadData(); },
@@ -96,8 +94,6 @@ export class ListagentComponent implements OnInit {
         this.loadData();
         console.log(updatelistagent);
       });
-    console.log('name = ' + input.value);
-    console.log(_listagent);
   }
 
   cancelUpdate(_listagent) {

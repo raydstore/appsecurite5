@@ -62,20 +62,16 @@ export class CauseComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -86,21 +82,10 @@ export class CauseComponent implements OnInit {
   createCause() {
     this.dialogVisible = false;
     this.newCause.idaccident = this.idaccident;
-    //  console.log(JSON.stringify(this.newCause));
-    // this.causes.splice(0, 0, this.newCause);
     this.causes = [this.newCause, ...this.causes];
-    // console.log('before causes' + JSON.stringify(this.lastids));
-
     this.service.create(this.newCause)
       .subscribe(newCause => {
         this.loadData();
-        /*       console.log('newCause' + JSON.stringify(newCause));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('cause');
-              console.log('last id cause = ' + lid);
-              console.log('last id cause = ' + JSON.stringify(lid));
-              this.causes[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.causes.splice(0, 1);
         if (error instanceof BadInput) {
@@ -109,21 +94,17 @@ export class CauseComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after causes' + this.getLastid('cause'));
   }
 
   deleteCause(_cause: Cause) {
     let index = this.causes.indexOf(_cause);
     this.causes.splice(index, 1);
     this.causes = [...this.causes];
-    // this.causes.splice(index, 1);
-    console.log('_cause' + _cause.id + ', ' + JSON.stringify(_cause));
     this.service.delete(_cause.id)
       .subscribe(
       () => { this.loadData(); },
       (error: Response) => {
         this.causes.splice(index, 0, _cause);
-
         if (error instanceof NotFoundError) {
           alert('this post has already been deleted');
         } else {
@@ -138,10 +119,7 @@ export class CauseComponent implements OnInit {
     this.service.update(_cause)
       .subscribe(updatecause => {
         this.loadData();
-        console.log(updatecause);
       });
-    console.log('name = ' + input.value);
-    console.log(_cause);
   }
 
   cancelUpdate(_cause) {
@@ -167,7 +145,6 @@ export class CauseComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.cause = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -191,16 +168,10 @@ export class CauseComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newCause = this.cloneCause(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneCause(c: Cause): Cause {
-    let cause: Cause; // = new Prime();
-    /* for (let prop of c) {
-      cause[prop] = c[prop];
-    } */
+    let cause: Cause; 
     cause = c;
     return cause;
   }

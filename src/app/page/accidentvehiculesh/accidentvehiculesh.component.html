@@ -1,43 +1,32 @@
-<div class="ctn">
-  <div class="card-header alCenter cardtitle">
+<!-- <div class="ctn"> -->
+<!-- <div class="card-header alCenter cardtitle"> -->
+<div class="alert alert-success" role="alert">
 
-    <h4 class="titleform">
+  <!-- <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
-    </h4>
+    </h4> -->
+  <h4>{{titlelist}}</h4>
+  <hr>
+  <button class="btn btn-success" (click)="showNewDialoge()">
+    <i class="fa fa-plus"></i>
+  </button>
 
-    <button class="btn btn-success btnright" (click)="showNewDialoge()">
-      <i class="fa fa-plus"></i>
-    </button>
 
-  </div>
 
-  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-  <p-dataTable class="header-table" [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" 
-    [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
-    <p-column expander="true" styleClass="col-icon"  [style]="{'width':'70px'}"></p-column>
+  <p-dataTable class="header-table" [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" [(selection)]="selectedNode"
+    (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
+    <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
     <p-column field="matricule" header="matricule"></p-column>
     <p-column field="idmark.name" header="marque"></p-column>
     <p-column field="name" header="nom"></p-column>
     <p-column field="identreprise.name" header="propriétaire"></p-column>
-    <!-- <p-column field="datecreate" header="Crée le">
-    <ng-template let-col let-m="rowData" pTemplate="body">
-      {{m[col.field] | date:'shortDate'}}
-    </ng-template>
-  </p-column>
-  <p-column field="owner" header="par"></p-column>
-  <p-column field="dateupdate" header="Modifier le">
-    <ng-template let-col let-m="rowData" pTemplate="body">
-      {{m[col.field] | date:'shortDate'}}
-    </ng-template>
-  </p-column>
-  <p-column field="lastuser" header="par"></p-column> -->
-  <p-column styleClass="col-button" [style]="{'width':'70px'}">
-    <ng-template let-m="rowData" pTemplate="body">
-      <button class="btn btn-danger" (click)="deleteAccidentvehiculesh(m)">
-        <i class="fa fa-minus"></i>
-      </button>
-    </ng-template>
-  </p-column> 
+    <p-column styleClass="col-button" [style]="{'width':'70px'}">
+      <ng-template let-m="rowData" pTemplate="body">
+        <button class="btn btn-danger" (click)="deleteAccidentvehiculesh(m)">
+          <i class="fa fa-minus"></i>
+        </button>
+      </ng-template>
+    </p-column>
     <ng-template let-item pTemplate="rowexpansion">
       <div class="container">
         <div class="form-group row">
@@ -71,26 +60,18 @@
     </ng-template>
   </p-dataTable>
 </div>
+<!-- </div> -->
 
-  <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-    <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculesh">
-      <div class="bdcontent">
-        <span>
-          <label for="imatricule">idagent : </label>
-          <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
-        </span>
-        <!--     <span>
-        <label for="imark">marque</label>
-        <input type="text" id="imark" [(ngModel)]="newAccidentvehiculesh.idmark['id']" placeholder="la marque">
-      </span>
+<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculesh">
+    <div class="bdcontent">
       <span>
-        <label for="iowner">observation</label>
-        <input type="text" id="iowner" [(ngModel)]="newAccidentvehiculesh.identreprise['id']" placeholder="le propriètaire">
+        <label for="imatricule">idagent : </label>
+        <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
       </span>
-  -->
-        <div class="toolbtn">
-          <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Submit</button>
-          <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
-        </div>
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Submit</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
       </div>
     </div>
+  </div>

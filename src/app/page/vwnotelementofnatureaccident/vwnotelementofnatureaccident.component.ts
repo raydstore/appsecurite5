@@ -42,9 +42,7 @@ export class VwnotelementofnatureaccidentComponent implements OnInit {
   newAccidentNature(idnature: number) {
     this.newaccidentnature.accidentnaturePK.idaccident = this.accident['id'];
     this.newaccidentnature.accidentnaturePK.idnature = idnature;
-    // console.log('1');
     this.newaccidentnature.accident = this.accident;
-    // console.log('this.newaccidentnature = ' + JSON.stringify(this.newaccidentnature));
     this.serviceAccidentnature.create(this.newaccidentnature).subscribe(
       newaccidentnature => { this.loadData(); }
       , (error: AppError) => {

@@ -64,33 +64,23 @@ export class UnitmeasureComponent implements OnInit {
 
   createUnitmeasure() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newUnitmeasure));
-    // this.unitmeasures.splice(0, 0, this.newUnitmeasure);
     this.unitMeasures = [this.newUnitMeasure, ...this.unitMeasures];
-    // console.log('before unitmeasures' + JSON.stringify(this.lastids));
-
     this.service.create(this.newUnitMeasure)
       .subscribe(newUnitmeasure => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side unitmeasures' + JSON.stringify(this.lastidService.getItem('unitmeasure')));
       }, (error: AppError) => {
         this.unitMeasures.splice(0, 1);
         if (error instanceof BadInput) {
-          // this.form.setErrors(originalError);
         } else {
           throw error;
         }
       });
-    // console.log('after unitmeasures' + this.getLastid('unitmeasure'));
   }
 
   deleteUnitmeasure(_unitmeasure: UnitMeasure) {
     let index = this.unitMeasures.indexOf(_unitmeasure);
     this.unitMeasures.splice(index, 1);
     this.unitMeasures = [...this.unitMeasures];
-    // this.unitmeasures.splice(index, 1);
-    console.log('_unitmeasure' + _unitmeasure.id + ', ' + JSON.stringify(_unitmeasure));
     this.service.delete(_unitmeasure.id)
       .subscribe(
       () => {
@@ -112,11 +102,8 @@ export class UnitmeasureComponent implements OnInit {
     _unitmeasure.name = input.value;
     this.service.update(_unitmeasure)
       .subscribe(updateunitmeasure => {
-        // console.log(updateunitmeasure);
         this.loadData();
       });
-    console.log('name = ' + input.value);
-    console.log(_unitmeasure);
   }
 
   cancelUpdate(_unitmeasure) {
@@ -142,7 +129,6 @@ export class UnitmeasureComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.unitmeasure = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -166,16 +152,10 @@ export class UnitmeasureComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newUnitmeasure = this.cloneUnitmeasure(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneUnitmeasure(c: UnitMeasure): UnitMeasure {
-    let unitmeasure: UnitMeasure; // = new Prime();
-    /* for (let prop of c) {
-      unitmeasure[prop] = c[prop];
-    } */
+    let unitmeasure: UnitMeasure; 
     unitmeasure = c;
     return unitmeasure;
   }

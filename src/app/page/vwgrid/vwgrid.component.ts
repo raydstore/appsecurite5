@@ -73,7 +73,6 @@ export class VwgridComponent implements OnInit {
   }
 
   onChangeDamageWithRank(eventargs: Damage) {
-    console.log('frm grid = , ', JSON.stringify(eventargs));
     this.createdamage(eventargs);
   }
 

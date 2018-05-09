@@ -18,11 +18,11 @@ export class AccidentvehiculenonshComponent implements OnInit {
   @Input() accidentdomain: number;
   @Input() classification: number;
   @Input() titlelist: string;
-  /* @Input() accidentdomain: number; */
+
   accidentvehiculenonshs: any[];
   selectedAccidentvehiculenonsh: Accidentvehicule;
   selectedNode: TreeNode;
-  // accidentvehiculenonsh: any;
+
   newAccidentvehiculenonsh: Accidentvehicule = {
     id: 0,
     name: '',
@@ -46,14 +46,12 @@ export class AccidentvehiculenonshComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  // titlelist = 'Marque';
 
   constructor(private service: AccidentvehiculeService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
@@ -71,20 +69,16 @@ export class AccidentvehiculenonshComponent implements OnInit {
   getLastid(name) {
     let lts: any[];
     this.loadLastId();
-    console.log('before lts' + JSON.stringify(this.lastids));
     for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
     }
     return 0;
-    //  console.log('before lid.count' + JSON.stringify(lid));
-    //  return lid.count;
   }
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -94,35 +88,17 @@ export class AccidentvehiculenonshComponent implements OnInit {
 
   createAccidentvehiculenonsh() {
     this.dialogVisible = false;
-
-    /* console.log('date = ' + JSON.stringify(this.newAccidentvehiculenonsh.hiredate));
-    this.newAccidentvehiculenonsh.hiredate = new Date('2017-02-02T00:00:00+01:00');
-    console.log('datetime = ' + JSON.stringify(this.newAccidentvehiculenonsh.hiredate.getDate));
-    console.log(JSON.stringify(this.newAccidentvehiculenonsh)); */
-
-    console.log(JSON.stringify(this.newAccidentvehiculenonsh));
-    // this.accidentvehiculenonshs.splice(0, 0, this.newAccidentvehiculenonsh);
     this.accidentvehiculenonshs = [this.newAccidentvehiculenonsh, ...this.accidentvehiculenonshs];
-    // console.log('before accidentvehiculenonshs' + JSON.stringify(this.lastids));
 
     this.service.create(this.newAccidentvehiculenonsh)
       .subscribe(newAccidentvehiculenonsh => {
         this.loadData();
-        /*       console.log('newAccidentvehiculenonsh' + JSON.stringify(newAccidentvehiculenonsh));
-              console.log('first lastids' + JSON.stringify(this.lastids));
-              let lid = this.getLastid('accidentvehiculenonsh');
-              console.log('last id accidentvehiculenonsh = ' + lid);
-              console.log('last id accidentvehiculenonsh = ' + JSON.stringify(lid));
-              this.accidentvehiculenonshs[0].id = lid + 1 ;
-              console.log('fnito '); */
       }, (error: AppError) => {
         this.accidentvehiculenonshs.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
-          console.log('5');
         }
-        console.log('6');
       });
   }
 
@@ -148,14 +124,10 @@ export class AccidentvehiculenonshComponent implements OnInit {
   }
 
   updateAccidentvehiculenonsh(_accidentvehiculenonsh, inputSamury: HTMLInputElement) {
-   // _accidentvehiculenonsh.samury = inputSamury.value;
     this.service.update(_accidentvehiculenonsh)
       .subscribe(updateaccidentvehiculenonsh => {
         this.loadData();
-        console.log(updateaccidentvehiculenonsh);
       });
-    /*   console.log('name = ' + input.value);
-      console.log(_accidentvehiculenonsh); */
   }
 
   cancelUpdate(_accidentvehiculenonsh) {

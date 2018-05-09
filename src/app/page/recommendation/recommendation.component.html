@@ -11,11 +11,10 @@
 
   </div>
 
-  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+  
   <p-dataTable [value]="recommendations" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
     (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
     <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
-    <!-- <p-column field="id" header="Id"></p-column> -->
     <p-column field="name" header="Name"></p-column>
 <!--     <p-column field="datecreate" header="Crée le">
       <ng-template let-col let-m="rowData" pTemplate="body">

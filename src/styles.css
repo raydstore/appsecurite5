@@ -107,5 +107,9 @@ body {
     color: darkblue!important;
     font-size: 20px!important;
 }
-/* */
+
+.ctn {
+    border: solid 10px rgb(135, 209, 222)!important;
+    padding: 10px;
+}
 

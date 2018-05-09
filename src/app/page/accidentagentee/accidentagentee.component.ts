@@ -100,7 +100,6 @@ export class AccidentagenteeComponent implements OnInit {
 
   nodeExpand(event) {
     this.selectedNode = event.node;
-    console.log('selected node ' + JSON.stringify(this.selectedNode));
   }
 
   isSelected(event) {
@@ -120,9 +119,7 @@ export class AccidentagenteeComponent implements OnInit {
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
-          console.log('5');
         }
-        console.log('6');
       });
   }
 
@@ -150,7 +147,6 @@ export class AccidentagenteeComponent implements OnInit {
     this.service.update(_accidentagentee)
       .subscribe(updateaccidentagentee => {
         this.loadData();
-        console.log(updateaccidentagentee);
       });
   }
 

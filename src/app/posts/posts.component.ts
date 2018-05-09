@@ -44,7 +44,6 @@ export class PostsComponent implements OnInit {
   updatePost(post) {
     this.service.update(post)
         .subscribe(updatePost => {
-          console.log(updatePost);
       });
   }
 

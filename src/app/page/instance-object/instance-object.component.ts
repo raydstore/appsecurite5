@@ -62,13 +62,6 @@ export class InstanceObjectComponent implements OnInit {
   }
 
   ngOnInit() {
-   /*  console.log('enter object = ' + JSON.stringify(this.idObject));
-    console.log('enter object 2 = ' + this.idObject); */
-    
-    /* this.serviceProperty.getAll()
-      .subscribe(propertys => {
-        this.propertys = propertys;
-      }); */
     this.loadData();
 
     this.siteService.getAll()
@@ -79,8 +72,6 @@ export class InstanceObjectComponent implements OnInit {
       .subscribe(marks => {
         this.marks = marks;
       });
-    /* this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids); */
   }
 
   loadData() {
@@ -105,17 +96,11 @@ export class InstanceObjectComponent implements OnInit {
 
   createInstance() {
     this.dialogVisible = false;
-    //  console.log(JSON.stringify(this.newInstance));
-    // this.instances.splice(0, 0, this.newInstance);
     this.newInstance.idobject = this.idObject;
     this.instances = [this.newInstance, ...this.instances];
-    console.log('before instances' + JSON.stringify(this.newInstance));
-
     this.service.create(this.newInstance)
       .subscribe(newInstance => {
         this.loadData();
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side instances' + JSON.stringify(this.lastidService.getItem('instance')));
       }, (error: AppError) => {
         this.instances.splice(0, 1);
         if (error instanceof BadInput) {
@@ -124,15 +109,12 @@ export class InstanceObjectComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after instances' + this.getLastid('instance'));
   }
 
   deleteInstance(_instance: Instance) {
     let index = this.instances.indexOf(_instance);
     this.instances.splice(index, 1);
     this.instances = [...this.instances];
-    // this.instances.splice(index, 1);
-    console.log('_instance' + _instance.id + ', ' + JSON.stringify(_instance));
     this.service.delete(_instance.id)
       .subscribe(
       null,
@@ -149,13 +131,10 @@ export class InstanceObjectComponent implements OnInit {
   }
 
   updateInstance(_instance, input: HTMLInputElement) {
-    // _instance.name = input.value;
     this.service.update(_instance)
       .subscribe(updateinstance => {
         console.log(updateinstance);
       });
-    console.log('name = ' + input.value);
-    console.log(_instance);
   }
 
   cancelUpdate(_instance) {
@@ -171,7 +150,6 @@ export class InstanceObjectComponent implements OnInit {
       id: 0,
       lastuser: 'ali',
       idsite: 0,
-     // name: '',
       owner: 'ali'
     };
   }
@@ -182,7 +160,6 @@ export class InstanceObjectComponent implements OnInit {
 
   showDialogToAdd() {
     this.newMode = true;
-    // this.instance = new PrimeCar();
     this.dialogVisible = true;
   }
 
@@ -206,16 +183,10 @@ export class InstanceObjectComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    /* this.newMode = false;
-    this.newInstance = this.cloneInstance(event.data);
-    this.dialogVisible = true; */
   }
 
   cloneInstance(c: Instance): Instance {
-    let instance: Instance; // = new Prime();
-    /* for (let prop of c) {
-      instance[prop] = c[prop];
-    } */
+    let instance: Instance; 
     instance = c;
     return instance;
   }
@@ -228,15 +199,9 @@ export class InstanceObjectComponent implements OnInit {
 
   createProperty() {
     this.dialogVisibleProperty = false;
-    //  console.log(JSON.stringify(this.newInstance));
-    // this.instances.splice(0, 0, this.newInstance);
     this.propertys = [this.newInstance, ...this.propertys];
-    // console.log('before instances' + JSON.stringify(this.lastids));
-
     this.service.create(this.newInstance)
       .subscribe(newInstance => {
-        // this.label['id'] = newlabel.id;
-        //  console.log('in side instances' + JSON.stringify(this.lastidService.getItem('instance')));
       }, (error: AppError) => {
         this.propertys.splice(0, 1);
         if (error instanceof BadInput) {
@@ -245,15 +210,12 @@ export class InstanceObjectComponent implements OnInit {
           throw error;
         }
       });
-    // console.log('after instances' + this.getLastid('instance'));
   }
 
   deleteProperty(_property: Property) {
     let index = this.instances.indexOf(_property);
     this.propertys.splice(index, 1);
     this.propertys = [...this.propertys];
-    // this.instances.splice(index, 1);
-    console.log('_instance' + _property.propertyPK.id + ', ' + JSON.stringify(_property));
     this.service.delete(_property.propertyPK.id)
       .subscribe(
       null,
@@ -275,8 +237,6 @@ export class InstanceObjectComponent implements OnInit {
       .subscribe(updateproperty => {
         console.log(updateproperty);
       });
-    console.log('name = ' + input.value);
-    console.log(_property);
   }
 
   cancelUpdateProperty(_property) {
@@ -302,7 +262,6 @@ export class InstanceObjectComponent implements OnInit {
 
   showDialogToAddProperty() {
     this.newModeProperty = true;
-    // this.instance = new PrimeCar();
     this.dialogVisibleProperty = true;
   }
 
@@ -328,10 +287,7 @@ export class InstanceObjectComponent implements OnInit {
 
 
   cloneProperty(c: Property): Property {
-    let property: Property; // = new Prime();
-    /* for (let prop of c) {
-      instance[prop] = c[prop];
-    } */
+    let property: Property; 
     property = c;
     return property;
   }

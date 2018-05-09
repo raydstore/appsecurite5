@@ -45,7 +45,7 @@ export class DataService {
     }
 
     update(resource) {
-        return this.http.put(this.url + '/' + resource.id, JSON.stringify(resource), { headers: this.headers })
+        return this.http.put(this.url + '/' + resource.id, resource, { headers: this.headers })
             .catch(this.handleError);
     }
 

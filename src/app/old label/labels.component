@@ -25,7 +25,6 @@ export class LabelsComponent implements OnInit {
     ngOnInit() {
         this.service.getAll()
             .subscribe(labels => this.labels = labels);
-        console.log('label = ' + this.labels);
     }
 
     createLabel() {
@@ -88,10 +87,8 @@ export class LabelsComponent implements OnInit {
 
     saveLabelForm() {
        if (this.isNewForm) {
-           console.log('new : ' + JSON.stringify(this.newLabel));
           this.createLabel();
        } else {
-         console.log('update : ' + JSON.stringify(this.newLabel));
          this.updateLabel();
        }
     }
