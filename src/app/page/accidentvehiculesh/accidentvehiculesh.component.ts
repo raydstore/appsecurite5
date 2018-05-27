@@ -1,3 +1,8 @@
+import { MarkService } from './../../services/mark.service';
+import { EntrepriseService } from './../../services/entreprise.service';
+import { Observable } from 'rxjs/Observable';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs/Subject';
 import { NotFoundError } from './../../common/not-found-error';
 import { BadInput } from './../../common/bad-input';
 import { AppError } from './../../common/app-error';
@@ -5,7 +10,7 @@ import { LastidService } from './../../services/lastid.service';
 import { AccidentvehiculeService } from './../../services/accidentvehicule.service';
 import { TreeNode } from 'primeng/primeng';
 import { Accidentvehicule } from './../../table/table';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-accidentvehiculesh',
@@ -46,9 +51,17 @@ export class AccidentvehiculeshComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
+
+  marks: any[];
+  entreprises: any[];
   // titlelist = 'Marque';
 
-  constructor(private service: AccidentvehiculeService, private lastidService: LastidService) {
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<String>();
+  click$ = new Subject<String>();
+
+  constructor(private service: AccidentvehiculeService, private lastidService: LastidService,
+              private markService: MarkService, private entrepriseService: EntrepriseService) {
   }
 
   ngOnInit() {
@@ -57,11 +70,39 @@ export class AccidentvehiculeshComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'S' })
+    this.service.getAll()
+    //.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'S' })
       .subscribe(accidentvehiculeshs => {
         this.accidentvehiculeshs = accidentvehiculeshs;
       });
+    this.markService.getAll()
+      .subscribe(marks => {
+        this.marks = marks;
+      });
+    this.entrepriseService.getAll()
+      .subscribe(entreprises => {
+        this.entreprises = entreprises;
+      });
   }
+
+  searchMark = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.marks : this.marks.filter(v => v.name.toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+
+  searchEntreprise = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200).distinctUntilChanged()
+      .merge(this.focus$)
+      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
+      .map(term => (term === '' ? this.entreprises : this.entreprises.filter(v => v.name.toLowerCase()
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
+ 
+  formatter = (x: { name: string }) => x.name;
+
 
   loadLastId() {
     this.lastidService.getAll()
@@ -123,8 +164,8 @@ export class AccidentvehiculeshComponent implements OnInit {
       );
   }
 
-  updateAccidentvehiculesh(_accidentvehiculesh, inputSamury: HTMLInputElement) {
-    _accidentvehiculesh.samury = inputSamury.value;
+  updateAccidentvehiculesh(_accidentvehiculesh) {
+    // _accidentvehiculesh.samury = inputSamury.value;
     this.service.update(_accidentvehiculesh)
       .subscribe(updateaccidentvehiculesh => {
         this.loadData();
@@ -148,8 +189,8 @@ export class AccidentvehiculeshComponent implements OnInit {
       accidentdomain: 6,
       matricule: '',
       lastuser: 'ali',
-      kind: '',
-      classification: '',
+      kind: 'UT',
+      classification: 'S',
       identreprise: null,
       idmark: null,
       source: '',
@@ -204,6 +245,11 @@ export class AccidentvehiculeshComponent implements OnInit {
 
   findSelectedAccidentvehiculeshIndex(): number {
     return this.accidentvehiculeshs.indexOf(this.selectedAccidentvehiculesh);
+  }
+
+  getClassification(value) {
+    console.log(value);
+    return value === 'S' ? 'Vehicule SH' : 'Vehicule non SH';
   }
 }
 

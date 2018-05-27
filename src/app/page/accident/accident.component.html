@@ -153,7 +153,12 @@
             <p-tabPanel [header]="'Action'">
               <app-action [idaccident]="item" [titlelist]="'Action'"></app-action>
             </p-tabPanel>
-            <p-tabPanel [header]="'Investigation'"></p-tabPanel>
+            <p-tabPanel [header]="'Investigation'">
+
+            </p-tabPanel>
+            <p-tabPanel [header]="'Fichier attaché'">
+               <app-accidentfile [idaccident]="item" [titlelist]="'Fichier attaché'"></app-accidentfile>
+            </p-tabPanel>
           </p-tabView>
         </div>
       </div>

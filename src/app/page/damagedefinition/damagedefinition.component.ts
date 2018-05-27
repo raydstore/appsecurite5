@@ -29,6 +29,9 @@ export class DamagedefinitionComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
+    iddamage: this.iddamage,
+    idgrid: this.idgrid,
+    accidentdomain: this.accidentdomain,
     lastuser: 'ali',
     name: '',
     owner: 'ali'
@@ -83,7 +86,6 @@ export class DamagedefinitionComponent implements OnInit {
     this.dialogVisible = false;
     this.damagedefinitions = [this.newDamagedefinition, ...this.damagedefinitions];
 
-
     this.service.create(this.newDamagedefinition)
       .subscribe(newDamagedefinition => {
         this.loadData();
@@ -116,8 +118,7 @@ export class DamagedefinitionComponent implements OnInit {
       );
   }
 
-  updateDamagedefinition(_damagedefinition, input: HTMLInputElement) {
-    _damagedefinition.name = input.value;
+  updateDamagedefinition(_damagedefinition) {
     this.service.update(_damagedefinition)
       .subscribe(updatedamagedefinition => {
         this.loadData();
@@ -137,6 +138,9 @@ export class DamagedefinitionComponent implements OnInit {
       id: 0,
       lastuser: 'ali',
       name: '',
+      iddamage: this.iddamage,
+      idgrid: this.idgrid,
+      accidentdomain: this.accidentdomain,
       owner: 'ali'
     };
   }

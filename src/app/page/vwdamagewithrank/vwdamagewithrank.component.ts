@@ -1,4 +1,4 @@
-import { Damage } from './../../table/table';
+import { Damage, Accidentnature } from './../../table/table';
 import { VwdamagewithrankService } from './../../services/vwdamagewithrank.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableModule } from 'primeng/table';
@@ -16,6 +16,7 @@ export class VwdamagewithrankComponent implements OnInit {
   @Input() idaccidentnature: number;
   @Input() idrank: number;
   @Input() idgrid: string;
+  @Input() labelCheck: string;
   @Output() change = new EventEmitter();
   vwdamagewithranks: string;
   checked: boolean = false;
@@ -35,7 +36,7 @@ export class VwdamagewithrankComponent implements OnInit {
   } ;
   
 
-  constructor(private service: VwdamagewithrankService, private serviceAccidentnature: AccidentnatureService) { }
+  constructor(private service: VwdamagewithrankService, private accidentnatureService: AccidentnatureService) { }
 
   ngOnInit() {
     this.loadData();
@@ -50,17 +51,6 @@ export class VwdamagewithrankComponent implements OnInit {
         this.vwdamagewithranks = vwdamagewithranks;
         this.checked = +this.vwdamagewithranks !== 0;
       });
-
-     this.serviceAccidentnature.getAll()
-      .subscribe(accidentnatures => {
-        this.accidentnatures = accidentnatures;
-      })
-
-    this.serviceAccidentnature.getItem(this.idaccidentnature)
-      .subscribe(accidentnature => {
-        this.accidentnature = accidentnature;
-      })
-
   }
 
   getAccidentnatureById(accidentnature, id)  {
@@ -68,8 +58,12 @@ export class VwdamagewithrankComponent implements OnInit {
   }
 
   getAccidentnature(id: number): any {
-    return this.accidentnatures.find(item =>(item.accidentnaturePK.idnature === id) && 
-                                         (item.accidentnaturePK.idaccident === this.accident.id));
+    let item: Accidentnature;
+    this.accidentnatureService.getItem('id;idaccident=' + this.accident.id + ';idnature=' + id)
+      .subscribe(accidentnat => {
+        item = accidentnat;
+      });
+    return item;
 
   }
 
@@ -79,8 +73,9 @@ export class VwdamagewithrankComponent implements OnInit {
 
   onCheckChange($event) {
      if (this.checked) {
+       let idnature = this.accidentdomain <= 3 ? 1 : this.accidentdomain <= 6 ? 2 : 3;
        this.newdamage.accidentdomain = this.accidentdomain;
-       this.newdamage.accidentnature = this.getAccidentnature(this.idaccidentnature);
+      // this.newdamage.accidentnature = this.getAccidentnature(idnature);
        this.newdamage.idgrid         = this.getIdgrid(this.idgrid);
        this.change.emit(this.newdamage);
      }

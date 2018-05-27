@@ -18,13 +18,13 @@ export class ElementdamageComponent implements OnInit {
   }
 
   loadData() {
-    console.log('in ed');
+ //   console.log('in ed');
     this.service.getByQueryParam({ 'idaccident': this.idaccident, 'idnature': this.idnature })
       .subscribe(elementdamages => {
         this.elementdamages = elementdamages;
-        console.log('ed = ' + JSON.stringify(this.elementdamages));
+    //    console.log('ed = ' + JSON.stringify(this.elementdamages));
       });
-    console.log('out ed');
+  //  console.log('out ed');
   }
 
 }

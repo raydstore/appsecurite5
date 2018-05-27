@@ -23,8 +23,10 @@ export class DataService {
     }
 
     getItem(id) {
-         return this.getAll()
-        .map(items => items.find(item => item.id === id))
+        // return this.getAll()
+        console.log(this.url + '/' + id);
+        return this.http.get(this.url + '/' + id)
+       // .map(items => items.find(item => item.id === id))
             .catch(this.handleError);
     }
 

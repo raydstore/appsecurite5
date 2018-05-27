@@ -54,17 +54,17 @@
         <div class="form-group row">
           <label for="chname" class="col-sm-2 col-form-label">équipement</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="l'équipement" #name>
+            <input type="text" class="form-control" id="chname" [(ngModel)]="item.name" placeholder="l'équipement" #name>
           </div>
         </div>
         <div class="form-group row">
           <label for="chdamagename" class="col-sm-2 col-form-label">dommage</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chdamagename" [value]="item.damagename" placeholder="le dommage" #damagename>
+            <input type="text" class="form-control" id="chdamagename" [(ngModel)]="item.damagename" placeholder="le dommage" #damagename>
           </div>
         </div>
         <div class="clupdate">
-          <button class="btn btn-success" (click)="updateAccidentmaterial(item, name)">
+          <button class="btn btn-success" (click)="updateAccidentmaterial(item)">
             <i class="fa fa-check">Valider</i>
           </button>
           <button class="btn btn-warning" (click)="cancelUpdate(item)">

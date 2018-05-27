@@ -13,13 +13,16 @@
 
 
 
-  <p-dataTable class="header-table" [value]="accidentvehiculeshs" expandableRows="true" selectionMode="single" [(selection)]="selectedNode"
+  <p-dataTable class="header-table" [value]="accidentvehiculeshs" sortField="classification" rowGroupMode="subheader" groupField="classification" expandableRows="true" selectionMode="single" [(selection)]="selectedNode"
     (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
+    <ng-template pTemplate="rowgroupheader" let-rowData>{{getClassification(rowData['classification'])}}</ng-template>
     <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
     <p-column field="matricule" header="matricule"></p-column>
     <p-column field="idmark.name" header="marque"></p-column>
     <p-column field="name" header="nom"></p-column>
     <p-column field="identreprise.name" header="propriétaire"></p-column>
+    <p-column field="source" header="source"></p-column>
+    <p-column field="destination" header="destination"></p-column>
     <p-column styleClass="col-button" [style]="{'width':'70px'}">
       <ng-template let-m="rowData" pTemplate="body">
         <button class="btn btn-danger" (click)="deleteAccidentvehiculesh(m)">
@@ -30,26 +33,44 @@
     <ng-template let-item pTemplate="rowexpansion">
       <div class="container">
         <div class="form-group row">
+          <label for="chnom" class="col-sm-2 col-form-label">nom : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chnom" [(ngModel)]="item.matricule" placeholder="nom" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
           <label for="chmatricule" class="col-sm-2 col-form-label">matricule : </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chmatricule" [value]="item.matricule" placeholder="matricule" readonly>
+            <input type="text" class="form-control" id="chmatricule" [(ngModel)]="item.matricule" placeholder="matricule" readonly>
           </div>
         </div>
         <div class="form-group row">
           <label for="chmarque" class="col-sm-2 col-form-label">marque</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chmarque" [value]="item.idmark['name']" placeholder="le nom de la marque" #name>
+            <input type="text" class="form-control" id="chmarque" [(ngModel)]="item.idmark['name']" placeholder="le nom de la marque" #name>
           </div>
         </div>
         <div class="form-group row">
           <label for="chowner" class="col-sm-2 col-form-label">propriètaire</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="chowner" [value]="item.identreprise['name']" placeholder="le nom de l'entreprise"
+            <input type="text" class="form-control" id="chowner" [(ngModel)]="item.identreprise['name']" placeholder="le nom de l'entreprise"
               #name>
           </div>
         </div>
+        <div class="form-group row">
+          <label for="chsource" class="col-sm-2 col-form-label">source : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chsource" [(ngModel)]="item.source" placeholder="source" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chdestination" class="col-sm-2 col-form-label">destination : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chdestination" [(ngModel)]="item.destination" placeholder="destination" readonly>
+          </div>
+        </div>
         <div class="clupdate">
-          <button class="btn btn-success" (click)="updateAccidentvehiculesh(item, name)">
+          <button class="btn btn-success" (click)="updateAccidentvehiculesh(item)">
             <i class="fa fa-check">Valider</i>
           </button>
           <button class="btn btn-warning" (click)="cancelUpdate(item)">
@@ -66,12 +87,52 @@
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehiculesh">
     <div class="bdcontent">
       <span>
-        <label for="imatricule">idagent : </label>
-        <input type="text" class="form-control" id="chmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
+        <label for="ichnom">nom : </label>
+        <input type="text" class="form-control" id="ichnom" [(ngModel)]="newAccidentvehiculesh.name" placeholder="nom">
+      </span>
+      <span>
+        <label for="ichmatricule">matricule : </label>
+        <input type="text" class="form-control" id="ichmatricule" [(ngModel)]="newAccidentvehiculesh.matricule" placeholder="matricule">
+      </span>
+       
+      <span>
+        <ng-template #ma let-m="result" let-a="term">
+          {{ m['name'] }}
+        </ng-template>
+        <label for="ichmark">marque : </label>
+        <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="newAccidentvehiculesh.idmark" [ngbTypeahead]="searchMark" (click)="click$.next($event.target.value)"
+          #instance="ngbTypeahead" [resultTemplate]="ma" [inputFormatter]="formatter" />
+      </span>
+
+      <!-- <span>
+        <label for="ichmark">marque : </label>
+        <input type="text" class="form-control" id="ichmark" [(ngModel)]="newAccidentvehiculesh.mark" placeholder="marque">
+      </span> -->
+      <!-- <span>
+        <label for="ichidentreprise">proprietaire : </label>
+        <input type="text" class="form-control" id="ichidentreprise" [(ngModel)]="newAccidentvehiculesh.identreprise" placeholder="entreprise">
+      </span> -->
+
+
+      <span>
+        <ng-template #en let-e="result" let-n="term">
+           {{ e['name'] }}
+        </ng-template>
+        <label for="ichmark">proprietaire : </label>
+        <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="newAccidentvehiculesh.identreprise" [ngbTypeahead]="searchEntreprise"
+               (click)="click$.next($event.target.value)" #instance="ngbTypeahead" [resultTemplate]="en" [inputFormatter]="formatter" />
+      </span>
+      <span>
+        <label for="ichsource">source : </label>
+        <input type="text" class="form-control" id="ichsource" [(ngModel)]="newAccidentvehiculesh.source" placeholder="source">
+      </span>
+      <span>
+        <label for="ichmatricule">destination : </label>
+        <input type="text" class="form-control" id="ichdestination" [(ngModel)]="newAccidentvehiculesh.destination" placeholder="destination">
       </span>
       <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+        <button class="btn btn-primary" (click)="createAccidentvehiculesh()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div>
   </div>

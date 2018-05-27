@@ -20,22 +20,42 @@
   <ng-template pTemplate="body" let-grid>
     <tr>
       <td>{{grid.id}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" 
-        [accidentdomain]="1" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col1"  (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank> {{grid.col1}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="2" [idaccidentnature]="1"
-         [idrank]="grid.id"  [idgrid]="grid.col2" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col2}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="3" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col3" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col3}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="4" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col4" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col4}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="5" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col5" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col5}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="6" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col6" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col6}}</td>
-      <td><app-vwdamagewithrank [accident]="accident" [accidentdomain]="7" [idaccidentnature]="3" [idrank]="grid.id" [idgrid]="grid.col7" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col7}}</td>
-    </tr>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col1" [accident]="accident" 
+        [accidentdomain]="1" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col1"  (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col2" [accident]="accident" [accidentdomain]="2" [idaccidentnature]="1"
+         [idrank]="grid.id"  [idgrid]="grid.col2" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col3" [accident]="accident" [accidentdomain]="3" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col3" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col4" [accident]="accident" [accidentdomain]="4" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col4" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col5" [accident]="accident" [accidentdomain]="5" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col5" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col6" [accident]="accident" [accidentdomain]="6" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col6" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+      <td class="bgcelselected"><app-vwdamagewithrank [labelCheck]="grid.col7" [accident]="accident" [accidentdomain]="7" [idaccidentnature]="3" [idrank]="grid.id" [idgrid]="grid.col7" (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank></td>
+     </tr>
+    <!--    <tr>
+          <td>{{grid.id}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="1" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col1"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank> {{grid.col1}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="2" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col2"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col2}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="3" [idaccidentnature]="1" [idrank]="grid.id" [idgrid]="grid.col3"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col3}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="4" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col4"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col4}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="5" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col5"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col5}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="6" [idaccidentnature]="2" [idrank]="grid.id" [idgrid]="grid.col6"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col6}}</td>
+          <td>
+            <app-vwdamagewithrank [accident]="accident" [accidentdomain]="7" [idaccidentnature]="3" [idrank]="grid.id" [idgrid]="grid.col7"
+              (change)="onChangeDamageWithRank($event)"></app-vwdamagewithrank>{{grid.col7}}</td>
+        </tr> -->
   </ng-template>
   <ng-template pTemplate="footer">
-   <!--  <tr>
-      <td colspan="3">Totals</td>
-      <td>$506,202</td>
-      <td>$531,020</td>
-    </tr> -->
+
   </ng-template>
 </p-table>

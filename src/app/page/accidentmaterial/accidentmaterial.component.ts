@@ -29,6 +29,9 @@ export class AccidentmaterialComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
+    iddamage: this.iddamage,
+    idgrid: this.idgrid,
+    accidentdomain: this.accidentdomain,
     lastuser: 'ali',
     name: '',
     owner: 'ali'
@@ -116,8 +119,7 @@ export class AccidentmaterialComponent implements OnInit {
       );
   }
 
-  updateAccidentmaterial(_accidentmaterial, input: HTMLInputElement) {
-    _accidentmaterial.name = input.value;
+  updateAccidentmaterial(_accidentmaterial) {
     this.service.update(_accidentmaterial)
       .subscribe(updateaccidentmaterial => {
         this.loadData();
@@ -135,6 +137,9 @@ export class AccidentmaterialComponent implements OnInit {
       datecreate: new Date(),
       dateupdate: new Date(),
       id: 0,
+      iddamage: this.iddamage,
+      idgrid: this.idgrid,
+      accidentdomain: this.accidentdomain,
       lastuser: 'ali',
       name: '',
       owner: 'ali'

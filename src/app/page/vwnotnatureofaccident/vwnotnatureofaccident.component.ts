@@ -43,7 +43,7 @@ export class VwnotnatureofaccidentComponent implements OnInit {
     this.newaccidentnature.accidentnaturePK.idaccident = this.accident['id'];
     this.newaccidentnature.accidentnaturePK.idnature = idnature;
     this.newaccidentnature.accident = this.accident;
-    console.log('ac n = '+ JSON.stringify(this.newaccidentnature));
+    // console.log('ac n = '+ JSON.stringify(this.newaccidentnature));
     this.serviceAccidentnature.create(this.newaccidentnature).subscribe (
       newaccidentnature => { this.loadData(); }
     , (error: AppError) => {

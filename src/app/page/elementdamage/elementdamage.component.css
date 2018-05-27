@@ -3,8 +3,12 @@
     color: brown; 
     letter-spacing: -1px; 
     text-align: center;
-    padding: 7px;
+    padding: 13px;
     border-radius: 7px;
+    border-radius: 7px;
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+    border: solid rgb(135, 209, 222) 7px;
 }
 
 

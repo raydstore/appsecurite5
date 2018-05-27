@@ -139,6 +139,11 @@ import { AccidentmaterialComponent } from './page/accidentmaterial/accidentmater
 import { DamagedefinitionComponent } from './page/damagedefinition/damagedefinition.component';
 import { StructureComponent } from './page/structure/structure.component';
 import { ActionassignmentComponent } from './page/actionassignment/actionassignment.component';
+import { AccidentfileComponent } from './page/accidentfile/accidentfile.component';
+import { AccidentfileService } from './services/accidentfile.service';
+import { UploadfileService } from './services/uploadfile.service';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 
@@ -206,7 +211,8 @@ import { ActionassignmentComponent } from './page/actionassignment/actionassignm
     AccidentmaterialComponent,
     DamagedefinitionComponent,
     StructureComponent,
-    ActionassignmentComponent
+    ActionassignmentComponent,
+    AccidentfileComponent
   ],
   imports: [
     BrowserModule,
@@ -228,10 +234,12 @@ import { ActionassignmentComponent } from './page/actionassignment/actionassignm
     DropdownModule,
     DialogModule,
     DataTableModule,
+    RadioButtonModule,
     TableModule,
     CheckboxModule,
     SharedModule,
     CodeHighlighterModule,
+    PdfViewerModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
@@ -317,6 +325,8 @@ import { ActionassignmentComponent } from './page/actionassignment/actionassignm
     AccidentmaterialService,
     DamagedefinitionService,
     StructureService,
+    AccidentfileService,
+    UploadfileService,
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]

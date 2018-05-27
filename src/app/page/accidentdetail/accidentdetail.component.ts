@@ -9,7 +9,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class AccidentdetailComponent implements OnInit {
   @Input() accident: any;
-  
+
   constructor() { }
 
   ngOnInit() {

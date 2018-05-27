@@ -476,3 +476,14 @@ export interface DamageDefinition {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Accidentfile {
+    id?: number;
+    idaccident?: any;
+    name: string;
+    path?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
