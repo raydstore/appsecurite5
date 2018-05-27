@@ -29,6 +29,7 @@ export class ActionComponent implements OnInit {
     id: 0,
     idparent: this.idaccident,
     kind: 'R',
+    state: 'C',
     lastuser: 'ali',
     name: '',
     owner: 'ali'
@@ -136,6 +137,7 @@ export class ActionComponent implements OnInit {
       id: 0,
       idparent: this.idaccident,
       kind: 'R',
+      state: 'C',
       lastuser: 'ali',
       name: '',
       owner: 'ali'

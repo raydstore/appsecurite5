@@ -165,8 +165,7 @@ export class AccidentagentshComponent implements OnInit {
       );
   }
 
-  updateAccidentagentsh(_accidentagentsh, inputSamury: HTMLInputElement) {
-    _accidentagentsh.samury = inputSamury.value;
+  updateAccidentagentsh(_accidentagentsh) {
     this.service.update(_accidentagentsh)
       .subscribe(updateaccidentagentsh => {
         this.loadData();

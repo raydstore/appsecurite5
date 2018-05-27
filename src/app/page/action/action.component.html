@@ -1,8 +1,8 @@
-<div class="card bg-light">
+<!-- <div class="card bg-light">
   <div class="card-header alCenter cardtitle">
 
     <h4 class="titleform">
-      <i class="fa fa-list" aria-hidden="true"></i> Recommandation
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
     </h4>
 
     <button class="btn btn-success btnright" (click)="showNewDialoge()">
@@ -17,18 +17,7 @@
     <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
     <p-column field="name" header="Name"></p-column>
     <p-column field="kind" header="nature"></p-column>
-    <!--     <p-column field="datecreate" header="Crée le">
-      <ng-template let-col let-m="rowData" pTemplate="body">
-        {{m[col.field] | date:'shortDate'}}
-      </ng-template>
-    </p-column>
-    <p-column field="owner" header="par"></p-column>
-    <p-column field="dateupdate" header="Modifier le">
-      <ng-template let-col let-m="rowData" pTemplate="body">
-        {{m[col.field] | date:'shortDate'}}
-      </ng-template>
-    </p-column>
-    <p-column field="lastuser" header="par"></p-column> -->
+    
     <p-column styleClass="col-button" [style]="{'width':'70px'}">
       <ng-template let-m="rowData" pTemplate="body">
         <button class="btn btn-danger" (click)="deleteAction(m)">
@@ -37,8 +26,7 @@
       </ng-template>
     </p-column>
     <ng-template let-item pTemplate="rowexpansion">
-      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
-      <!-- <div class="ui-grid-row"> -->
+      
       <div class="container">
         <div class="form-group row">
           <label for="chid" class="col-sm-2 col-form-label">id : </label>
@@ -61,11 +49,10 @@
           </button>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
+      
     </ng-template>
   </p-dataTable>
-  <!-- </div> -->
+  
 </div>
 
 <p-dialog header="Nouvelle action" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
@@ -79,7 +66,7 @@
         <label for="iname">name</label>
         <input type="text" id="iname" [(ngModel)]="newAction.name" placeholder="l'action">
       </span>
-     <!--  <div class="col-sm-5"> -->
+  
         <div class="alert alert-secondary" role="alert">
           <h5 class="alert-heading">nature :</h5>
           <hr class="hrline">
@@ -96,7 +83,7 @@
             </div>
           </div>
         </div>
-      <!-- </div> -->
+  
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="createAction()">Valider</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
@@ -105,7 +92,7 @@
   </div>
   <br>
   <hr>
-  <br>
+  <br> -->
   <div class="card bg-light">
     <div class="card-header alCenter cardtitle">
   

@@ -7,7 +7,18 @@
 </div>
  -->
 <div class="card">
-  <div class="card-header">Bit d'agent</div>
+  <div class="card-header">
+    Bit d'agent
+    <p-button (click)="newNature()" label="Nature"></p-button>
+    
+    <p-button (click)="newSiege()" icon="fa fa-fw fa-check" label="Siège"></p-button>
+    
+    <p-button (click)="newForme()" icon="fa fa-fw fa-check" iconPos="right" label="Forme"></p-button>
+    
+    <p-button (click)="newMateriel()" icon="fa fa-fw fa-check" [disabled]="true" label="Matériel"></p-button>
+
+
+  </div>
   <div class="card-body">
     <div class="input-group" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
       <div class="input-group-prepend">

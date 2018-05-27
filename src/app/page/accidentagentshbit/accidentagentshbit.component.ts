@@ -30,4 +30,20 @@ export class AccidentagentshbitComponent implements OnInit {
       });
   }
 
+  newNature() {
+
+  }
+
+  newSiege() {
+
+  }
+
+  newForme() {
+
+  }
+
+  newMateriel() {
+
+  }
+
 }
