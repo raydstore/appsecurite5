@@ -1,4 +1,5 @@
-import { Site } from './../../table/table';
+import { CalendarComponent } from './../../common/calendar/calendar.component';
+import { Site, Agent, IAgent, TFunctionName } from './../../table/table';
 import { SiteService } from './../../services/site.service';
 import { VwdamageaccidentnatureService } from './../../services/vwdamageaccidentnature.service';
 import { VwelementdamageService } from './../../services/vwelementdamage.service';
@@ -8,13 +9,14 @@ import { NotFoundError } from './../../common/not-found-error';
 import { AppError } from './../../common/app-error';
 import { BadInput } from './../../common/bad-input';
 import { AccidentService } from './../../services/accident.service';
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accident } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import {CheckboxModule} from 'primeng/checkbox';
 import { AgentService } from '../../services/agent.service';
+
 
 import { NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs/Subject';
@@ -49,28 +51,13 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class AccidentComponent implements OnInit {
-  accidents: any[];
+ // @Input() displayValue;
+  accidents: Accident[];
   sites: any[];
   agents: any[];
   selectedAccident: Accident;
   selectedNode: TreeNode;
-  newAccident: any = {
-    id: 0,
-    classification: 'A',
-    sitedescription: '',
-    event: '',
-    idsiteparent: null,
-    idsite: null,
-    curdate: new Date(),
-    tabindex: 1,
-    time: new Date(),
-    idagentdeclare: null,
-    idagentvalidate: null,
-    datecreate: new Date(),
-    dateupdate: new Date(),
-    lastuser: 'ali',
-    owner: 'ali'
-  };
+  newAccident: Accident;
   dialogVisible = false;
   newMode = false;
 
@@ -78,21 +65,44 @@ export class AccidentComponent implements OnInit {
   lastid: any;
   titlelist = 'Accident';
   selectedNatures: string[];
+  filteredAgentsSingle: IAgent[];
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
   constructor(private service: AccidentService,
-    private siteService: SiteService,
-    private agentService: AgentService,
+    public siteService: SiteService,
+    public agentService: AgentService,
     private lastidService: LastidService) {
   }
 
   ngOnInit() {
+    this.initAccident();
     this.loadData();
     this.loadSite();
     this.loadAgent();
+  }
+
+  initAccident() {
+    let a: any = {
+      id: 0,
+      classification: 'A',
+      sitedescription: '',
+      event: '',
+      idsiteparent: null,
+      idsite: null,
+      curdate: new Date(),
+      tabindex: 1,
+      time: new Date(),
+      idagentdeclare: null,
+      idagentvalidate: null,
+      datecreate: new Date(),
+      dateupdate: new Date(),
+      lastuser: 'ali',
+      owner: 'ali'
+    };
+    this.newAccident = <Accident> a;
   }
 
   loadData() {
@@ -100,6 +110,29 @@ export class AccidentComponent implements OnInit {
       .subscribe(accidents => {
         this.accidents = accidents;
       });
+  }
+
+  displayNameAgent(item: any, args: string[]): string {
+    let result = '';
+    if (item !== null) {
+      if (args.length > 0) {
+        result = item[args[0]];
+      }
+      for (let i = 1; i < args.length; i++) {
+        result = result + ' ' + item[args[i]];
+      }
+    }
+    return result;
+  }
+
+  displayNameSite(item: any, args: string[]): string {
+    let result = '';
+    if (item !== null) {
+      if (args.length > 0) {
+        result = item[args[0]];
+      }
+    }
+    return result;
   }
 
   searchSite = (text$: Observable<string>) =>
@@ -117,14 +150,14 @@ export class AccidentComponent implements OnInit {
       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
       .map(term => (term === '' ? this.sites : this.sites.filter(v => (v.id + v.name).toLowerCase()
         .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
-        
+
   searchAgentDeclare = (text$: Observable<string>) =>
     text$
       .debounceTime(200).distinctUntilChanged()
       .merge(this.focus$)
       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
       .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.name).toLowerCase()
-        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));      
+        .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
 
   searchAgentValidate = (text$: Observable<string>) =>
     text$
@@ -151,6 +184,32 @@ export class AccidentComponent implements OnInit {
       });
   }
 
+  filterAgentSingle(event) {
+    let query = event.query;
+    this.agentService.getAll().subscribe(agents => {
+      this.agents = agents;
+      this.filteredAgentsSingle = this.filterAgent(query, agents);
+    });
+  }
+
+
+  filterAgent(query, agents: Agent[]): IAgent[] {
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: IAgent[] = [];
+    for (let i = 0; i < agents.length; i++) {
+      let agent = agents[i];
+      if (agent.firstname.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+        let iagent: IAgent = {
+          agent: agent,
+          name: agent.firstname + ' ' + agent.lastname
+        }
+        filtered.push(iagent);
+      }
+    }
+    return filtered;
+  }
+
+
   loadLastId() {
     this.lastidService.getAll()
       .subscribe(lastids => this.lastids = lastids);
@@ -169,6 +228,10 @@ export class AccidentComponent implements OnInit {
   get today() {
     return new Date();
   }
+/* 
+  getDate(date): Date {
+     return new Date(date);
+  } */
 
   nodeExpand(event) {
     this.selectedNode = event.node;
@@ -215,8 +278,9 @@ export class AccidentComponent implements OnInit {
       );
   }
 
-  updateAccident(_accident, input: HTMLInputElement) {
-    _accident.name = input.value;
+  updateAccident(_accident) {
+   // _accident.name = input.value;
+   console.log(_accident);
     this.service.update(_accident)
       .subscribe(updateaccident => {
         this.loadData();
@@ -230,7 +294,8 @@ export class AccidentComponent implements OnInit {
   showNewDialoge() {
     this.dialogVisible = true;
     this.newMode = true;
-    this.newAccident = {
+    this.initAccident();
+    /* this.newAccident = {
       id: 0,
       classification: 'A',
       sitedescription: '',
@@ -246,7 +311,7 @@ export class AccidentComponent implements OnInit {
       dateupdate: new Date(),
       lastuser: 'ali',
       owner: 'ali'
-    };
+    }; */
   }
 
   hideNewDialoge() {
@@ -275,6 +340,18 @@ export class AccidentComponent implements OnInit {
     this.accidents = this.accidents.filter((val, i) => i !== index);
     this.newAccident = null;
     this.dialogVisible = false;
+  }
+
+  onChangeDate(item: Accident, event) {
+    item.curdate = event;
+  }
+
+  onChangeItem(item: Accident, field: string, event) {
+    item[field] = <Agent> event.item;
+  }
+
+  onSelect(event) {
+    console.log(event);
   }
 
   onRowSelect(event) {

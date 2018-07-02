@@ -1,0 +1,8 @@
+<p-autoComplete [(ngModel)]="item" [suggestions]="filteredList" (completeMethod)="filterItem($event)"
+  [size]="30" placeholder="" [minLength]="1" [dropdown]="true" field="name" (onSelect)="onSelect($event)">
+  <ng-template let-i pTemplate="p">
+    <div class="ui-helper-clearfix">
+      <div>{{i.name}}</div>
+    </div>
+  </ng-template>
+</p-autoComplete>

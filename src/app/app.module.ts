@@ -68,6 +68,7 @@ import { CodeHighlighterModule } from 'primeng/primeng';
 import { InplaceModule } from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 import { MarkComponent } from './page/mark/mark.component';
 import { TypeObjectComponent } from './page/type-object/type-object.component';
 import { TypeOperationComponent } from './page/type-operation/type-operation.component';
@@ -144,6 +145,8 @@ import { AccidentfileService } from './services/accidentfile.service';
 import { UploadfileService } from './services/uploadfile.service';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { CalendarComponent } from './common/calendar/calendar.component';
+import { AutocompleteComponent } from './common/autocomplete/autocomplete.component';
 
 
 
@@ -212,7 +215,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DamagedefinitionComponent,
     StructureComponent,
     ActionassignmentComponent,
-    AccidentfileComponent
+    AccidentfileComponent,
+    CalendarComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -240,6 +245,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     SharedModule,
     CodeHighlighterModule,
     PdfViewerModule,
+    CalendarModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},

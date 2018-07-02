@@ -113,3 +113,7 @@ body {
     padding: 10px;
 }
 
+
+.ui-calendar.ui-calendar-w-btn input {
+    width: 273px!important;
+}

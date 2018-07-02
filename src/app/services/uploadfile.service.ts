@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 const urlService = environment.urlService;
 
 @Injectable()
-export class UploadfileService extends DataService {
+export class UploadfileService extends DataService<any> {
   constructor(http: HttpClient) {
     super(urlService + '/uploadfile', http);
   }

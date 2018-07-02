@@ -82,36 +82,50 @@
                 <div class="form-group row">
                   <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chcurdate" [value]="item.curdate" placeholder="date" readonly>
+                    <!-- <input type="text" class="form-control" id="chcurdate" [value]="item.curdate | date: 'dd/MM/yy'" placeholder="date" readonly> -->
+                    <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" (changeDate)="onChangeDate(item, $event)"></app-calendar>
+                    
+                    <!-- <p-calendar [(ngModel)]="item.curdate" formatDate="yy-mm-dd"></p-calendar>{{item.curdate}} -->
+
+
+                    <!-- <p-calendar id="chcurdate" [(ngModel)]="item.curdate"  [dateFormat]="'yy-mm-ddT06:35:56+01:00'" [showTime]="true"> -->
+                      <!-- <ng-template pTemplate="displayValue">
+                        <span>{{item.curdate | date:'yy-mm-ddThh:mm:ssz'}}</span>
+                      </ng-template> -->
+                    <!-- </p-calendar> -->
                   </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label for="chtime" class="col-sm-2 col-form-label">heure : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chtime" [value]="item.time" placeholder="heure" readonly>
+                    
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
-                  <label for="chidsiteparent" class="col-sm-2 col-form-label">id site parent : </label>
+                  <label for="chidsiteparent" class="col-sm-2 col-form-label">site : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent.name" placeholder="site parent" readonly>
+                    <!-- <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent.name" placeholder="site parent" readonly> -->
+                    <app-autocomplete [i_item]="item.idsiteparent" [service]="siteService" [functionName]="displayNameSite"
+                                      [args]="['name']" (changeItem)="onChangeItem(item, 'idsiteparent', $event)"></app-autocomplete>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="chidsite" class="col-sm-2 col-form-label">id site : </label>
+                  <label for="chidsite" class="col-sm-2 col-form-label">lieu : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidsite" [value]="item.idsite.name" placeholder="site" readonly>
+                    <!-- <input type="text" class="form-control" id="chidsite" [value]="item.idsite.name" placeholder="site" readonly> -->
+                    <app-autocomplete [i_item]="item.idsite" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
+                      (changeItem)="onChangeItem(item, 'idsite', $event)"></app-autocomplete>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="chdescription" class="col-sm-2 col-form-label">description site</label>
+                  <label for="chdescription" class="col-sm-2 col-form-label">description lieu</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="chdescription" [value]="item.sitedescription" placeholder="la description du site"
                       #name>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="chevent" class="col-sm-2 col-form-label">evenement</label>
+                  <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="chevent" [value]="item.event" placeholder="l'evenement de l'accident" #name>
                   </div>
@@ -119,19 +133,38 @@
                 <div class="form-group row">
                   <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare.name" placeholder="agent declare"
-                      readonly>
+                    <!-- <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare.firstname + ' ' + item.idagentdeclare.lastname" placeholder="agent declare"
+                      readonly> -->
+                    <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"  [service]="agentService" (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
+                    <!-- <p-autoComplete [(ngModel)]="item.idagentdeclare" value="test" [suggestions]="filteredAgentsSingle" (completeMethod)="filterAgentSingle($event)"
+                      [size]="30" placeholder="Agents" [minLength]="1" [dropdown]="true" field="name">
+                      <ng-template let-agent pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div>{{agent.name}}</div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete> -->
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate.name" placeholder="agent validate"
-                      readonly>
+                    <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+                      (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
+                    <!-- <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate.firstname + ' ' + item.idagentvalidate.lastname" placeholder="agent validate"
+                      readonly> -->
+                    <!-- <p-autoComplete [(ngModel)]="item.idagentvalidate" [suggestions]="filteredAgentsSingle" (completeMethod)="filterAgentSingle($event)"
+                      [size]="30" placeholder="Agents" [minLength]="1" [dropdown]="true" field="firstname" (onSelect)="onSelect($event)" >
+                      <ng-template let-agent pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                          <div>{{agent.firstname}}</div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete> -->
                   </div>
                 </div>
                 <div class="clupdate">
-                  <button class="btn btn-success" (click)="updateAccident(item, name)">
+                  <button class="btn btn-success" (click)="updateAccident(item)">
                     <i class="fa fa-check">Valider</i>
                   </button>
                   <button class="btn btn-warning" (click)="cancelUpdate(item)">
@@ -204,15 +237,21 @@
             <h5 class="alert-heading">c'est produite :</h5>
             <hr class="hrline">
             <div class="bx">
-              <!-- class="input-group" class="form-group"<label for="iidsiteparent">le :</label> -->
               <div class="inlbox">
-                <input class="inpcal" placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
+                <!-- <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-4"> -->
+                <!-- <input class="inpcal" placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
                 <button class="btn btn-secondary btncal" (click)="d1.toggle()">
                   <i class="fa fa-calendar-alt"></i>
                 </button>
-                <ngb-timepicker class="inptime" [(ngModel)]="newAccident.time"></ngb-timepicker>
-              </div>
+                <ngb-timepicker class="inptime" [(ngModel)]="newAccident.time"></ngb-timepicker> -->
+                <p-calendar [(ngModel)]="newAccident.curdate" [showTime]="true" [showIcon]="true" ></p-calendar>
+                <!-- </div>
+                </div> -->
             </div>
+            <!-- <div class="inlbox">
+                <p-calendar [(ngModel)]="newAccident.time" [timeOnly]="true"></p-calendar>
+            </div> -->
           </div>
         </div>
       </div>
@@ -223,19 +262,23 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidsiteparent">site :</label>
-              <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
+              <!-- <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-              </select>
+              </select> -->
+              <app-autocomplete id="iidsiteparent" [i_item]="newAccident.idsiteparent" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
+                (changeItem)="onChangeItem(newAccident, 'idsiteparent', $event)"></app-autocomplete>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidsiteparent">lieu :</label>
-              <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
+              <!-- <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-              </select>
+              </select> -->
+              <app-autocomplete id="iidsite" [i_item]="newAccident.idsite" [service]="siteService" [functionName]="displayNameSite"
+                [args]="['name']" (changeItem)="onChangeItem(newAccident, 'idsite', $event)"></app-autocomplete>
             </div>
           </div>
           <div class="row">
@@ -263,19 +306,23 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidagentdeclare">établi par :</label>
-              <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
+              <!-- <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-              </select>
+              </select> -->
+              <app-autocomplete id="iidagentdeclare" [i_item]="newAccident.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+                (changeItem)="onChangeItem(newAccident, 'idagentdeclare', $event)"></app-autocomplete>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidagentvalidate">validé par :</label>
-              <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
+              <!-- <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
                 <option value=""></option>
                 <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-              </select>
+              </select> -->
+              <app-autocomplete id="iidagentvalidate" [i_item]="newAccident.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"
+                [service]="agentService" (changeItem)="onChangeItem(newAccident, 'idagentvalidate', $event)"></app-autocomplete>
             </div>
           </div>
         </div>

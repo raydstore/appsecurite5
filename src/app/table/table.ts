@@ -1,3 +1,5 @@
+export type TFunctionName = <T, K>(item: T, arg: K) => any;
+
 
 export interface Activity {
     id?: number;
@@ -206,12 +208,17 @@ export interface Accident {
     curdate?: Date;
     time?: Date;
     tabindex?: number;
-    idagentdeclare?: any;
-    idagentvalidate?: any;
+    idagentdeclare?: Agent;
+    idagentvalidate?: Agent;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
+}
+
+export interface IAgent {
+    agent: Agent;
+    name: string;
 }
 
 export interface AccidentnaturePK {

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class DataService {
+export class DataService<T> {
     headers = new HttpHeaders();
 
     constructor(private url, private http: HttpClient) {
@@ -18,14 +18,14 @@ export class DataService {
      }
 
     getAll() {
-        return this.http.get(this.url)
+        return this.http.get<T>(this.url)
             .catch(this.handleError);
     }
 
     getItem(id) {
         // return this.getAll()
         console.log(this.url + '/' + id);
-        return this.http.get(this.url + '/' + id)
+        return this.http.get<T>(this.url + '/' + id)
        // .map(items => items.find(item => item.id === id))
             .catch(this.handleError);
     }
@@ -37,7 +37,7 @@ export class DataService {
         query += op + param + '=' + listParam[param];
             op = op === '?' ? '&&' : '&&';
         }
-        return this.http.get(this.url + query)
+        return this.http.get<T>(this.url + query)
             .catch(this.handleError);
     }
 

@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 const urlService = environment.urlService;
 
 @Injectable()
-export class VwdamageaccidentnatureService extends DataService {
+export class VwdamageaccidentnatureService extends DataService<any> {
   constructor(http: HttpClient) {
     super(urlService + '/vwdamageaccidentnature', http);
   }

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 const urlService = environment.urlService;
 
 @Injectable()
-export class OpscardService extends DataService {
+export class OpscardService extends DataService<any> {
   constructor(http: HttpClient) {
     super(urlService + '/opscard', http);
   }
