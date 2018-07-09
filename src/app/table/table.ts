@@ -1,5 +1,10 @@
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
-
+export enum Mode {insert = 0, update = 1, delete = 2}
+export interface EventAccidentArgs {
+    item: Accident;
+    mode: Mode;
+    dialogVisible: boolean;
+}
 
 export interface Activity {
     id?: number;
