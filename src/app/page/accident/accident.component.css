@@ -62,6 +62,7 @@
 
 .bdcontent {
     background-color: white;
+    width: 700px;
 }
 
 .toolbtn {
@@ -70,6 +71,7 @@
     float: left;
     padding: 5px!important;
     height: 50px;
+    width: 720px;
 }
 
 .btn-primary {

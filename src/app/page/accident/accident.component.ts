@@ -1,5 +1,5 @@
 import { CalendarComponent } from './../../common/calendar/calendar.component';
-import { Site, Agent, IAgent, TFunctionName } from './../../table/table';
+import { Site, Agent, IAgent, TFunctionName, Mode, EventAccidentArgs } from './../../table/table';
 import { SiteService } from './../../services/site.service';
 import { VwdamageaccidentnatureService } from './../../services/vwdamageaccidentnature.service';
 import { VwelementdamageService } from './../../services/vwelementdamage.service';
@@ -11,6 +11,7 @@ import { BadInput } from './../../common/bad-input';
 import { AccidentService } from './../../services/accident.service';
 import { Component, Injectable, OnInit, ViewChild, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
+/* import { InputTextareaModule } from 'primeng/inputtextarea'; */
 import { Accident } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
@@ -60,6 +61,8 @@ export class AccidentComponent implements OnInit {
   newAccident: Accident;
   dialogVisible = false;
   newMode = false;
+  mInsert: Mode.insert;
+  mUpdate: Mode.update;
 
   lastids: any[];
   lastid: any;
@@ -172,9 +175,9 @@ export class AccidentComponent implements OnInit {
 
   loadSite() {
     this.siteService.getAll()
-        .subscribe(sites => {
-          this.sites = sites;
-        });
+      .subscribe(sites => {
+        this.sites = sites;
+      });
   }
 
   loadAgent() {
@@ -241,6 +244,20 @@ export class AccidentComponent implements OnInit {
     return this.selectedNode === event.node ? true : false;
   }
 
+  performAction(eventArgs: EventAccidentArgs) {
+    console.log('enter perform acion');
+    console.log(JSON.stringify(eventArgs));
+    switch (eventArgs.mode) {
+      case this.mInsert: this.dialogVisible = eventArgs.dialogVisible;
+        console.log(this.mInsert);
+                        this.createAccident();
+        break;
+      case this.mUpdate: this.updateAccident(<Accident>eventArgs.item);
+        console.log(this.mUpdate);
+        break;
+    }
+    console.log('end performAction eventArgs.mode = ' + eventArgs.mode);
+  }
 
   createAccident() {
     this.dialogVisible = false;
@@ -260,6 +277,8 @@ export class AccidentComponent implements OnInit {
   }
 
   deleteAccident(_accident: Accident) {
+    console.log('1');
+    console.log(JSON.stringify(_accident));
     const index = this.accidents.indexOf(_accident);
     this.accidents.splice(index, 1);
     this.accidents = [...this.accidents];

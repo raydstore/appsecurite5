@@ -53,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+/* import { InputTextareaModule } from 'primeng/inputtextarea'; */
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
@@ -147,6 +148,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CalendarComponent } from './common/calendar/calendar.component';
 import { AutocompleteComponent } from './common/autocomplete/autocomplete.component';
+import { FaccidentComponent } from './container/faccident/faccident.component';
 
 
 
@@ -217,7 +219,9 @@ import { AutocompleteComponent } from './common/autocomplete/autocomplete.compon
     ActionassignmentComponent,
     AccidentfileComponent,
     CalendarComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    FaccidentComponent
+    /* ,InputTextareaModule */
   ],
   imports: [
     BrowserModule,

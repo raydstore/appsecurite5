@@ -62,10 +62,9 @@
       <div class="card text-white bg-info mb-3">
         <div class="card-header">Info Accident</div>
         <div class="card-body">
-          <!-- <h5 class="card-title"></h5> -->
           <p-tabView>
             <p-tabPanel [selected]="true" [header]="'Détail'">
-              <div class="container">
+              <!-- <div class="container">
                 <div class="form-group row">
                   <label for="chid" class="col-sm-2 col-form-label">id : </label>
                   <div class="col-sm-10">
@@ -75,36 +74,19 @@
                 <div class="form-group row">
                   <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chclassification" [value]="item.classification" placeholder="classification"
-                      readonly>
+                    <p-radioButton name="grClassification" value="A" label="Accident" [(ngModel)]="item.classification" ></p-radioButton>
+                    <p-radioButton name="grClassification" value="I" label="Incident" [(ngModel)]="item.classification" ></p-radioButton>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
                   <div class="col-sm-10">
-                    <!-- <input type="text" class="form-control" id="chcurdate" [value]="item.curdate | date: 'dd/MM/yy'" placeholder="date" readonly> -->
                     <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" (changeDate)="onChangeDate(item, $event)"></app-calendar>
-                    
-                    <!-- <p-calendar [(ngModel)]="item.curdate" formatDate="yy-mm-dd"></p-calendar>{{item.curdate}} -->
-
-
-                    <!-- <p-calendar id="chcurdate" [(ngModel)]="item.curdate"  [dateFormat]="'yy-mm-ddT06:35:56+01:00'" [showTime]="true"> -->
-                      <!-- <ng-template pTemplate="displayValue">
-                        <span>{{item.curdate | date:'yy-mm-ddThh:mm:ssz'}}</span>
-                      </ng-template> -->
-                    <!-- </p-calendar> -->
                   </div>
                 </div>
-                <!-- <div class="form-group row">
-                  <label for="chtime" class="col-sm-2 col-form-label">heure : </label>
-                  <div class="col-sm-10">
-                    
-                  </div>
-                </div> -->
                 <div class="form-group row">
                   <label for="chidsiteparent" class="col-sm-2 col-form-label">site : </label>
                   <div class="col-sm-10">
-                    <!-- <input type="text" class="form-control" id="chidsiteparent" [value]="item.idsiteparent.name" placeholder="site parent" readonly> -->
                     <app-autocomplete [i_item]="item.idsiteparent" [service]="siteService" [functionName]="displayNameSite"
                                       [args]="['name']" (changeItem)="onChangeItem(item, 'idsiteparent', $event)"></app-autocomplete>
                   </div>
@@ -112,7 +94,6 @@
                 <div class="form-group row">
                   <label for="chidsite" class="col-sm-2 col-form-label">lieu : </label>
                   <div class="col-sm-10">
-                    <!-- <input type="text" class="form-control" id="chidsite" [value]="item.idsite.name" placeholder="site" readonly> -->
                     <app-autocomplete [i_item]="item.idsite" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
                       (changeItem)="onChangeItem(item, 'idsite', $event)"></app-autocomplete>
                   </div>
@@ -127,23 +108,13 @@
                 <div class="form-group row">
                   <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="chevent" [value]="item.event" placeholder="l'evenement de l'accident" #name>
+                  <textarea rows="5" cols="70" pInputTextarea [(ngModel)]="newAccident.event"></textarea>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
                   <div class="col-sm-10">
-                    <!-- <input type="text" class="form-control" id="chidagentdeclare" [value]="item.idagentdeclare.firstname + ' ' + item.idagentdeclare.lastname" placeholder="agent declare"
-                      readonly> -->
                     <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"  [service]="agentService" (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
-                    <!-- <p-autoComplete [(ngModel)]="item.idagentdeclare" value="test" [suggestions]="filteredAgentsSingle" (completeMethod)="filterAgentSingle($event)"
-                      [size]="30" placeholder="Agents" [minLength]="1" [dropdown]="true" field="name">
-                      <ng-template let-agent pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                          <div>{{agent.name}}</div>
-                        </div>
-                      </ng-template>
-                    </p-autoComplete> -->
                   </div>
                 </div>
                 <div class="form-group row">
@@ -151,16 +122,6 @@
                   <div class="col-sm-10">
                     <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
                       (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
-                    <!-- <input type="text" class="form-control" id="chidagentvalidate" [value]="item.idagentvalidate.firstname + ' ' + item.idagentvalidate.lastname" placeholder="agent validate"
-                      readonly> -->
-                    <!-- <p-autoComplete [(ngModel)]="item.idagentvalidate" [suggestions]="filteredAgentsSingle" (completeMethod)="filterAgentSingle($event)"
-                      [size]="30" placeholder="Agents" [minLength]="1" [dropdown]="true" field="firstname" (onSelect)="onSelect($event)" >
-                      <ng-template let-agent pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                          <div>{{agent.firstname}}</div>
-                        </div>
-                      </ng-template>
-                    </p-autoComplete> -->
                   </div>
                 </div>
                 <div class="clupdate">
@@ -171,8 +132,8 @@
                     <i class="fa fa-times">Annuler</i>
                   </button>
                 </div>
-              </div>
-
+              </div> -->
+              <app-faccident [item]="item" [mode]="mUpdate" (operation)="performAction($event)" ></app-faccident>
             </p-tabPanel>
             <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
               <app-accidentdetail [accident]="item"></app-accidentdetail>
@@ -180,9 +141,6 @@
             <p-tabPanel [header]="'Cause'">
               <app-cause [idaccident]="item" [titlelist]="'Causes'"></app-cause>
             </p-tabPanel>
-            <!-- <p-tabPanel [header]="'Recommandation'">
-              <app-recommendation [idaccident]="item" [titlelist]="'Recommandations'"></app-recommendation>
-            </p-tabPanel> -->
             <p-tabPanel [header]="'Action / Recommandation'">
               <app-action [idaccident]="item" [titlelist]="'Action / Recommandation'"></app-action>
             </p-tabPanel>
@@ -198,21 +156,11 @@
 
     </ng-template>
   </p-dataTable>
-  <!-- </div> -->
 </div>
 
-<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="680">
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="748">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
-    <div class="bdcontent">
-      <!--  <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="iid" [(ngModel)]="newAccident.id" placeholder="Identificateur" readonly>
-      </span> -->
-      <!-- <span>
-        <label for="iclassification"></label>
-        <input type="text" class="form-control" id="iclassification" [(ngModel)]="newAccident.classification" placeholder="classification"
-          readonly>
-      </span> -->
+    <!-- <div class="bdcontent">
       <div class="row">
         <div class="col-sm-5">
           <div class="alert alert-secondary" role="alert">
@@ -238,20 +186,8 @@
             <hr class="hrline">
             <div class="bx">
               <div class="inlbox">
-                <!-- <div class="ui-g ui-fluid">
-                <div class="ui-g-12 ui-md-4"> -->
-                <!-- <input class="inpcal" placeholder="yyyy-mm-dd" name="d1" #c1="ngModel" [(ngModel)]="newAccident.curdate" ngbDatepicker #d1="ngbDatepicker">
-                <button class="btn btn-secondary btncal" (click)="d1.toggle()">
-                  <i class="fa fa-calendar-alt"></i>
-                </button>
-                <ngb-timepicker class="inptime" [(ngModel)]="newAccident.time"></ngb-timepicker> -->
                 <p-calendar [(ngModel)]="newAccident.curdate" [showTime]="true" [showIcon]="true" ></p-calendar>
-                <!-- </div>
-                </div> -->
             </div>
-            <!-- <div class="inlbox">
-                <p-calendar [(ngModel)]="newAccident.time" [timeOnly]="true"></p-calendar>
-            </div> -->
           </div>
         </div>
       </div>
@@ -262,10 +198,6 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidsiteparent">site :</label>
-              <!-- <select [(ngModel)]="newAccident.idsiteparent" id="iidsiteparent" class="form-control">
-                <option value=""></option>
-                <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-              </select> -->
               <app-autocomplete id="iidsiteparent" [i_item]="newAccident.idsiteparent" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
                 (changeItem)="onChangeItem(newAccident, 'idsiteparent', $event)"></app-autocomplete>
             </div>
@@ -273,10 +205,6 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidsiteparent">lieu :</label>
-              <!-- <select [(ngModel)]="newAccident.idsite" id="iidsiteparent" class="form-control">
-                <option value=""></option>
-                <option *ngFor="let site of sites" [ngValue]="site"> {{site.name}} </option>
-              </select> -->
               <app-autocomplete id="iidsite" [i_item]="newAccident.idsite" [service]="siteService" [functionName]="displayNameSite"
                 [args]="['name']" (changeItem)="onChangeItem(newAccident, 'idsite', $event)"></app-autocomplete>
             </div>
@@ -294,10 +222,9 @@
       <div class="alert alert-secondary" role="alert">
         <h5 class="alert-heading">Description de l'evenement :</h5>
         <hr class="hrline">
-        <span>
-          <!-- <label for="ievent">evenement</label> -->
-          <input type="text" class="form-control" id="ievent" [(ngModel)]="newAccident.event" placeholder="l'évenement">
-        </span>
+        <div>
+        <textarea rows="5" cols="70" pInputTextarea [(ngModel)]="newAccident.event" ></textarea>
+        </div>
       </div>
       <div class="alert alert-secondary" role="alert">
         <h5 class="alert-heading">Signature :</h5>
@@ -306,10 +233,6 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidagentdeclare">établi par :</label>
-              <!-- <select [(ngModel)]="newAccident.idagentdeclare" id="iidagentdeclare" class="form-control">
-                <option value=""></option>
-                <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-              </select> -->
               <app-autocomplete id="iidagentdeclare" [i_item]="newAccident.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
                 (changeItem)="onChangeItem(newAccident, 'idagentdeclare', $event)"></app-autocomplete>
             </div>
@@ -317,10 +240,6 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="iidagentvalidate">validé par :</label>
-              <!-- <select [(ngModel)]="newAccident.idagentvalidate" id="iidagentvalidate" class="form-control">
-                <option value=""></option>
-                <option *ngFor="let agent of agents" [ngValue]="agent"> {{agent.firstname + ' ' + agent.lastname}} </option>
-              </select> -->
               <app-autocomplete id="iidagentvalidate" [i_item]="newAccident.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"
                 [service]="agentService" (changeItem)="onChangeItem(newAccident, 'idagentvalidate', $event)"></app-autocomplete>
             </div>
@@ -331,5 +250,6 @@
         <button class="btn btn-primary" (click)="createAccident()">Valider</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
-    </div>
+    </div> -->
+    <app-faccident [item]="newAccident" [mode]="mInsert" (operation)="performAction($event)"></app-faccident>
   </div>

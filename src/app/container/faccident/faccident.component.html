@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="form-group row">
+    <label for="chid" class="col-sm-2 col-form-label">id : </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
+    <div class="col-sm-10">
+      <p-radioButton name="grClassification" value="A" label="Accident" [(ngModel)]="item.classification"></p-radioButton>
+      <p-radioButton name="grClassification" value="I" label="Incident" [(ngModel)]="item.classification"></p-radioButton>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
+    <div class="col-sm-10">
+      <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" (changeDate)="onChangeDate(item, $event)"></app-calendar>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chidsiteparent" class="col-sm-2 col-form-label">site : </label>
+    <div class="col-sm-10">
+      <app-autocomplete [i_item]="item.idsiteparent" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
+        (changeItem)="onChangeItem(item, 'idsiteparent', $event)"></app-autocomplete>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chidsite" class="col-sm-2 col-form-label">lieu : </label>
+    <div class="col-sm-10">
+      <app-autocomplete [i_item]="item.idsite" [service]="siteService" [functionName]="displayNameSite" [args]="['name']" (changeItem)="onChangeItem(item, 'idsite', $event)"></app-autocomplete>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chdescription" class="col-sm-2 col-form-label">description lieu</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="chdescription" [(ngModel)]="item.sitedescription" placeholder="la description du site"
+        #name>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
+    <div class="col-sm-10">
+      <textarea rows="5" cols="70" pInputTextarea [(ngModel)]="item.event"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
+    <div class="col-sm-10">
+      <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+        (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
+    <div class="col-sm-10">
+      <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+        (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
+    </div>
+  </div>
+  <div class="clupdate">
+    <button class="btn btn-success" (click)="perform($event)">
+      <i class="fa fa-check">Valider</i>
+    </button>
+    <button class="btn btn-warning" (click)="cancel(item)">
+      <i class="fa fa-times">Annuler</i>
+    </button>
+  </div>
+</div>
