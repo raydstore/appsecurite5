@@ -1,4 +1,4 @@
-import { VwdamageService } from './../../services/vwdamage.service';
+import { VwdamageService } from '../../services/vwdamage.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

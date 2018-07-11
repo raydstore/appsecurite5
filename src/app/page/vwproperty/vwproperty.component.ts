@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { VPropertyService } from './../../services/vproperty.service';
-import { NPropertyService } from './../../services/nproperty.service';
-import { DPropertyService } from './../../services/dproperty.service';
-import { DataService } from './../../services/data.service';
-import { VwpropertyService } from './../../services/vwproperty.service';
-import { IPropertyService } from './../../services/iproperty.service';
+import { VPropertyService } from '../../services/vproperty.service';
+import { NPropertyService } from '../../services/nproperty.service';
+import { DPropertyService } from '../../services/dproperty.service';
+import { DataService } from '../../services/data.service';
+import { VwpropertyService } from '../../services/vwproperty.service';
+import { IPropertyService } from '../../services/iproperty.service';
 
 
 

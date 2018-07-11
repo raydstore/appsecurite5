@@ -1,14 +1,14 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { EntrepriseService } from './../../services/entreprise.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { LastidService } from './../../services/lastid.service';
-import { AccidentagenteeService } from './../../services/accidentagentee.service';
+import { EntrepriseService } from '../../services/entreprise.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { LastidService } from '../../services/lastid.service';
+import { AccidentagenteeService } from '../../services/accidentagentee.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentagentee, AccidentagenteePK, Entreprise } from './../../table/table';
+import { Accidentagentee, AccidentagenteePK, Entreprise } from '../../table/table';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({

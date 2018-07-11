@@ -1,6 +1,6 @@
-import { BadInput } from './../../common/bad-input';
-import { NatureService } from './../../services/nature.service';
-import { Nature } from './../../table/table';
+import { BadInput } from '../../common/bad-input';
+import { NatureService } from '../../services/nature.service';
+import { Nature } from '../../table/table';
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/treenode';
 import { LastidService } from '../../services/lastid.service';

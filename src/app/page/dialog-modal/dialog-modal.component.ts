@@ -1,4 +1,4 @@
-import { LabelService } from './../../services/label.service';
+import { LabelService } from '../../services/label.service';
 import { TreeNode } from 'primeng/primeng';
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Label } from '../../table/table';

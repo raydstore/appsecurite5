@@ -1,4 +1,4 @@
-import { VwelementgridService } from './../../services/vwelementgrid.service';
+import { VwelementgridService } from '../../services/vwelementgrid.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

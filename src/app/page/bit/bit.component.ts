@@ -1,8 +1,8 @@
-import { BadInput } from './../../common/bad-input';
-import { BitService } from './../../services/bit.service';
+import { BadInput } from '../../common/bad-input';
+import { BitService } from '../../services/bit.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TreeTableModule, TreeNode, SharedModule } from 'primeng/primeng';
-import { Bit } from './../../table/table';
+import { Bit } from '../../table/table';
 import { AppError } from '../../common/app-error';
 import { NotFoundError } from '../../common/not-found-error';
 

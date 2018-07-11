@@ -1,6 +1,6 @@
-import { ListagentService } from './../../services/listagent.service';
-import { BadInput } from './../../common/bad-input';
-import { Caseagent, Listagent } from './../../table/table';
+import { ListagentService } from '../../services/listagent.service';
+import { BadInput } from '../../common/bad-input';
+import { Caseagent, Listagent } from '../../table/table';
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/treenode';
 import { NotFoundError } from '../../common/not-found-error';

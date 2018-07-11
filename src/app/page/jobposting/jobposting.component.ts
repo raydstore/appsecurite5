@@ -1,4 +1,4 @@
-import { BadInput } from './../../common/bad-input';
+import { BadInput } from '../../common/bad-input';
 import { TreeNode } from 'primeng/primeng';
 import { Component, OnInit } from '@angular/core';
 import { JobpostingService } from '../../services/jobposting.service';

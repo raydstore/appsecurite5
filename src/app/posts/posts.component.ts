@@ -1,6 +1,6 @@
-import { PostService } from './../services/post.service';
+import { PostService } from '../services/post.service';
 import { AppError } from '../common/app-error';
-import { BadInput } from './../common/bad-input';
+import { BadInput } from '../common/bad-input';
 import { NotFoundError } from '../common/not-found-error';
 import { error } from 'util';
 

@@ -1,11 +1,11 @@
-import { InfoSite } from './../dialog-modal/dialog-modal.component';
-import { NotFoundError } from './../../common/not-found-error';
+import { InfoSite } from '../dialog-modal/dialog-modal.component';
+import { NotFoundError } from '../../common/not-found-error';
 /* import { Label } from './../../table/label'; */
-import { LabelService } from './../../services/label.service';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
+import { LabelService } from '../../services/label.service';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
 /* import { Site } from './../../table/site'; */
-import { SiteService } from './../../services/site.service';
+import { SiteService } from '../../services/site.service';
 import { TreeNode } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { OrganizationChartModule } from 'primeng/primeng';

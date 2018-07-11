@@ -1,5 +1,5 @@
-import { BitclassService } from './../../services/bitclass.service';
-import { AccidentagentshbitService } from './../../services/accidentagentshbit.service';
+import { BitclassService } from '../../services/bitclass.service';
+import { AccidentagentshbitService } from '../../services/accidentagentshbit.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Vw$accidentagentshbitService } from '../../services/vw$accidentagentshbit.service';
 import { Vw$accidentagentshbit } from '../../table/table';

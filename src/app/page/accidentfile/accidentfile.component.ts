@@ -1,19 +1,19 @@
-import { UploadfileService } from './../../services/uploadfile.service';
+import { UploadfileService } from '../../services/uploadfile.service';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from './../../services/data.service';
-import { Accident } from './../../table/table';
+import { DataService } from '../../services/data.service';
+import { Accident } from '../../table/table';
 import { TreeNode } from 'primeng/components/common/api';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { AccidentfileService } from './../../services/accidentfile.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { AccidentfileService } from '../../services/accidentfile.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accidentfile } from '../../table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 const urlService = environment.urlService;
 

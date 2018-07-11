@@ -1,5 +1,5 @@
-import { Damage, Accidentnature } from './../../table/table';
-import { VwdamagewithrankService } from './../../services/vwdamagewithrank.service';
+import { Damage, Accidentnature } from '../../table/table';
+import { VwdamagewithrankService } from '../../services/vwdamagewithrank.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { AccidentnatureService } from '../../services/accidentnature.service';

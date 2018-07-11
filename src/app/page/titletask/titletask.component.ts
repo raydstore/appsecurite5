@@ -1,8 +1,8 @@
-import { BadInput } from './../../common/bad-input';
-import { TitletaskService } from './../../services/titletask.service';
+import { BadInput } from '../../common/bad-input';
+import { TitletaskService } from '../../services/titletask.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TreeTableModule, TreeNode, SharedModule } from 'primeng/primeng';
-import { Titletask } from './../../table/table';
+import { Titletask } from '../../table/table';
 import { AppError } from '../../common/app-error';
 import { NotFoundError } from '../../common/not-found-error';
 

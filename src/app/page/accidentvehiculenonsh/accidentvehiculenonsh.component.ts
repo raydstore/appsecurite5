@@ -1,10 +1,10 @@
-import { NotFoundError } from './../../common/not-found-error';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { LastidService } from './../../services/lastid.service';
-import { AccidentvehiculeService } from './../../services/accidentvehicule.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { LastidService } from '../../services/lastid.service';
+import { AccidentvehiculeService } from '../../services/accidentvehicule.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentvehicule } from './../../table/table';
+import { Accidentvehicule } from '../../table/table';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

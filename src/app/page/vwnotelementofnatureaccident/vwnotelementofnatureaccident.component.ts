@@ -1,8 +1,8 @@
-import { Accidentnature, AccidentnaturePK } from './../../table/table';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { AccidentnatureService } from './../../services/accidentnature.service';
-import { VwnotelementofnatureaccidentService } from './../../services/vwnotelementofnatureaccident.service';
+import { Accidentnature, AccidentnaturePK } from '../../table/table';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { AccidentnatureService } from '../../services/accidentnature.service';
+import { VwnotelementofnatureaccidentService } from '../../services/vwnotelementofnatureaccident.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

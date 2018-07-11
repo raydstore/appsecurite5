@@ -1,9 +1,9 @@
-import { TypeOperationService } from './../../services/type-operation.service';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { OperationService } from './../../services/operation.service';
+import { TypeOperationService } from '../../services/type-operation.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { OperationService } from '../../services/operation.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Operation } from '../../table/table';

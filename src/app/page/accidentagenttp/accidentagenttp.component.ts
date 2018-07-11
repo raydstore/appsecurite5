@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { NotFoundError } from './../../common/not-found-error';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { LastidService } from './../../services/lastid.service';
-import { AccidentagenttpService } from './../../services/accidentagenttp.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { LastidService } from '../../services/lastid.service';
+import { AccidentagenttpService } from '../../services/accidentagenttp.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentagenttp, AccidentagenttpPK, Entreprise } from './../../table/table';
+import { Accidentagenttp, AccidentagenttpPK, Entreprise } from '../../table/table';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({

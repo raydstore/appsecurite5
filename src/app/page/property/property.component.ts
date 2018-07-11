@@ -1,9 +1,9 @@
-import { UnitMeasureService } from './../../services/unit-measure.service';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { PropertyService } from './../../services/property.service';
+import { UnitMeasureService } from '../../services/unit-measure.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { PropertyService } from '../../services/property.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Property } from '../../table/table';

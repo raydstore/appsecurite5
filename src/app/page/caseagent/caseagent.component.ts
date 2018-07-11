@@ -1,6 +1,6 @@
-import { BadInput } from './../../common/bad-input';
-import { Caseagent } from './../../table/table';
-import { CaseagentService } from './../../services/caseagent.service';
+import { BadInput } from '../../common/bad-input';
+import { Caseagent } from '../../table/table';
+import { CaseagentService } from '../../services/caseagent.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/treenode';
 import { AppError } from '../../common/app-error';

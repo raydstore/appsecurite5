@@ -1,5 +1,5 @@
-import { TFunctionName } from './../../table/table';
-import { DataService } from './../../services/data.service';
+import { TFunctionName } from '../../table/table';
+import { DataService } from '../../services/data.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -23,15 +23,9 @@ export class AutocompleteComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  // this.setProperty(this.item, 'item', this.i_item);
     this.item.item = this.i_item;
     this.item.name = this.functionName(this.item.item, this.args);
-    // this.getProperty(this.item.item, 'firstname') + ' ' + this.getProperty(this.item.item, 'lastname');
-    console.log(this.item.name);
-    /* this.service.getAll().subscribe(items => {
-      this.filteredList = this.filter(query, items);
-    } */
-  }
+    }
 
   getProperty<T, K extends keyof T>(obj: T, key: K) {
      return obj[key];
@@ -66,8 +60,7 @@ export class AutocompleteComponent implements OnInit {
         let iitem: IItem = {
           item: item,
           name: displayName
-          // this.getProperty(item, 'firstname') + ' ' + this.getProperty(item, 'lastname')
-        }
+          }
         filtered.push(iitem);
       }
     }

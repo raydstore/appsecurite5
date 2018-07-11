@@ -1,10 +1,10 @@
-import { Accident } from './../../table/table';
+import { Accident } from '../../table/table';
 import { TreeNode } from 'primeng/components/common/api';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { CauseService } from './../../services/cause.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { CauseService } from '../../services/cause.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Cause } from '../../table/table';

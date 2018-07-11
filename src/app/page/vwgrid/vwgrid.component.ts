@@ -1,10 +1,10 @@
-import { VwnotnatureofaccidentService } from './../../services/vwnotnatureofaccident.service';
-import { AccidentnatureService } from './../../services/accidentnature.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { Damage, AccidentnaturePK, Accidentnature } from './../../table/table';
-import { VwgridService } from './../../services/vwgrid.service';
+import { VwnotnatureofaccidentService } from '../../services/vwnotnatureofaccident.service';
+import { AccidentnatureService } from '../../services/accidentnature.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { Damage, AccidentnaturePK, Accidentnature } from '../../table/table';
+import { VwgridService } from '../../services/vwgrid.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { DamageService } from '../../services/damage.service';

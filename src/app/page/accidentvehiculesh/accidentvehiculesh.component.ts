@@ -1,15 +1,15 @@
-import { MarkService } from './../../services/mark.service';
-import { EntrepriseService } from './../../services/entreprise.service';
+import { MarkService } from '../../services/mark.service';
+import { EntrepriseService } from '../../services/entreprise.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs/Subject';
-import { NotFoundError } from './../../common/not-found-error';
-import { BadInput } from './../../common/bad-input';
-import { AppError } from './../../common/app-error';
-import { LastidService } from './../../services/lastid.service';
-import { AccidentvehiculeService } from './../../services/accidentvehicule.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadInput } from '../../common/bad-input';
+import { AppError } from '../../common/app-error';
+import { LastidService } from '../../services/lastid.service';
+import { AccidentvehiculeService } from '../../services/accidentvehicule.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentvehicule } from './../../table/table';
+import { Accidentvehicule } from '../../table/table';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 @Component({

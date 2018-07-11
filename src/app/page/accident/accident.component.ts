@@ -1,14 +1,14 @@
-import { CalendarComponent } from './../../common/calendar/calendar.component';
-import { Site, Agent, IAgent, TFunctionName, Mode, EventAccidentArgs } from './../../table/table';
-import { SiteService } from './../../services/site.service';
-import { VwdamageaccidentnatureService } from './../../services/vwdamageaccidentnature.service';
-import { VwelementdamageService } from './../../services/vwelementdamage.service';
+import { CalendarComponent } from '../../common/calendar/calendar.component';
+import { Site, Agent, IAgent, TFunctionName, Mode, EventArgs } from '../../table/table';
+import { SiteService } from '../../services/site.service';
+import { VwdamageaccidentnatureService } from '../../services/vwdamageaccidentnature.service';
+import { VwelementdamageService } from '../../services/vwelementdamage.service';
 import { TreeNode } from 'primeng/components/common/api';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { AccidentService } from './../../services/accident.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { AccidentService } from '../../services/accident.service';
 import { Component, Injectable, OnInit, ViewChild, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 /* import { InputTextareaModule } from 'primeng/inputtextarea'; */
@@ -244,19 +244,14 @@ export class AccidentComponent implements OnInit {
     return this.selectedNode === event.node ? true : false;
   }
 
-  performAction(eventArgs: EventAccidentArgs) {
-    console.log('enter perform acion');
-    console.log(JSON.stringify(eventArgs));
+  performAction(eventArgs: EventArgs) {
     switch (eventArgs.mode) {
       case this.mInsert: this.dialogVisible = eventArgs.dialogVisible;
-        console.log(this.mInsert);
-                        this.createAccident();
+                         this.createAccident();
         break;
       case this.mUpdate: this.updateAccident(<Accident>eventArgs.item);
-        console.log(this.mUpdate);
         break;
     }
-    console.log('end performAction eventArgs.mode = ' + eventArgs.mode);
   }
 
   createAccident() {

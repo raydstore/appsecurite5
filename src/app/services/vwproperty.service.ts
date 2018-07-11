@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Property } from '../table/table';
 
 const urlService = environment.urlService;
