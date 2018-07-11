@@ -29,7 +29,7 @@
     </ng-template>
   </p-column>
   <ng-template let-item pTemplate="rowexpansion">
-    <div class="container">
+    <!-- <div class="container">
       <div class="form-group row">
         <label for="chid" class="col-sm-2 col-form-label">idagent : </label>
         <p-autoComplete [(ngModel)]="agent" [suggestions]="filteredAgents" (completeMethod)="filterAgents($event)" [size]="30" [minLength]="1"
@@ -74,12 +74,14 @@
       <ng-template #showAccidentagentshBit>
         <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" [idgrid]="idgrid"></app-accidentagentshbit>
       </ng-template>
-    </div>
+    </div> -->
+    <app-faccidentagentsh [item]="item" [mode]="mUpdate" (operation)="performAction($event)" ></app-faccidentagentsh>
   </ng-template>
 </p-dataTable>
 
 <p-dialog header="Agent Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
+    <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mUpdate" (operation)="performAction($event)" ></app-faccidentagentsh>
+  <!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
     <div class="bdcontent">
       <span>
         <ng-template #rt let-r="result" let-t="term">
@@ -102,4 +104,4 @@
         <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
       </div>
     </div>
-  </div>
+  </div> -->

@@ -1,13 +1,14 @@
+import { EventArgs, Mode } from './../../table/table';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { AgentService } from './../../services/agent.service';
+import { AgentService } from '../../services/agent.service';
 import { TreeNode } from 'primeng/components/common/api';
-import { LastidService } from './../../services/lastid.service';
-import { NotFoundError } from './../../common/not-found-error';
-import { AppError } from './../../common/app-error';
-import { BadInput } from './../../common/bad-input';
-import { AccidentagentshService } from './../../services/accidentagentsh.service';
+import { LastidService } from '../../services/lastid.service';
+import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../common/app-error';
+import { BadInput } from '../../common/bad-input';
+import { AccidentagentshService } from '../../services/accidentagentsh.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accidentagentsh, AccidentagentshPK, Agent } from '../../table/table';
@@ -127,6 +128,16 @@ export class AccidentagentshComponent implements OnInit {
 
   isSelected(event) {
     return this.selectedNode === event.node ? true : false;
+  }
+
+  performAction(eventArgs: EventArgs) {
+    switch (eventArgs.mode) {
+      case Mode.insert: this.dialogVisible = eventArgs.dialogVisible;
+                         this.createAccidentagentsh();
+        break;
+      case Mode.update: this.updateAccidentagentsh(<Accidentagentsh>eventArgs.item);
+        break;
+    }
   }
 
 
