@@ -1,6 +1,7 @@
-import { EventArgs } from './../../table/table';
+import { BadInput } from './../../common/bad-input';
+import { AppError } from './../../common/app-error';
 import { AgentService } from '../../services/agent.service';
-import { Accidentagentsh, Mode, Agent } from '../../table/table';
+import { Accidentagentsh, Mode, Agent, EventArgs } from '../../table/table';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +9,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './faccidentagentsh.component.html',
   styleUrls: ['./faccidentagentsh.component.css']
 })
-export class AccidentagentshComponent implements OnInit {
+export class FaccidentagentshComponent implements OnInit {
+
   @Input() item: Accidentagentsh;
   @Input() mode: Mode;
   @Output() operation = new EventEmitter();
@@ -62,5 +64,24 @@ export class AccidentagentshComponent implements OnInit {
     }
     return result;
   }
+
+
+  getAgent(id?: string): Agent {
+    let res: Agent  = null;
+    this.agentService.getItem('id;id=' + id )
+  .subscribe(result => {
+    res = result;
+  }, (error: AppError) => {  
+    if (error instanceof BadInput) {
+    } else {
+      throw error;
+    }
+  }, () => {
+    if (res == null) {
+    }
+  }
+  );
+  return res;
+}
 
 }

@@ -1,3 +1,4 @@
+import { FaccidentagentshComponent } from './container/faccidentagentsh/faccidentagentsh.component';
 import { StructureService } from './services/structure.service';
 import { DamagedefinitionService } from './services/damagedefinition.service';
 import { AccidentmaterialService } from './services/accidentmaterial.service';
@@ -220,7 +221,8 @@ import { FaccidentComponent } from './container/faccident/faccident.component';
     AccidentfileComponent,
     CalendarComponent,
     AutocompleteComponent,
-    FaccidentComponent
+    FaccidentComponent,
+    FaccidentagentshComponent
     /* ,InputTextareaModule */
   ],
   imports: [

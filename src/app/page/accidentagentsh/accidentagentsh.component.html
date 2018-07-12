@@ -80,7 +80,10 @@
 </p-dataTable>
 
 <p-dialog header="Agent Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-    <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mUpdate" (operation)="performAction($event)" ></app-faccidentagentsh>
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
+    <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mUpdate" (operation)="performAction($event)"></app-faccidentagentsh>
+  </div>
+</p-dialog>
   <!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
     <div class="bdcontent">
       <span>

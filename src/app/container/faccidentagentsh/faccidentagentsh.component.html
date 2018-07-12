@@ -3,7 +3,7 @@
     <div class="form-group row">
       <label for="chidagentdeclare" class="col-sm-2 col-form-label">Agent : </label>
       <div class="col-sm-10">
-        <app-autocomplete [i_item]="item.idagent" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+        <app-autocomplete [i_item]="getAgent(item.idagent)" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
           (changeItem)="onChangeItem(item, 'idagent', $event)"></app-autocomplete>
       </div>
     </div>
